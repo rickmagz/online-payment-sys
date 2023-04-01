@@ -1,0 +1,54 @@
+.account-block {
+  padding: 0;
+  background-image: url(https://bootdey.com/img/Content/bg1.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100%;
+  position: relative;
+}
+
+.account-block .overlay {
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 10px;
+}
+
+.account-block .account-testimonial {
+  text-align: center;
+  color: var(--bs-white);
+  position: absolute;
+  margin: 0;
+  padding: 0 1rem;
+  bottom: 3rem;
+  left: 0;
+  right: 0;
+}
+
+.text-theme {
+  color: #f77f00 !important;
+}
+
+.btn-theme {
+  background-color: #f77f00;
+  border-color: #f77f00;
+  color: #fff;
+}
+
+.btn-theme:hover {
+  background-color: var(--bs-primary);
+  border-color: var(--bs-primary);
+}
+
+.login-card {
+  background-color: var(--bs-light);
+  border-radius: 10px;
+  box-shadow: var(--bs-cyan);
+}
+
