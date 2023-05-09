@@ -1,3 +1,7 @@
+<?php
+    session_start();
+    
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,9 +23,10 @@
                 </a>
                 <hr class="sidebar-divider my-0">
                 <ul class="navbar-nav text-light" id="accordionSidebar">
-                    <li class="nav-item"><a class="nav-link active" href="index.html"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="addnewuser.html"><i class="fas fa-user"></i><span>Add New User</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="payments.html"><i class="fas fa-money-bill"></i><span>Payment History</span></a></li>
+                    <li class="nav-item"><a class="nav-link active" href="admin.php"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="addnewstudent.php"><i class="fas fa-user"></i><span>Add New Student</span></a><a class="nav-link" href="addnewuser.php"><i class="fas fa-user"></i><span>Add New User</span></a><a class="nav-link" href="viewstudents.php"><i class="fas fa-users"></i><span>Registered Students</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="viewusers.php"><i class="fas fa-user-tie"></i><span>System Users</span></a><a class="nav-link" href="payments.php"><i class="fas fa-money-bill"></i><span>Payment History</span></a></li>
+                    <li class="nav-item"></li>
                     <li class="nav-item"></li>
                     <li class="nav-item"></li>
                 </ul>
@@ -45,7 +50,12 @@
                             <div class="d-none d-sm-block topbar-divider"></div>
                             <li class="nav-item dropdown no-arrow">
                                 <div class="nav-item dropdown no-arrow"><a class="dropdown-toggle nav-link" aria-expanded="false" data-bs-toggle="dropdown" href="#"><span class="d-none d-lg-inline me-2 text-gray-600 small">Admin</span><img class="border rounded-circle img-profile" src="assets/img/avatars/avatar5.jpeg"></a>
-                                    <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in"><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>&nbsp;Logout</a></div>
+                                    <div class="dropdown-menu shadow dropdown-menu-end animated--grow-in">
+                                        <a class="dropdown-item" href="logout.php">
+                                            <i class="fas fa-sign-out-alt fa-sm fa-fw me-2 text-gray-400"></i>
+                                            &nbsp;Logout
+                                        </a>
+                                    </div>
                                 </div>
                             </li>
                         </ul>
@@ -53,7 +63,7 @@
                 </nav>
                 <div class="container-fluid">
                     <div class="d-sm-flex justify-content-between align-items-center mb-4">
-                        <h3 class="text-dark mb-0">Dashboard</h3><a class="btn btn-primary btn-sm d-none d-sm-inline-block" role="button" href="#"><i class="fas fa-download fa-sm text-white-50"></i>&nbsp;Generate Report</a>
+                        <h3 class="text-dark mb-0"><strong>Dashboard</strong></h3><a class="btn btn-primary btn-sm d-none d-sm-inline-block" role="button" href="#"><i class="fas fa-download fa-sm text-white-50"></i>&nbsp;Generate Report</a>
                     </div>
                     <div class="row">
                         <div class="col-md-6 col-xl-3 mb-4">

@@ -1,5 +1,5 @@
 <?php 
-
+session_start();
 
 ?>
 <!DOCTYPE html>
@@ -52,7 +52,14 @@
             <li class="nav-item"></li>
             <li class="nav-item"></li>
           </ul>
-          <button class="btn btn-danger" type="submit">LOG OUT</button>
+          <form action="index.php" method="POST">
+            <input class="btn btn-danger" type="submit" name="logout" value="Log Out">
+                    <?php
+                      if(isset($_POST['logout'])){
+                        session_destroy();
+                      }
+                      ?>
+          </form>
         </div>
       </div>
     </nav>
@@ -63,54 +70,49 @@
             class="bg-light border rounded border-0 border-light d-flex flex-column justify-content-between flex-lg-row p-4 p-md-5"
           >
             <div class="pb-2 pb-lg-1">
-              <h2 class="fw-bold mb-2">Hi, {student_name}!</h2>
-              <p class="fs-4 mb-0">LRN: {#}</p>
+              <h2 class="fw-bold mb-2">Hi, <?php echo $_SESSION['first_name'];?> <?php echo $_SESSION['last_name'];?>!</h2>
+              <p class="fs-4 mb-0">LRN: <?php echo $_SESSION['lrn_id'];?></p>
+              <p class="fs-4 mb-0"><a href="payment-portal.php" class="btn btn-info" role="button">Process your payment here!</a></p>
             </div>
           </div>
-        </div>
-        <section class="student-record">
+          <section class="student-record">
+          <h2 class="fs-4 mb-0">Payment History</h2>
           <div class="table-responsive student-table">
             <table class="table">
               <thead>
                 <tr>
-                  <th>Payment No.</th>
-                  <th>Grade Level</th>
                   <th>Date</th>
                   <th>Mode of Payment</th>
                   <th>Reference No.</th>
                   <th>Proof of Payment</th>
                   <th>Amount Paid</th>
                   <th>Remarks</th>
-                  <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td>Cell 1</td>
+                  <!-- <td>Cell 1</td>
                   <td>Cell 2</td>
                   <td>Cell 3</td>
                   <td>Cell 3</td>
                   <td>Cell 3</td>
-                  <td>Cell 3</td>
-                  <td>Cell 3</td>
-                  <td>Cell 8</td>
-                  <td>Cell 8</td>
+                  <td>Cell 3</td> -->
+                 
                 </tr>
                 <tr>
-                  <td>Cell 3</td>
-                  <td>Cell 4</td>
-                  <td>Cell 3</td>
+                  <!-- <td>Cell 3</td>
                   <td>Cell 3</td>
                   <td>Cell 3</td>
                   <td>Cell 3</td>
                   <td>Cell 3</td>
-                  <td>Cell 8</td>
-                  <td>Cell 8</td>
+                  <td>Cell 8</td> -->
                 </tr>
               </tbody>
             </table>
           </div>
         </section>
+        </div>
+        
       </section>
     </section>
     <footer>

@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Page Not Found - GNHS PTA Payment System - Admin</title>
+    <title>Profile - GNHS PTA Payment System - Admin</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/Nunito.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
@@ -19,9 +19,36 @@
                 </a>
                 <hr class="sidebar-divider my-0">
                 <ul class="navbar-nav text-light" id="accordionSidebar">
-                    <li class="nav-item"><a class="nav-link" href="admin.html"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="addnewstudent.html"><i class="fas fa-user"></i><span>Add New Student</span></a><a class="nav-link" href="addnewuser.html"><i class="fas fa-user"></i><span>Add New User</span></a><a class="nav-link" href="viewstudents.html"><i class="fas fa-users"></i><span>Registered Students</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="viewusers.html"><i class="fas fa-user-tie"></i><span>System Users</span></a><a class="nav-link" href="payments.html"><i class="fas fa-money-bill"></i><span>Payment History</span></a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="admin.php">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="addnewstudent.php">
+                            <i class="fas fa-user"></i>
+                            <span>Add New Student</span>
+                        </a>
+                        <a class="nav-link" href="addnewuser.php">
+                            <i class="fas fa-user"></i>
+                            <span>Add New User</span>
+                        </a>
+                        <a class="nav-link" href="viewstudents.php">
+                            <i class="fas fa-users"></i>
+                            <span>Registered Students</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="viewusers.php">
+                            <i class="fas fa-user-tie"></i>
+                            <span>System Users</span>
+                        </a>
+                        <a class="nav-link" href="payments.php">
+                            <i class="fas fa-money-bill"></i>
+                            <span>Payment History</span>
+                        </a>
+                    </li>
                     <li class="nav-item"></li>
                     <li class="nav-item"></li>
                     <li class="nav-item"></li>
@@ -53,12 +80,29 @@
                     </div>
                 </nav>
                 <div class="container-fluid">
-                    <div class="text-center mt-5">
-                        <div class="error mx-auto" data-text="404">
-                            <p class="m-0">404</p>
+                    <div class="row mb-3">
+                        <div class="col-lg-12 col-xl-12 col-xxl-12">
+                            <div class="p-5">
+                                <h1 class="text-dark mb-4"><strong>Add New Student</strong></h1>
+                                <form class="user">
+                                    <div class="row mb-3">
+                                        <div class="col-sm-6 col-xl-6 col-xxl-4 mb-3 mb-sm-0"><input class="form-control form-control-user" type="text" id="exampleFirstName" placeholder="Learners Reference Number" name="lrn" required="" autofocus=""></div>
+                                        <div class="col-sm-6 col-xxl-4"><input class="form-control form-control-user" type="email" id="exampleLastName" placeholder="E-mail Address" name="email" required=""></div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-sm-6 col-xxl-4 mb-3 mb-sm-0"><input class="form-control form-control-user" type="text" id="exampleFirstName-1" placeholder="First Name" name="first_name" required=""></div>
+                                        <div class="col-sm-6 col-xl-6 col-xxl-4"><input class="form-control form-control-user" type="text" id="exampleLastName-2" placeholder="Middle Name" name="middle_name"></div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-sm-6 col-xxl-4"><input class="form-control form-control-user" type="text" id="exampleLastName-5" placeholder="Last Name" name="last_name" required=""></div>
+                                        <div class="col-sm-6 col-xxl-2"><input class="form-control form-control-user" type="text" id="exampleLastName-6" placeholder="Suffix" name="suffix"></div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-sm-6 col-md-5 col-lg-4 col-xl-4 col-xxl-2 offset-xl-0 align-items-center align-content-center"><button class="btn btn-primary border rounded" type="submit">Submit</button><button class="btn btn-danger border rounded" type="reset">Reset</button></div>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
-                        <p class="text-dark mb-5 lead">Page Not Found</p>
-                        <p class="text-black-50 mb-0">It looks like you found a glitch in the matrix...</p><a href="/">← Back to Dashboard</a>
                     </div>
                 </div>
             </div>

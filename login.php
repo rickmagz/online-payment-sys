@@ -1,5 +1,5 @@
 <?php session_start();
-require 'db_connect.php';
+include 'db_connect.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -7,7 +7,7 @@ require 'db_connect.php';
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Login | GNHS PTA Online Payment System</title>
+    <title>Student Login | GNHS PTA Online Payment System</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/Kaushan%20Script.css">
     <link rel="stylesheet" href="assets/css/Montserrat.css">
@@ -65,7 +65,19 @@ require 'db_connect.php';
                                     if(isset($_POST['login'])){
                                         $email = $_POST['email'];
                                         $password = $_POST['password'];
-                                        
+                                        $query = mysqli_query($cxn, "SELECT * FROM student WHERE email='$email' AND lrn_id='$password'");
+
+                                        if(mysqli_num_rows($query)>0){
+                                            $row = mysqli_fetch_assoc($query);
+                                            $_SESSION['first_name'] = $row['first_name'];
+                                            $_SESSION['last_name']= $row['last_name'];
+                                            $_SESSION['lrn_id'] = $row['lrn_id'];
+                                            $_SESSION['email'] = $row['email'];
+                                            header("location: student-portal.php");
+                                        }
+                                        else{
+                                            echo '<script type="text/javascript"> alert("Invalid Credentials!")</script>';
+                                        }
                                     }
 
                                 ?>

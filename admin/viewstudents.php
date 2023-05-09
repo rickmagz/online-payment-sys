@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Page Not Found - GNHS PTA Payment System - Admin</title>
+    <title>Table - GNHS PTA Payment System - Admin</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/Nunito.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
@@ -19,9 +19,9 @@
                 </a>
                 <hr class="sidebar-divider my-0">
                 <ul class="navbar-nav text-light" id="accordionSidebar">
-                    <li class="nav-item"><a class="nav-link" href="admin.html"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="addnewstudent.html"><i class="fas fa-user"></i><span>Add New Student</span></a><a class="nav-link" href="addnewuser.html"><i class="fas fa-user"></i><span>Add New User</span></a><a class="nav-link" href="viewstudents.html"><i class="fas fa-users"></i><span>Registered Students</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="viewusers.html"><i class="fas fa-user-tie"></i><span>System Users</span></a><a class="nav-link" href="payments.html"><i class="fas fa-money-bill"></i><span>Payment History</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="admin.php"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
+                    <li class="nav-item"><a class="nav-link " href="addnewstudent.php"><i class="fas fa-user"></i><span>Add New Student</span></a><a class="nav-link" href="addnewuser.php"><i class="fas fa-user"></i><span>Add New User</span></a><a class="nav-link active" href="viewstudents.php"><i class="fas fa-users"></i><span>Registered Students</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="viewusers.php"><i class="fas fa-user-tie"></i><span>System Users</span></a><a class="nav-link" href="payments.php"><i class="fas fa-money-bill"></i><span>Payment History</span></a></li>
                     <li class="nav-item"></li>
                     <li class="nav-item"></li>
                     <li class="nav-item"></li>
@@ -53,12 +53,46 @@
                     </div>
                 </nav>
                 <div class="container-fluid">
-                    <div class="text-center mt-5">
-                        <div class="error mx-auto" data-text="404">
-                            <p class="m-0">404</p>
+                    <h3 class="text-dark mb-4"><strong>Registered Students</strong></h3>
+                    <div class="card shadow">
+                        <div class="card-body">
+                            <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+                                <table class="table my-0" id="dataTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Grade Level</th>
+                                            <th>LRN</th>
+                                            <th>Registration Date</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Cedric Kelly</td>
+                                            <td>Grade 8</td>
+                                            <td>123456789</td>
+                                            <td>Apr 17, 2023</td>
+                                            <td><button class="btn btn-danger btn-sm" type="submit">Delete</button></td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr></tr>
+                                    </tfoot>
+                                </table>
+                            </div>
                         </div>
-                        <p class="text-dark mb-5 lead">Page Not Found</p>
-                        <p class="text-black-50 mb-0">It looks like you found a glitch in the matrix...</p><a href="/">← Back to Dashboard</a>
+                    </div>
+                </div>
+                <div class="modal fade" role="dialog" tabindex="-1" id="modal-1">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Proof of Payment</h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body"><img></div>
+                            <div class="modal-footer"><button class="btn btn-primary" type="button" data-bs-dismiss="modal">Close</button></div>
+                        </div>
                     </div>
                 </div>
             </div>
