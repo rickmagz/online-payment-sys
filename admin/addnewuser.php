@@ -1,10 +1,15 @@
+<?php
+session_start();
+include 'db_connect.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Profile - GNHS PTA Payment System - Admin</title>
+    <title>Register User | GNHS PTA Payment System - Admin</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/Nunito.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
@@ -19,7 +24,7 @@
                 </a>
                 <hr class="sidebar-divider my-0">
                 <ul class="navbar-nav text-light" id="accordionSidebar">
-                <li class="nav-item"><a class="nav-link" href="admin.php"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="admin.php"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="addnewstudent.php"><i class="fas fa-user"></i><span>Add New Student</span></a><a class="nav-link active" href="addnewuser.php"><i class="fas fa-user"></i><span>Add New User</span></a><a class="nav-link" href="viewstudents.php"><i class="fas fa-users"></i><span>Registered Students</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="viewusers.php"><i class="fas fa-user-tie"></i><span>System Users</span></a><a class="nav-link" href="payments.php"><i class="fas fa-money-bill"></i><span>Payment History</span></a></li>
                     <li class="nav-item"></li>
@@ -57,17 +62,20 @@
                         <div class="col-lg-12 col-xl-12 col-xxl-12">
                             <div class="p-5">
                                 <h1 class="text-dark mb-4"><strong>Add New User</strong></h1>
-                                <form class="user">
+                                <form class="user" action="addnewuser.php" method="post">
                                     <div class="row mb-3">
                                         <div class="col-sm-6 col-xl-6 col-xxl-4 mb-3 mb-sm-0"><input class="form-control form-control-user" type="text" id="exampleFirstName" placeholder="Username" name="username" required="" autofocus=""></div>
-                                        <div class="col-sm-6 col-xxl-4"><input class="form-control form-control-user" type="password" id="exampleLastName" placeholder="Password" name="password" required=""></div>
+                                        <div class="col-sm-6 col-xxl-4"><input class="form-control form-control-user" type="password" id="exampleLastName" placeholder="ID Number" name="password" required=""></div>
                                     </div>
                                     <div class="row mb-3">
                                         <div class="col-sm-6 col-xxl-4 mb-3 mb-sm-0"><input class="form-control form-control-user" type="text" id="exampleFirstName-1" placeholder="First Name" name="first_name" required=""></div>
                                         <div class="col-sm-6 col-xl-6 col-xxl-4"><input class="form-control form-control-user" type="text" id="exampleLastName-2" placeholder="Last Name" name="last_name" required=""></div>
                                     </div>
                                     <div class="row mb-3">
-                                        <div class="col-sm-6 col-md-5 col-lg-4 col-xl-4 col-xxl-2 offset-xl-0 align-items-center align-content-center"><button class="btn btn-primary border rounded" type="submit">Submit</button><button class="btn btn-danger border rounded" type="reset">Reset</button></div>
+                                        <div class="col-sm-6 col-md-5 col-lg-4 col-xl-4 col-xxl-2 offset-xl-0 align-items-center align-content-center">
+                                            <input class="btn btn-info" type="submit" name="submit" value="Add User">
+                                            <button class="btn btn-danger border rounded" type="reset">Reset</button>
+                                        </div>
                                     </div>
                                 </form>
                             </div>
@@ -77,23 +85,19 @@
             </div>
 
             <?php
-                if(isset($_POST['submit'])){
-                    $con = mysqli_connect("localhost","root","","pta_payment") or die("Unable to Connect!");
+            if (isset($_POST['submit'])) {
+                $username = $_POST['username'];
+                $password = $_POST['password'];
+                $first_name = $_POST['first_name'];
+                $last_name = $_POST['last_name'];
 
-                    $lrn = $_POST['lrn'];
-                    $first_name = $_POST['first_name'];
-                    $last_name = $_POST['last_name'];
-                    $middle_name = $_POST['middle_name'];
-                    $email = $_POST['email'];
+                $query = mysqli_query($cxn, "INSERT INTO users(username,password,first_name,last_name) VALUES('$username','$password','$first_name','$last_name')") or die("Error in query: $query." . mysqli_error($cxn));
 
-                    $query = mysqli_query($con, "INSERT INTO student(lrn_id,first_name,last_name,email) VALUES('$lrn','$first_name','$last_name','$email')") or die("Error in query: $query.".mysqli_error($con));
-
-                    echo "<script type='text/javascript'> alert('Student Registration Success!'); location.href = 'addnewuser.php'; </script>";
-
-                }
+                echo "<script type='text/javascript'> alert('Successfully Added New User!'); location.href = 'addnewuser.php'; </script>";
+            }
 
             ?>
-            
+
             <footer class="bg-white sticky-footer">
                 <div class="container my-auto">
                     <div class="text-center my-auto copyright"><span>Copyright © GNHS PTA Payment System - Admin Dashboard 2023</span></div>
