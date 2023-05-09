@@ -1,10 +1,16 @@
+<?php
+session_start();
+include 'db_connect.php';
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Profile - GNHS PTA Payment System - Admin</title>
+    <title>Register Student | GNHS PTA Payment System - Admin</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/Nunito.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
@@ -84,7 +90,7 @@
                         <div class="col-lg-12 col-xl-12 col-xxl-12">
                             <div class="p-5">
                                 <h1 class="text-dark mb-4"><strong>Add New Student</strong></h1>
-                                <form class="user">
+                                <form class="user" action="addnewstudent.php" method="post">
                                     <div class="row mb-3">
                                         <div class="col-sm-6 col-xl-6 col-xxl-4 mb-3 mb-sm-0"><input class="form-control form-control-user" type="text" id="exampleFirstName" placeholder="Learners Reference Number" name="lrn" required="" autofocus=""></div>
                                         <div class="col-sm-6 col-xxl-4"><input class="form-control form-control-user" type="email" id="exampleLastName" placeholder="E-mail Address" name="email" required=""></div>
@@ -98,7 +104,7 @@
                                         <div class="col-sm-6 col-xxl-2"><input class="form-control form-control-user" type="text" id="exampleLastName-6" placeholder="Suffix" name="suffix"></div>
                                     </div>
                                     <div class="row mb-3">
-                                        <div class="col-sm-6 col-md-5 col-lg-4 col-xl-4 col-xxl-2 offset-xl-0 align-items-center align-content-center"><button class="btn btn-primary border rounded" type="submit">Submit</button><button class="btn btn-danger border rounded" type="reset">Reset</button></div>
+                                        <div class="col-sm-6 col-md-5 col-lg-4 col-xl-4 col-xxl-2 offset-xl-0 align-items-center align-content-center"><input class="btn btn-info" type="submit" name="submit" value="Add Student"><button class="btn btn-danger border rounded" type="reset">Reset</button></div>
                                     </div>
                                 </form>
                             </div>
@@ -106,6 +112,23 @@
                     </div>
                 </div>
             </div>
+
+
+            <?php
+
+            if (isset($_POST['submit'])) {
+                $lrn = $_POST['lrn'];
+                $first_name = $_POST['first_name'];
+                $last_name = $_POST['last_name'];
+                $middle_name = $_POST['middle_name'];
+                $email = $_POST['email'];
+
+                $query = mysqli_query($cxn, "INSERT INTO student(lrn_id,first_name,last_name,email) VALUES('$lrn','$first_name','$last_name','$email')") or die("Error in query: $query." . mysqli_error($cxn));
+
+                echo "<script type='text/javascript'> alert('Successfully Added New Student!'); location.href = 'addnewstudent.php'; </script>";
+            }
+
+            ?>
             <footer class="bg-white sticky-footer">
                 <div class="container my-auto">
                     <div class="text-center my-auto copyright"><span>Copyright © GNHS PTA Payment System - Admin Dashboard 2023</span></div>
