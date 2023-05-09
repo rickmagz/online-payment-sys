@@ -1,5 +1,7 @@
 <?php
 session_start();
+include 'db_connect.php';
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,7 +23,7 @@ session_start();
 <body>
   <nav class="navbar navbar-dark navbar-expand-lg fixed-top bg-dark" data-aos="fade" id="mainNav">
     <div class="container">
-      <a class="navbar-brand" href="#page-top">GNHS | PTA Online Payment System</a><button data-bs-toggle="collapse" data-bs-target="#navbarResponsive" class="navbar-toggler navbar-toggler-right" type="button" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <a class="navbar-brand" href="student-portal.php">GNHS | PTA Online Payment System</a><button data-bs-toggle="collapse" data-bs-target="#navbarResponsive" class="navbar-toggler navbar-toggler-right" type="button" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <i class="fa fa-bars"></i>
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
@@ -40,7 +42,7 @@ session_start();
         <div class="d-sm-flex justify-content-between align-items-center mb-4">
           <h3 class="text-dark mb-0">PTA Payment for <?php echo $_SESSION['first_name']; ?> <?php echo $_SESSION['last_name']; ?> (LRN: <?php echo $_SESSION['lrn_id']; ?>)</h3>
         </div>
-        <form>
+        <form action="payment-portal.php" method="post">
           <div class="card shadow mb-3">
             <div class="card-header py-3">
               <p class="text-primary m-0 fw-bold">
@@ -51,7 +53,7 @@ session_start();
               <div class="row">
                 <div class="col-sm-12 col-md-5 col-lg-4 col-xl-4 offset-md-1 offset-lg-2 offset-xl-2">
                   <div class="mb-3">
-                    <label class="form-label" for="service_price"><strong>Grade Level*</strong><br /></label><select class="form-select" required="">
+                    <label class="form-label" for="service_price"><strong>Grade Level*</strong><br /></label><select class="form-select" required="" name="grade_level">
                       <optgroup label="Select Grade Level">
                         <option value="Grade 7" selected="">Grade 7</option>
                         <option value="Grade 8">Grade 8</option>
@@ -65,46 +67,64 @@ session_start();
                 </div>
                 <div class="col-sm-12 col-md-5 col-lg-4">
                   <div class="mb-3">
-                    <label class="form-label" for="service_price"><strong>Amount *</strong><br /></label><input class="form-control" type="text" id="service_price" placeholder="P000" required="" />
+                    <label class="form-label" for="service_price"><strong>Amount *</strong><br /></label><input class="form-control" type="text" id="service_price" placeholder="P000" required="" name="amount_paid"/>
                   </div>
                 </div>
               </div>
               <div class="row">
                 <div class="col-sm-12 col-md-5 col-lg-4 col-xl-4 offset-md-1 offset-lg-2 offset-xl-2">
                   <div class="mb-3">
-                    <label class="form-label" for="service_price"><strong>Payment Method *</strong><br /></label><select class="form-select" required="">
+                    <label class="form-label" for="service_price"><strong>Payment Method *</strong><br /></label><select class="form-select" required="" name="payment_method">
                       <optgroup label="Select Payment Method">
-                        <option value="gcash" selected="">GCash</option>
-                        <option value="palawanexpress">Palawan Express</option>
+                        <option value="GCash" selected="">GCash</option>
+                        <option value="Palawan Express">Palawan Express</option>
                       </optgroup>
                     </select>
                   </div>
                 </div>
                 <div class="col-sm-12 col-md-5 col-lg-4">
                   <div class="mb-3">
-                    <label class="form-label" for="service_price"><strong>Reference No. / Receipt No.*</strong><br /></label><input class="form-control" type="text" id="service_price-1" placeholder="***********" required="" />
+                    <label class="form-label" for="service_price"><strong>Reference No. / Receipt No.*</strong><br /></label><input class="form-control" type="text" id="service_price-1" placeholder="***********" required="" name="refno"/>
                   </div>
                 </div>
               </div>
-              <div class="row mb-2">
+              <!-- <div class="row mb-2">
                 <div class="col-md-10 col-lg-8 col-xl-8 offset-md-1 offset-lg-2 offset-xl-2">
                   <label class="form-label" for="service_price">
                     <strong>Proof of Payment *</strong><br />
                   </label>
                   <input class="form-control" type="file" required="" name="file">
                 </div>
+                -->
                 <div class="col-md-10 col-lg-2 col-xl-2 offset-md-1 offset-lg-2 offset-xl-2" style="margin-top: 20px">
                   <label class="form-label" for="service_price"><br /></label>
-                  <input class="btn btn-info" type="submit" value="Submit">
+                  <input class="btn btn-info" type="submit" name="submit" value="Next">
                   <a href="student-portal.php" class="btn btn-danger" role="button">Cancel</a>
                 </div>
-              </div>
+              </div> 
             </div>
           </div>
         </form>
       </div>
     </section>
   </main>
+
+
+  <?php
+        if(isset($_POST['submit'])){
+              $grade_level = $_POST['grade_level'];
+              $amount_paid = $_POST['amount_paid'];
+              $payment_method = $_POST['payment_method'];
+              $refno = $_POST['refno'];
+              $first_name = $_SESSION['first_name'];
+              $last_name = $_SESSION['last_name'];
+              $lrn = $_SESSION['lrn_id'];
+
+              $query = mysqli_query($cxn, "INSERT INTO payments (lrn,first_name,last_name,grade_level,amount_paid,payment_method,ref_no,remarks) VALUES('$lrn','$first_name','$last_name','$grade_level','$amount_paid','$payment_method','$refno','PENDING')") or die("Error in query: $query.".mysqli_error($cxn));
+
+              echo "<script type='text/javascript'> alert('Click OK to upload Proof of Payment.'); location.href = 'proof_of_payment.php'; </script>";
+        }
+  ?>
   <footer>
     <div class="container">
       <div class="row">
