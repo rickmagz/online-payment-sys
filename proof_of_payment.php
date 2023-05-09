@@ -35,7 +35,14 @@ $lastname = $_SESSION['last_name'];
                     <li class="nav-item"></li>
                     <li class="nav-item"></li>
                 </ul>
-                <button class="btn btn-danger" type="submit">LOG OUT</button>
+                <form action="index.php" method="POST">
+            <input class="btn btn-danger" type="submit" name="logout" value="Log Out">
+                    <?php
+                      if(isset($_POST['logout'])){
+                        session_destroy();
+                      }
+                      ?>
+          </form>
             </div>
         </div>
     </nav>
