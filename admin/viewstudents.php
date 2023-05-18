@@ -9,7 +9,7 @@ include 'db_connect.php';
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Table - GNHS PTA Payment System - Admin</title>
+    <title>Registered Students | GNHS PTA Payment System - Admin</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/Nunito.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
@@ -80,13 +80,36 @@ include 'db_connect.php';
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <?php
+                                            $students = mysqli_query($cxn, "SELECT * FROM student ORDER BY last_name asc");
+                                            $student_query = mysqli_num_rows($students);
+
+                                            if($student_query>0){
+                                                $i = 0;
+                                                while($s = mysqli_fetch_assoc($students)){
+                                                    $lrn = $s['lrn_id'];
+                                                    $first_name = $s['first_name'];
+                                                    $last_name = $s['last_name'];
+                                                    $email = $s['email'];
+                                                    $reg_date = strtotime($s['date_created']);
+                                                    $date_reg = date("F d, Y", $reg_date);
+                                                    $grade_level = $s['grade_level'];
+                                                
+
+                                        ?>
                                         <tr>
-                                            <td>Cedric Kelly</td>
-                                            <td>Grade 8</td>
-                                            <td>123456789</td>
-                                            <td>Apr 17, 2023</td>
+                                            <td><?php echo $first_name;?> <?php echo $last_name;?></td>
+                                            <td><?php echo $grade_level;?></td>
+                                            <td><?php echo $lrn;?></td>
+                                            <td><?php echo $date_reg;?></td>
                                             <td><button class="btn btn-danger btn-sm" type="submit">Delete</button></td>
                                         </tr>
+
+                                        <?php
+                                            $i++;
+                                                }
+                                            }
+                                        ?>
                                     </tbody>
                                     <tfoot>
                                         <tr></tr>
