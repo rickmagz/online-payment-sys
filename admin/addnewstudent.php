@@ -97,7 +97,7 @@ include 'db_connect.php';
                         <div class="col-lg-12 col-xl-12 col-xxl-12">
                             <div class="p-5">
                                 <h1 class="text-dark mb-4"><strong>Add New Student</strong></h1>
-                                <form class="user" action="addnewstudent.php" method="post">
+                                <form class="user" action="addnewstudent.php" method="post" id="addstudent">
                                     <div class="row mb-3">
                                         <div class="col-sm-6 col-xl-6 col-xxl-4 mb-3 mb-sm-0"><input class="form-control form-control-user" type="text" id="exampleFirstName" placeholder="Learners Reference Number" name="lrn" required="" autofocus=""></div>
                                         <div class="col-sm-6 col-xxl-4"><input class="form-control form-control-user" type="email" id="exampleLastName" placeholder="E-mail Address" name="email" required=""></div>
@@ -107,13 +107,29 @@ include 'db_connect.php';
                                         <div class="col-sm-6 col-xl-6 col-xxl-4"><input class="form-control form-control-user" type="text" id="exampleLastName-2" placeholder="Middle Name" name="middle_name"></div>
                                     </div>
                                     <div class="row mb-3">
-                                        <div class="col-sm-6 col-xxl-4"><input class="form-control form-control-user" type="text" id="exampleLastName-5" placeholder="Last Name" name="last_name" required=""></div>
-                                        <div class="col-sm-6 col-xxl-2"><input class="form-control form-control-user" type="text" id="exampleLastName-6" placeholder="Suffix" name="suffix"></div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <div class="col-sm-6 col-md-5 col-lg-4 col-xl-4 col-xxl-2 offset-xl-0 align-items-center align-content-center"><input class="btn btn-info" type="submit" name="submit" value="Add Student"><button class="btn btn-danger border rounded" type="reset">Reset</button></div>
+                                        <div class="col-sm-6 col-xxl-4">
+                                            <input class="form-control form-control-user" type="text" id="exampleLastName-5" placeholder="Last Name" name="last_name" required="">
+                                        </div>
+                                        <div class="col-sm-6 col-xl-6 col-xxl-4">
+                                            <select class="form-select form-select-sm" style="height: 53px;border-radius: 160px; padding: 16px; margin-bottom:16px;" name="grade_level" required>
+                                                <optgroup label="Select Grade Level">
+                                                    <option value="Grade 7" selected>Grade 7</option>
+                                                    <option value="Grade 8">Grade 8</option>
+                                                    <option value="Grade 9">Grade 9</option>
+                                                    <option value="Grade 10">Grade 10</option>
+                                                    <option value="Grade 11">Grade 11</option>
+                                                    <option value="Grade 12">Grade 12</option>
+                                                </optgroup>
+                                            </select>
+                                        </div>
                                     </div>
                                 </form>
+                                <div class="row mb-3">
+                                    <div class="col-sm-6 col-md-5 col-lg-4 col-xl-4 col-xxl-2 offset-xl-0 align-items-center align-content-center">
+                                        <button class="btn btn-primary" type="submit" name="submit" form="addstudent">Add Student</button>
+                                        <button class="btn btn-danger" type="reset">Reset</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -129,8 +145,9 @@ include 'db_connect.php';
                 $last_name = $_POST['last_name'];
                 $middle_name = $_POST['middle_name'];
                 $email = $_POST['email'];
+                $grade_level = $_POST['grade_level'];
 
-                $query = mysqli_query($cxn, "INSERT INTO student(lrn_id,first_name,last_name,email) VALUES('$lrn','$first_name','$last_name','$email')") or die("Error in query: $query." . mysqli_error($cxn));
+                $query = mysqli_query($cxn, "INSERT INTO student(lrn_id,first_name,last_name,email,grade_level) VALUES('$lrn','$first_name','$last_name','$email','$grade_level')") or die("Error in query: $query." . mysqli_error($cxn));
 
                 echo "<script type='text/javascript'> alert('Successfully Added New Student!'); location.href = 'addnewstudent.php'; </script>";
             }
