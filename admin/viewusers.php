@@ -72,7 +72,9 @@ include 'db_connect.php';
                                 <table class="table my-0" id="dataTable">
                                     <thead>
                                         <tr>
-                                            <th>Name</th>
+                                            <th>ID</th>
+                                            <th>First Name</th>
+                                            <th>Last Name</th>
                                             <th>Username</th>
                                             <th>ID No.</th>
                                             <th>Access Level</th>
@@ -89,6 +91,7 @@ include 'db_connect.php';
                                         if ($users_query > 0) {
                                             $i = 0;
                                             while ($u = mysqli_fetch_assoc($users)) {
+                                                $id = $u['id'];
                                                 $t_id = $u['teacher_id'];
                                                 $first_name = $u['first_name'];
                                                 $last_name = $u['last_name'];
@@ -100,13 +103,15 @@ include 'db_connect.php';
 
                                         ?>
                                                 <tr>
-                                                    <td><?php echo $first_name; ?> <?php echo $last_name; ?></td>
+                                                    <td><?php echo $id; ?></td>
+                                                    <td><?php echo $first_name; ?></td>
+                                                    <td> <?php echo $last_name; ?></td>
                                                     <td><?php echo $username; ?></td>
                                                     <td><?php echo $t_id; ?></td>
                                                     <td><?php echo $access_level; ?></td>
                                                     <td><?php echo $added_by; ?></td>
                                                     <td><?php echo $added_on; ?></td>
-                                                    <td><button class="btn btn-primary btn-sm" type="button" data-toggle="modal" data-target="#modifybtn">Modify</button>&emsp13;
+                                                    <td><button class="btn btn-primary btn-sm modifybtn" type="button" data-toggle="modal" data-target="#modifybtn">Modify</button>&emsp13;
                                                         <button class="btn btn-outline-danger btn-sm" type="submit">Delete</button>
                                                     </td>
                                                 </tr>
@@ -132,46 +137,62 @@ include 'db_connect.php';
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Modify User</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
+                            <h5 class="modal-title" id="exampleModalLabel">Modify System User Info</h5>
                         </div>
                         <div class="modal-body">
-                            <div class="form-floating mb-3 mt-3">
-                                <input type="text" class="form-control" id="first_name" placeholder="Enter first name" name="first_name">
-                                <label>First Name</label>
-                            </div>
-                            <div class="form-floating mb-3 mt-3">
-                                <input type="text" class="form-control" id="last_name" placeholder="Enter last name" name="last_name">
-                                <label>Last Name</label>
-                            </div>
-                            <div class="form-floating mb-3 mt-3">
-                                <input type="text" class="form-control" id="username" placeholder="Enter username" name="username">
-                                <label>Username</label>
-                            </div>
-                            <div class="form-floating mb-3 mt-3">
-                                <input type="text" class="form-control" id="idno" placeholder="Enter ID no." name="idno">
-                                <label>ID No.</label>
-                            </div>
-                            <div class="form-floating mb-3 mt-3">
-                                <select class="form-select" name="access_level" id="access_level" required>
-                                    <optgroup label="Select Access Level">
-                                        <option value="Admin">Admin</option>
-                                        <option value="Teacher">Teacher</option>
-                                    </optgroup>
-                                </select>
-                                <label>Access Level</label>
-                            </div>
+                            <form action="viewusers.php" method="POST" id="modifyusers">
+                                <input type="hidden" id="id" name="id" value="id">
+                                <div class="form-floating mb-3 mt-3">
+                                    <input type="text" class="form-control" id="first_name" placeholder="Enter first name" name="first_name">
+                                    <label>First Name</label>
+                                </div>
+                                <div class="form-floating mb-3 mt-3">
+                                    <input type="text" class="form-control" id="last_name" placeholder="Enter last name" name="last_name">
+                                    <label>Last Name</label>
+                                </div>
+                                <div class="form-floating mb-3 mt-3">
+                                    <input type="text" class="form-control" id="username" placeholder="Enter username" name="username">
+                                    <label>Username</label>
+                                </div>
+                                <div class="form-floating mb-3 mt-3">
+                                    <input type="text" class="form-control" id="idno" placeholder="Enter ID no." name="idno">
+                                    <label>ID No.</label>
+                                </div>
+                                <div class="form-floating mb-3 mt-3">
+                                    <select class="form-select" name="access_level" id="access_level" required>
+                                        <optgroup label="Select Access Level">
+                                            <option value="Admin">Admin</option>
+                                            <option value="Teacher">Teacher</option>
+                                        </optgroup>
+                                    </select>
+                                    <label>Access Level</label>
+                                </div>
+                            </form>
                         </div>
+
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
+                            <a class="btn btn-secondary" href="viewusers.php" role="button">Close</a>
+                            <button type="submit" name="modifyusers" form="modifyusers" class="btn btn-primary">Save changes</button>
                         </div>
                     </div>
                 </div>
             </div>
+        
+        <?php
+            if (isset($_POST['modifyusers'])) {
+                $id = $_POST['id'];
+                $t_id = $_POST['idno'];
+                $first_name = $_POST['first_name'];
+                $last_name = $_POST['last_name'];
+                $username = $_POST['username'];
+                $access_level = $_POST['access_level'];
+                $added_by = $_SESSION['first_name'];
 
+                $update_user = mysqli_query($cxn, "UPDATE users SET first_name='$first_name',last_name='$last_name',username='$username',teacher_id='$t_id',access_level='$access_level',added_by='$added_by',added_on=now() WHERE id='$id'") or die("Error in query: $update_user." . mysqli_error($cxn));
+
+                echo "<script type='text/javascript'> alert('Successfully Modified!'); location.href = 'viewusers.php'; </script>";
+            }
+        ?>
 
             <footer class="bg-white sticky-footer">
                 <div class="container my-auto">
@@ -186,6 +207,29 @@ include 'db_connect.php';
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('.modifybtn').on('click', function() {
+                $('#modifybtn').modal('show');
+
+                $tr = $(this).closest('tr');
+
+                var data = $tr.children("td").map(function() {
+                    return $(this).text();
+                }).get();
+
+                console.log(data);
+
+                $('#id').val(data[0]);
+                $('#first_name').val(data[1]);
+                $('#last_name').val(data[2]);
+                $('#username').val(data[3]);
+                $('#idno').val(data[4]);
+                $('#access_level').val(data[5]);
+            });
+        });
+    </script>
 </body>
 
 </html>
