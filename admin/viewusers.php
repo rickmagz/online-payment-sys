@@ -106,7 +106,7 @@ include 'db_connect.php';
                                                     <td><?php echo $access_level; ?></td>
                                                     <td><?php echo $added_by; ?></td>
                                                     <td><?php echo $added_on; ?></td>
-                                                    <td><button class="btn btn-danger btn-sm" type="submit">Delete</button></td>
+                                                    <td><button class="btn btn-primary btn-sm" type="submit">Modify</button>&emsp13; <button class="btn btn-outline-danger btn-sm" type="submit">Delete</button></td>
                                                 </tr>
 
                                         <?php
