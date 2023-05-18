@@ -72,7 +72,9 @@ include 'db_connect.php';
                                 <table class="table my-0" id="dataTable">
                                     <thead>
                                         <tr>
-                                            <th>Name</th>
+                                            <th>No.</th>
+                                            <th>First Name</th>
+                                            <th>Last Name</th>
                                             <th>Grade Level</th>
                                             <th>LRN</th>
                                             <th>E-mail Address</th>
@@ -88,6 +90,7 @@ include 'db_connect.php';
                                         if ($student_query > 0) {
                                             $i = 0;
                                             while ($s = mysqli_fetch_assoc($students)) {
+                                                $id = $s['id'];
                                                 $lrn = $s['lrn_id'];
                                                 $first_name = $s['first_name'];
                                                 $last_name = $s['last_name'];
@@ -99,12 +102,14 @@ include 'db_connect.php';
 
                                         ?>
                                                 <tr>
-                                                    <td><?php echo $first_name; ?> <?php echo $last_name; ?></td>
+                                                    <td><?php echo $id;?> </td>
+                                                    <td><?php echo $first_name; ?></td>
+                                                    <td><?php echo $last_name; ?></td>
                                                     <td><?php echo $grade_level; ?></td>
                                                     <td><?php echo $lrn; ?></td>
                                                     <td><?php echo $email; ?></td>
                                                     <td><?php echo $date_reg; ?></td>
-                                                    <td><button class="btn btn-primary btn-sm" type="button" data-toggle="modal" data-target="#modifybtn">Modify</button>&emsp13; <button class="btn btn-outline-danger btn-sm" type="submit">Delete</button></td>
+                                                    <td><button class="btn btn-primary btn-sm modifybtn" type="button" data-toggle="modal" data-target="#modifybtn">Modify</button>&emsp13; <button class="btn btn-outline-danger btn-sm" type="submit">Delete</button></td>
                                                 </tr>
 
                                         <?php
@@ -128,44 +133,44 @@ include 'db_connect.php';
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="exampleModalLabel">Modify Student Info</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
                             </div>
                             <div class="modal-body">
-                                <div class="form-floating mb-3 mt-3">
-                                    <input type="text" class="form-control" id="first_name" placeholder="Enter first name" name="first_name">
-                                    <label>First Name</label>
-                                </div>
-                                <div class="form-floating mb-3 mt-3">
-                                    <input type="text" class="form-control" id="last_name" placeholder="Enter last name" name="last_name">
-                                    <label>Last Name</label>
-                                </div>
-                                <div class="form-floating mb-3 mt-3">
-                                    <select class="form-select" name="grade_level" required>
-                                        <optgroup label="Select Grade Level">
-                                            <option value="Grade 7" selected>Grade 7</option>
-                                            <option value="Grade 8">Grade 8</option>
-                                            <option value="Grade 9">Grade 9</option>
-                                            <option value="Grade 10">Grade 10</option>
-                                            <option value="Grade 11">Grade 11</option>
-                                            <option value="Grade 12">Grade 12</option>
-                                        </optgroup>
-                                    </select>
-                                    <label>Grade Level</label>
-                                </div>
-                                <div class="form-floating mb-3 mt-3">
-                                    <input type="text" class="form-control" id="lrn" placeholder="Enter LRN" name="lrn">
-                                    <label>Learners Reference No.</label>
-                                </div>
-                                <div class="form-floating mb-3 mt-3">
-                                <input type="text" class="form-control" id="email" placeholder="Enter Email" name="email">
-                                    <label>Email Address</label>
-                                </div>
+                                <form action="viewstudents.php" method="POST" id="modifystudent">
+                                    <input type="hidden" id="id" name="id" value="id">
+                                    <div class="form-floating mb-3 mt-3">
+                                        <input type="text" class="form-control" id="first_name" placeholder="Enter first name" name="first_name">
+                                        <label>First Name</label>
+                                    </div>
+                                    <div class="form-floating mb-3 mt-3">
+                                        <input type="text" class="form-control" id="last_name" placeholder="Enter last name" name="last_name">
+                                        <label>Last Name</label>
+                                    </div>
+                                    <div class="form-floating mb-3 mt-3">
+                                        <select class="form-select" name="grade_level" id="grade_level" required>
+                                            <optgroup label="Select Grade Level">
+                                                <option value="Grade 7" selected>Grade 7</option>
+                                                <option value="Grade 8">Grade 8</option>
+                                                <option value="Grade 9">Grade 9</option>
+                                                <option value="Grade 10">Grade 10</option>
+                                                <option value="Grade 11">Grade 11</option>
+                                                <option value="Grade 12">Grade 12</option>
+                                            </optgroup>
+                                        </select>
+                                        <label>Grade Level</label>
+                                    </div>
+                                    <div class="form-floating mb-3 mt-3">
+                                        <input type="text" class="form-control" id="lrn" placeholder="Enter LRN" name="lrn">
+                                        <label>Learners Reference No.</label>
+                                    </div>
+                                    <div class="form-floating mb-3 mt-3">
+                                        <input type="text" class="form-control" id="email" placeholder="Enter Email" name="email">
+                                        <label>Email Address</label>
+                                    </div>
+                                </form>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Save changes</button>
+                                <a class="btn btn-secondary" href="viewstudents.php" role="button">Close</a>
+                                <button type="submit" name="modifystudent" form="modifystudent" class="btn btn-primary">Save changes</button>
                             </div>
                         </div>
                     </div>
@@ -174,6 +179,22 @@ include 'db_connect.php';
 
 
             </div>
+
+            <?php
+            if (isset($_POST['modifystudent'])) {
+                $id = $_POST['id'];
+                $lrn = $_POST['lrn'];
+                $first_name = $_POST['first_name'];
+                $last_name = $_POST['last_name'];
+                $email = $_POST['email'];
+                $grade_level = $_POST['grade_level'];
+
+                $update_student = mysqli_query($cxn, "UPDATE student SET first_name='$first_name',last_name='$last_name',email='$email',grade_level='$grade_level' WHERE id='$id'") or die("Error in query: $update_student." . mysqli_error($cxn));
+
+                echo "<script type='text/javascript'> alert('Successfully Modified!'); location.href = 'viewstudents.php'; </script>";
+            }
+
+            ?>
             <footer class="bg-white sticky-footer">
                 <div class="container my-auto">
                     <div class="text-center my-auto copyright"><span>Copyright © GNHS PTA Payment System - Admin Dashboard 2023</span></div>
@@ -187,6 +208,29 @@ include 'db_connect.php';
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('.modifybtn').on('click', function() {
+                $('#modifybtn').modal('show');
+
+                $tr = $(this).closest('tr');
+
+                var data = $tr.children("td").map(function() {
+                    return $(this).text();
+                }).get();
+
+                console.log(data);
+
+                $('#id').val(data[0]);
+                $('#first_name').val(data[1]);
+                $('#last_name').val(data[2]);
+                $('#grade_level').val(data[3]);
+                $('#lrn').val(data[4]);
+                $('#email').val(data[5]);
+            });
+        });
+    </script>
 </body>
 
 </html>
