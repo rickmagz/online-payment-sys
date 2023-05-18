@@ -92,7 +92,7 @@ include 'db_connect.php';
                                                     $last_name = $s['last_name'];
                                                     $email = $s['email'];
                                                     $reg_date = strtotime($s['date_created']);
-                                                    $date_reg = date("F d, Y", $reg_date);
+                                                    $date_reg = date("F d, Y; h:i A", $reg_date);
                                                     $grade_level = $s['grade_level'];
                                                 
 

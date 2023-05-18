@@ -74,6 +74,7 @@ include 'db_connect.php';
                                         <tr>
                                             <th>Name</th>
                                             <th>Username</th>
+                                            <th>ID No.</th>
                                             <th>Access Level</th>
                                             <th>Added by</th>
                                             <th>Added on</th>
@@ -94,13 +95,14 @@ include 'db_connect.php';
                                                 $username = $u['username'];
                                                 $added_by = $u['added_by'];
                                                 $added = strtotime($u['added_on']);
-                                                $added_on = date("F d, Y", $added);
+                                                $added_on = date("F d, Y; h:i A", $added);
                                                 $access_level = $u['access_level'];
 
                                         ?>
                                                 <tr>
                                                     <td><?php echo $first_name; ?> <?php echo $last_name; ?></td>
                                                     <td><?php echo $username; ?></td>
+                                                    <td><?php echo $t_id; ?></td>
                                                     <td><?php echo $access_level; ?></td>
                                                     <td><?php echo $added_by; ?></td>
                                                     <td><?php echo $added_on; ?></td>
