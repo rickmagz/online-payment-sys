@@ -113,16 +113,13 @@ include 'db_connect.php';
                                         <label>First Name</label>
                                             <input class="form-control form-control-user" type="text" id="exampleFirstName-1" placeholder="Enter First Name" name="first_name" required="" style="height: 50px; border-radius: 10px; padding: 10px;">
                                         </div>
-                                        <div class="col-sm-6 col-xl-6 col-xxl-4">
-                                        <label>Middle Name</label>
-                                            <input class="form-control form-control-user" type="text" id="exampleLastName-2" placeholder="Enter Middle Name" name="middle_name" style="height: 50px; border-radius: 10px; padding: 10px;">
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3">
                                         <div class="col-sm-6 col-xxl-4">
                                         <label>Last Name</label>
                                             <input class="form-control form-control-user" type="text" id="exampleLastName-5" placeholder="Enter Last Name" name="last_name" required=""  style="height: 50px; border-radius: 10px; padding: 10px;">
                                         </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        
                                         <div class="col-sm-6 col-xl-6 col-xxl-4">
                                             <label>Grade Level</label>
                                             <select class="form-select form-select-sm" style="height: 50px; border-radius: 10px; padding: 10px;" name="grade_level" required>
@@ -157,7 +154,6 @@ include 'db_connect.php';
                 $lrn = $_POST['lrn'];
                 $first_name = $_POST['first_name'];
                 $last_name = $_POST['last_name'];
-                $middle_name = $_POST['middle_name'];
                 $email = $_POST['email'];
                 $grade_level = $_POST['grade_level'];
 
