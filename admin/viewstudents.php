@@ -82,35 +82,35 @@ include 'db_connect.php';
                                     </thead>
                                     <tbody>
                                         <?php
-                                            $students = mysqli_query($cxn, "SELECT * FROM student ORDER BY last_name asc");
-                                            $student_query = mysqli_num_rows($students);
+                                        $students = mysqli_query($cxn, "SELECT * FROM student ORDER BY last_name asc");
+                                        $student_query = mysqli_num_rows($students);
 
-                                            if($student_query>0){
-                                                $i = 0;
-                                                while($s = mysqli_fetch_assoc($students)){
-                                                    $lrn = $s['lrn_id'];
-                                                    $first_name = $s['first_name'];
-                                                    $last_name = $s['last_name'];
-                                                    $email = $s['email'];
-                                                    $reg_date = strtotime($s['date_created']);
-                                                    $date_reg = date("F d, Y; h:i A", $reg_date);
-                                                    $grade_level = $s['grade_level'];
-                                                
+                                        if ($student_query > 0) {
+                                            $i = 0;
+                                            while ($s = mysqli_fetch_assoc($students)) {
+                                                $lrn = $s['lrn_id'];
+                                                $first_name = $s['first_name'];
+                                                $last_name = $s['last_name'];
+                                                $email = $s['email'];
+                                                $reg_date = strtotime($s['date_created']);
+                                                $date_reg = date("F d, Y; h:i A", $reg_date);
+                                                $grade_level = $s['grade_level'];
+
 
                                         ?>
-                                        <tr>
-                                            <td><?php echo $first_name;?> <?php echo $last_name;?></td>
-                                            <td><?php echo $grade_level;?></td>
-                                            <td><?php echo $lrn;?></td>
-                                            <td><?php echo $email;?></td>
-                                            <td><?php echo $date_reg;?></td>
-                                            <td><button class="btn btn-primary btn-sm" type="submit">Modify</button>&emsp13; <button class="btn btn-outline-danger btn-sm" type="submit">Delete</button></td>
-                                        </tr>
+                                                <tr>
+                                                    <td><?php echo $first_name; ?> <?php echo $last_name; ?></td>
+                                                    <td><?php echo $grade_level; ?></td>
+                                                    <td><?php echo $lrn; ?></td>
+                                                    <td><?php echo $email; ?></td>
+                                                    <td><?php echo $date_reg; ?></td>
+                                                    <td><button class="btn btn-primary btn-sm" type="button" data-toggle="modal" data-target="#modifybtn">Modify</button>&emsp13; <button class="btn btn-outline-danger btn-sm" type="submit">Delete</button></td>
+                                                </tr>
 
                                         <?php
-                                            $i++;
-                                                }
+                                                $i++;
                                             }
+                                        }
                                         ?>
                                     </tbody>
                                     <tfoot>
@@ -121,17 +121,58 @@ include 'db_connect.php';
                         </div>
                     </div>
                 </div>
-                <div class="modal fade" role="dialog" tabindex="-1" id="modal-1">
-                    <div class="modal-dialog modal-lg" role="document">
+
+                <!-- Modal -->
+                <div class="modal fade" id="modifybtn" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h4 class="modal-title">Proof of Payment</h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                <h5 class="modal-title" id="exampleModalLabel">Modify Student Info</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
                             </div>
-                            <div class="modal-body"><img></div>
-                            <div class="modal-footer"><button class="btn btn-primary" type="button" data-bs-dismiss="modal">Close</button></div>
+                            <div class="modal-body">
+                                <div class="form-floating mb-3 mt-3">
+                                    <input type="text" class="form-control" id="first_name" placeholder="Enter first name" name="first_name">
+                                    <label>First Name</label>
+                                </div>
+                                <div class="form-floating mb-3 mt-3">
+                                    <input type="text" class="form-control" id="last_name" placeholder="Enter last name" name="last_name">
+                                    <label>Last Name</label>
+                                </div>
+                                <div class="form-floating mb-3 mt-3">
+                                    <select class="form-select" name="grade_level" required>
+                                        <optgroup label="Select Grade Level">
+                                            <option value="Grade 7" selected>Grade 7</option>
+                                            <option value="Grade 8">Grade 8</option>
+                                            <option value="Grade 9">Grade 9</option>
+                                            <option value="Grade 10">Grade 10</option>
+                                            <option value="Grade 11">Grade 11</option>
+                                            <option value="Grade 12">Grade 12</option>
+                                        </optgroup>
+                                    </select>
+                                    <label>Grade Level</label>
+                                </div>
+                                <div class="form-floating mb-3 mt-3">
+                                    <input type="text" class="form-control" id="lrn" placeholder="Enter LRN" name="lrn">
+                                    <label>Learners Reference No.</label>
+                                </div>
+                                <div class="form-floating mb-3 mt-3">
+                                <input type="text" class="form-control" id="email" placeholder="Enter Email" name="email">
+                                    <label>Email Address</label>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Save changes</button>
+                            </div>
                         </div>
                     </div>
                 </div>
+
+
+
             </div>
             <footer class="bg-white sticky-footer">
                 <div class="container my-auto">

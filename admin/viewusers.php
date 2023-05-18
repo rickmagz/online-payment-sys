@@ -106,7 +106,7 @@ include 'db_connect.php';
                                                     <td><?php echo $access_level; ?></td>
                                                     <td><?php echo $added_by; ?></td>
                                                     <td><?php echo $added_on; ?></td>
-                                                    <td><button class="btn btn-primary btn-sm" type="button" data-toggle="modal" data-target="#exampleModal">Modify</button>&emsp13;
+                                                    <td><button class="btn btn-primary btn-sm" type="button" data-toggle="modal" data-target="#modifybtn">Modify</button>&emsp13;
                                                         <button class="btn btn-outline-danger btn-sm" type="submit">Delete</button>
                                                     </td>
                                                 </tr>
@@ -128,17 +128,41 @@ include 'db_connect.php';
             </div>
 
             <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="modifybtn" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Modify User</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
-                            ...
+                            <div class="form-floating mb-3 mt-3">
+                                <input type="text" class="form-control" id="first_name" placeholder="Enter first name" name="first_name">
+                                <label>First Name</label>
+                            </div>
+                            <div class="form-floating mb-3 mt-3">
+                                <input type="text" class="form-control" id="last_name" placeholder="Enter last name" name="last_name">
+                                <label>Last Name</label>
+                            </div>
+                            <div class="form-floating mb-3 mt-3">
+                                <input type="text" class="form-control" id="username" placeholder="Enter username" name="username">
+                                <label>Username</label>
+                            </div>
+                            <div class="form-floating mb-3 mt-3">
+                                <input type="text" class="form-control" id="idno" placeholder="Enter ID no." name="idno">
+                                <label>ID No.</label>
+                            </div>
+                            <div class="form-floating mb-3 mt-3">
+                                <select class="form-select" name="access_level" id="access_level" required>
+                                    <optgroup label="Select Access Level">
+                                        <option value="Admin">Admin</option>
+                                        <option value="Teacher">Teacher</option>
+                                    </optgroup>
+                                </select>
+                                <label>Access Level</label>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -147,6 +171,8 @@ include 'db_connect.php';
                     </div>
                 </div>
             </div>
+
+
             <footer class="bg-white sticky-footer">
                 <div class="container my-auto">
                     <div class="text-center my-auto copyright"><span>Copyright © GNHS PTA Payment System - Admin Dashboard 2023</span></div>
