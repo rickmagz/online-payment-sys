@@ -77,7 +77,7 @@ include 'db_connect.php';
                                         </div>
                                         <div class="col-sm-6 col-xxl-4">
                                         <label>Employee No.</label>
-                                            <input class="form-control form-control-user" type="password" id="exampleLastName" placeholder="Enter Employee Number" name="password" required="" style="height: 50px; border-radius: 10px; padding: 10px;">
+                                            <input class="form-control form-control-user" type="text" id="exampleLastName" placeholder="Enter Employee Number" name="empno" required="" style="height: 50px; border-radius: 10px; padding: 10px;">
                                         </div>
                                     </div>
                                     <div class="row mb-3">
@@ -96,8 +96,7 @@ include 'db_connect.php';
                                             <select class="form-select form-select-sm" style="height: 50px; border-radius: 10px; padding: 10px; margin-bottom:16px;" name="access_level" required>
                                                 <optgroup label="Select Access Level">
                                                     <option value="Admin" selected>Admin</option>
-                                                    <option value="Department Head">Department Head</option>
-                                                    <option value="Teacher/Adviser">Teacher/Adviser</option>
+                                                    <option value="Teacher">Teacher</option>
                                                 </optgroup>
                                             </select>
                                         </div>
@@ -118,11 +117,13 @@ include 'db_connect.php';
             <?php
             if (isset($_POST['submit'])) {
                 $username = $_POST['username'];
-                $password = $_POST['password'];
+                $empno = $_POST['empno'];
                 $first_name = $_POST['first_name'];
                 $last_name = $_POST['last_name'];
+                $access_level = $_POST['access_level'];
+                $added_by = $_SESSION['first_name'];
 
-                $query = mysqli_query($cxn, "INSERT INTO users(username,password,first_name,last_name) VALUES('$username','$password','$first_name','$last_name')") or die("Error in query: $query." . mysqli_error($cxn));
+                $query = mysqli_query($cxn, "INSERT INTO users(username,teacher_id,first_name,last_name,added_by,access_level) VALUES('$username','$empno','$first_name','$last_name','$added_by','$access_level')") or die("Error in query: $query." . mysqli_error($cxn));
 
                 echo "<script type='text/javascript'> alert('Successfully Added New User!'); location.href = 'addnewuser.php'; </script>";
             }
