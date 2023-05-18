@@ -69,22 +69,46 @@ include 'db_connect.php';
                         <div class="col-lg-12 col-xl-12 col-xxl-12">
                             <div class="p-5">
                                 <h1 class="text-dark mb-4"><strong>Add New User</strong></h1>
-                                <form class="user" action="addnewuser.php" method="post">
+                                <form class="user" action="addnewuser.php" method="post" id="adduser">
                                     <div class="row mb-3">
-                                        <div class="col-sm-6 col-xl-6 col-xxl-4 mb-3 mb-sm-0"><input class="form-control form-control-user" type="text" id="exampleFirstName" placeholder="Username" name="username" required="" autofocus=""></div>
-                                        <div class="col-sm-6 col-xxl-4"><input class="form-control form-control-user" type="password" id="exampleLastName" placeholder="ID Number" name="password" required=""></div>
+                                        <div class="col-sm-6 col-xl-6 col-xxl-4 mb-3 mb-sm-0">
+                                        <label>Username</label>
+                                            <input class="form-control form-control-user" type="text" id="exampleFirstName" placeholder="Enter Username" name="username" required="" autofocus="" style="height: 50px; border-radius: 10px; padding: 10px;">
+                                        </div>
+                                        <div class="col-sm-6 col-xxl-4">
+                                        <label>Employee No.</label>
+                                            <input class="form-control form-control-user" type="password" id="exampleLastName" placeholder="Enter Employee Number" name="password" required="" style="height: 50px; border-radius: 10px; padding: 10px;">
+                                        </div>
                                     </div>
                                     <div class="row mb-3">
-                                        <div class="col-sm-6 col-xxl-4 mb-3 mb-sm-0"><input class="form-control form-control-user" type="text" id="exampleFirstName-1" placeholder="First Name" name="first_name" required=""></div>
-                                        <div class="col-sm-6 col-xl-6 col-xxl-4"><input class="form-control form-control-user" type="text" id="exampleLastName-2" placeholder="Last Name" name="last_name" required=""></div>
+                                        <div class="col-sm-6 col-xxl-4 mb-3 mb-sm-0">
+                                        <label>First Name</label>
+                                            <input class="form-control form-control-user" type="text" id="exampleFirstName-1" placeholder="Enter First Name" name="first_name" required="" style="height: 50px; border-radius: 10px; padding: 10px;">
+                                        </div>
+                                        <div class="col-sm-6 col-xl-6 col-xxl-4">
+                                        <label>Last Name</label>
+                                            <input class="form-control form-control-user" type="text" placeholder="Enter Last Name" name="last_name" required="" style="height: 50px; border-radius: 10px; padding: 10px;">
+                                        </div>
                                     </div>
                                     <div class="row mb-3">
-                                        <div class="col-sm-6 col-md-5 col-lg-4 col-xl-4 col-xxl-2 offset-xl-0 align-items-center align-content-center">
-                                            <input class="btn btn-info" type="submit" name="submit" value="Add User">
-                                            <button class="btn btn-danger border rounded" type="reset">Reset</button>
+                                        <div class="col-sm-6 col-xl-6 col-xxl-4">
+                                        <label>Access Level</label>
+                                            <select class="form-select form-select-sm" style="height: 50px; border-radius: 10px; padding: 10px; margin-bottom:16px;" name="access_level" required>
+                                                <optgroup label="Select Access Level">
+                                                    <option value="Admin" selected>Admin</option>
+                                                    <option value="Department Head">Department Head</option>
+                                                    <option value="Teacher/Adviser">Teacher/Adviser</option>
+                                                </optgroup>
+                                            </select>
                                         </div>
                                     </div>
                                 </form>
+                                <div class="row mb-3">
+                                    <div class="col-sm-6 col-md-5 col-lg-4 col-xl-4 col-xxl-2 offset-xl-0 align-items-center align-content-center">
+                                        <button class="btn btn-primary" type="submit" name="submit" form="adduser">Add User</button>
+                                        <button class="btn btn-danger border rounded" type="reset">Reset</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
