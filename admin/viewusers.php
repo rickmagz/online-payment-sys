@@ -9,7 +9,7 @@ include 'db_connect.php';
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Table - GNHS PTA Payment System - Admin</title>
+    <title>System Users | GNHS PTA Payment System - Admin</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/Nunito.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
@@ -73,37 +73,51 @@ include 'db_connect.php';
                                     <thead>
                                         <tr>
                                             <th>Name</th>
+                                            <th>Username</th>
                                             <th>Access Level</th>
                                             <th>Added by</th>
-                                            <th>Registration Date</th>
+                                            <th>Added on</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>Cedric Kelly</td>
-                                            <td>staff</td>
-                                            <td>admin</td>
-                                            <td>Apr 17, 2023</td>
-                                            <td><button class="btn btn-danger btn-sm" type="submit">Delete</button></td>
-                                        </tr>
+                                        <?php
+                                        $users = mysqli_query($cxn, "SELECT * FROM users ORDER BY added_on asc");
+                                        $users_query = mysqli_num_rows($users);
+
+                                        if ($users_query > 0) {
+                                            $i = 0;
+                                            while ($u = mysqli_fetch_assoc($users)) {
+                                                $t_id = $u['teacher_id'];
+                                                $first_name = $u['first_name'];
+                                                $last_name = $u['last_name'];
+                                                $username = $u['username'];
+                                                $added_by = $u['added_by'];
+                                                $added = strtotime($u['added_on']);
+                                                $added_on = date("F d, Y", $added);
+                                                $access_level = $u['access_level'];
+
+                                        ?>
+                                                <tr>
+                                                    <td><?php echo $first_name; ?> <?php echo $last_name; ?></td>
+                                                    <td><?php echo $username; ?></td>
+                                                    <td><?php echo $access_level; ?></td>
+                                                    <td><?php echo $added_by; ?></td>
+                                                    <td><?php echo $added_on; ?></td>
+                                                    <td><button class="btn btn-danger btn-sm" type="submit">Delete</button></td>
+                                                </tr>
+
+                                        <?php
+                                                $i++;
+                                            }
+                                        }
+                                        ?>
                                     </tbody>
                                     <tfoot>
                                         <tr></tr>
                                     </tfoot>
                                 </table>
                             </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal fade" role="dialog" tabindex="-1" id="modal-1">
-                    <div class="modal-dialog modal-lg" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title">Proof of Payment</h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body"><img></div>
-                            <div class="modal-footer"><button class="btn btn-primary" type="button" data-bs-dismiss="modal">Close</button></div>
                         </div>
                     </div>
                 </div>
