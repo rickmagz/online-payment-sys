@@ -99,19 +99,33 @@ include 'db_connect.php';
                                 <h1 class="text-dark mb-4"><strong>Add New Student</strong></h1>
                                 <form class="user" action="addnewstudent.php" method="post" id="addstudent">
                                     <div class="row mb-3">
-                                        <div class="col-sm-6 col-xl-6 col-xxl-4 mb-3 mb-sm-0"><input class="form-control form-control-user" type="text" id="exampleFirstName" placeholder="Learners Reference Number" name="lrn" required="" autofocus=""></div>
-                                        <div class="col-sm-6 col-xxl-4"><input class="form-control form-control-user" type="email" id="exampleLastName" placeholder="E-mail Address" name="email" required=""></div>
+                                        <div class="col-sm-6 col-xl-6 col-xxl-4 mb-3 mb-sm-0">
+                                        <label>Learners Reference Number</label>
+                                            <input class="form-control form-control-user" type="text" id="exampleFirstName" placeholder="Enter Learners Reference Number" name="lrn" required="" autofocus="" style="height: 50px; border-radius: 10px; padding: 10px;">
+                                        </div>
+                                        <div class="col-sm-6 col-xxl-4">
+                                        <label>E-mail Address</label>
+                                            <input class="form-control form-control-user" type="email" id="exampleLastName" placeholder="Enter E-mail Address" name="email" required="" style="height: 50px; border-radius: 10px; padding: 10px;">
+                                        </div>
                                     </div>
                                     <div class="row mb-3">
-                                        <div class="col-sm-6 col-xxl-4 mb-3 mb-sm-0"><input class="form-control form-control-user" type="text" id="exampleFirstName-1" placeholder="First Name" name="first_name" required=""></div>
-                                        <div class="col-sm-6 col-xl-6 col-xxl-4"><input class="form-control form-control-user" type="text" id="exampleLastName-2" placeholder="Middle Name" name="middle_name"></div>
+                                        <div class="col-sm-6 col-xxl-4 mb-3 mb-sm-0">
+                                        <label>First Name</label>
+                                            <input class="form-control form-control-user" type="text" id="exampleFirstName-1" placeholder="Enter First Name" name="first_name" required="" style="height: 50px; border-radius: 10px; padding: 10px;">
+                                        </div>
+                                        <div class="col-sm-6 col-xl-6 col-xxl-4">
+                                        <label>Middle Name</label>
+                                            <input class="form-control form-control-user" type="text" id="exampleLastName-2" placeholder="Enter Middle Name" name="middle_name" style="height: 50px; border-radius: 10px; padding: 10px;">
+                                        </div>
                                     </div>
                                     <div class="row mb-3">
                                         <div class="col-sm-6 col-xxl-4">
-                                            <input class="form-control form-control-user" type="text" id="exampleLastName-5" placeholder="Last Name" name="last_name" required="">
+                                        <label>Last Name</label>
+                                            <input class="form-control form-control-user" type="text" id="exampleLastName-5" placeholder="Enter Last Name" name="last_name" required=""  style="height: 50px; border-radius: 10px; padding: 10px;">
                                         </div>
                                         <div class="col-sm-6 col-xl-6 col-xxl-4">
-                                            <select class="form-select form-select-sm" style="height: 53px;border-radius: 160px; padding: 16px; margin-bottom:16px;" name="grade_level" required>
+                                            <label>Grade Level</label>
+                                            <select class="form-select form-select-sm" style="height: 50px; border-radius: 10px; padding: 10px;" name="grade_level" required>
                                                 <optgroup label="Select Grade Level">
                                                     <option value="Grade 7" selected>Grade 7</option>
                                                     <option value="Grade 8">Grade 8</option>
