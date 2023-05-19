@@ -13,6 +13,8 @@ include 'db_connect.php';
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/Nunito.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.js" type="text/javascript"></script>
+    <script src='https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js' type='text/javascript'></script>
 </head>
 
 <body id="page-top">
@@ -75,48 +77,42 @@ include 'db_connect.php';
                                             <th>LRN</th>
                                             <th>Name</th>
                                             <th>Grade Level</th>
-                                            <th>Reference No.</th>
-                                            <th>Amount Paid</th>
+                                            <th>Reference Number</th>
                                             <th>Payment Method</th>
-                                            <th>Proof of Payment</th>
+                                            <th>Amount Paid</th>
                                             <th>Payment Date</th>
+                                            <th>Proof of Payment</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
-                                        $payments = mysqli_query($cxn, "SELECT * FROM payments ORDER BY uploaded_on asc");
-                                        $payments_query = mysqli_num_rows($payments);
+                                        $payments = mysqli_query($cxn, "SELECT * FROM payments");
 
-                                        if ($payments_query > 0) {
-                                            $i = 0;
-                                            while ($p = mysqli_fetch_assoc($payments)) {
-                                                $lrn = $p['lrn'];
-                                                $first_name = $p['first_name'];
-                                                $last_name = $p['last_name'];
-                                                $grade_level = $p['grade_level'];
-                                                $ref_no = $p['ref_no'];
-                                                $amount_paid = $p['amount_paid'];
-                                                $payment_method = $p['payment_method'];
-                                                $date = strtotime($p['uploaded_on']);
-                                                $pay_date = date("F d, Y; h:i A", $date);
-
-
+                                        while ($p = mysqli_fetch_array($payments)) {
+                                            $id = $p['id'];
+                                            $lrn = $p['lrn'];
+                                            $first_name = $p['first_name'];
+                                            $last_name = $p['last_name'];
+                                            $grade_level = $p['grade_level'];
+                                            $ref_no = $p['ref_no'];
+                                            $amount_paid = $p['amount_paid'];
+                                            $payment_method = $p['payment_method'];
+                                            $date = strtotime($p['uploaded_on']);
+                                            $pay_date = date("F d, Y; h:i A", $date);
                                         ?>
-                                                <tr>
-                                                    <td><?php echo $lrn; ?></td>
-                                                    <td><?php echo $first_name; ?> <?php echo $last_name; ?></td>
-                                                    <td><?php echo $grade_level; ?></td>
-                                                    <td><?php echo $ref_no; ?></td>
-                                                    <td><?php echo $amount_paid; ?></td>
-                                                    <td><?php echo $payment_method; ?></td>
-                                                    <td><button class="btn btn-primary btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#modal-1">See Attachment</button></td>
-                                                    <td><?php echo $pay_date; ?></td>
-                                                    <td><button class="btn btn-primary btn-sm" type="submit">Approve</button>&emsp13;<button class="btn btn-danger btn-sm" type="submit">Deny</button></td>
-                                                </tr>
+                                            <tr>
+                                                <td><?php echo $lrn; ?></td>
+                                                <td><?php echo $first_name; ?> <?php echo $last_name; ?></td>
+                                                <td><?php echo $grade_level; ?></td>
+                                                <td><?php echo $ref_no; ?></td>
+                                                <td><?php echo $payment_method; ?></td>
+                                                <td><?php echo $amount_paid; ?></td>
+                                                <td><?php echo $pay_date; ?></td>
+                                                <td><button data-id='<?php echo $p['id']; ?>' class="userinfo btn btn-primary">See Attachment</button></td>
+                                                <td><button class="btn btn-primary btn-sm" type="submit">Approve</button>&emsp13;<button class="btn btn-danger btn-sm" type="submit">Deny</button></td>
+                                            </tr>
                                         <?php
-                                                $i++;
-                                            }
                                         }
                                         ?>
 
@@ -127,34 +123,6 @@ include 'db_connect.php';
                         </div>
                     </div>
                 </div>
-                <?php
-                $image = mysqli_query($cxn, "SELECT attachment FROM proof_of_payments WHERE lrn='$lrn'");
-                $image_query = mysqli_num_rows($image);
-
-                if ($image_query > 0) {
-                    while ($i = mysqli_fetch_assoc($image)) {
-                        $imageURL = 'proof_of_payments/' . $i['attachment'];
-
-                ?>
-                        <!-- #########################    Proof of Payment Modal    ####################################################-->
-                        <div class="modal fade" role="dialog" tabindex="-1" id="modal-1">
-                            <div class="modal-dialog modal-lg" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h4 class="modal-title">Proof of Payment</h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body"><img src="<?php echo $imageURL;?>" alt="Proof of Payment"></div>
-                                    <div class="modal-footer"><button class="btn btn-primary" type="button" data-bs-dismiss="modal">Close</button></div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- #########################    End of Modal    ####################################################-->
-                <?php
-
-                    }
-                }
-
-                ?>
             </div>
             <footer class="bg-white sticky-footer">
                 <div class="container my-auto">
@@ -166,9 +134,44 @@ include 'db_connect.php';
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/bs-init.js"></script>
     <script src="assets/js/theme.js"></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script type='text/javascript'>
+        $(document).ready(function() {
+            $('.userinfo').click(function() {
+                var userid = $(this).data('id');
+                $.ajax({
+                    url: 'ajaxfile.php',
+                    type: 'post',
+                    data: {
+                        userid: userid
+                    },
+                    success: function(response) {
+                        $('.modal-body').html(response);
+                        $('#empModal').modal('show');
+                    }
+                });
+            });
+        });
+    </script>
+
+    <!-- #########################    Proof of Payment Modal    ####################################################-->
+    <div class="modal fade" id="empModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Proof of Payment</h4>
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                </div>
+                <div class="modal-body">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- #########################    End of Modal    ####################################################-->
 </body>
 
 </html>
