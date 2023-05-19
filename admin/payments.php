@@ -9,7 +9,7 @@ include 'db_connect.php';
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Table - GNHS PTA Payment System - Admin</title>
+    <title>Payments History | GNHS PTA Payment System - Admin</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/Nunito.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
@@ -72,43 +72,89 @@ include 'db_connect.php';
                                 <table class="table my-0" id="dataTable">
                                     <thead>
                                         <tr>
+                                            <th>LRN</th>
                                             <th>Name</th>
                                             <th>Grade Level</th>
+                                            <th>Reference No.</th>
                                             <th>Amount Paid</th>
-                                            <th>Payment Date</th>
+                                            <th>Payment Method</th>
                                             <th>Proof of Payment</th>
+                                            <th>Payment Date</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>Cedric Kelly</td>
-                                            <td>Grade 8</td>
-                                            <td>P 100.00</td>
-                                            <td>Apr 17, 2023</td>
-                                            <td><button class="btn btn-primary btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#modal-1">See Attachment</button></td>
-                                            <td><button class="btn btn-primary btn-sm" type="submit">Approve</button><button class="btn btn-danger btn-sm" type="submit">Reject</button></td>
-                                        </tr>
+                                        <?php
+                                        $payments = mysqli_query($cxn, "SELECT * FROM payments ORDER BY uploaded_on asc");
+                                        $payments_query = mysqli_num_rows($payments);
+
+                                        if ($payments_query > 0) {
+                                            $i = 0;
+                                            while ($p = mysqli_fetch_assoc($payments)) {
+                                                $lrn = $p['lrn'];
+                                                $first_name = $p['first_name'];
+                                                $last_name = $p['last_name'];
+                                                $grade_level = $p['grade_level'];
+                                                $ref_no = $p['ref_no'];
+                                                $amount_paid = $p['amount_paid'];
+                                                $payment_method = $p['payment_method'];
+                                                $date = strtotime($p['uploaded_on']);
+                                                $pay_date = date("F d, Y; h:i A", $date);
+
+
+                                        ?>
+                                                <tr>
+                                                    <td><?php echo $lrn; ?></td>
+                                                    <td><?php echo $first_name; ?> <?php echo $last_name; ?></td>
+                                                    <td><?php echo $grade_level; ?></td>
+                                                    <td><?php echo $ref_no; ?></td>
+                                                    <td><?php echo $amount_paid; ?></td>
+                                                    <td><?php echo $payment_method; ?></td>
+                                                    <td><button class="btn btn-primary btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#modal-1">See Attachment</button></td>
+                                                    <td><?php echo $pay_date; ?></td>
+                                                    <td><button class="btn btn-primary btn-sm" type="submit">Approve</button>&emsp13;<button class="btn btn-danger btn-sm" type="submit">Deny</button></td>
+                                                </tr>
+                                        <?php
+                                                $i++;
+                                            }
+                                        }
+                                        ?>
+
                                     </tbody>
-                                    <tfoot>
-                                        <tr></tr>
-                                    </tfoot>
                                 </table>
+
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="modal fade" role="dialog" tabindex="-1" id="modal-1">
-                    <div class="modal-dialog modal-lg" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title">Proof of Payment</h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <?php
+                $image = mysqli_query($cxn, "SELECT attachment FROM proof_of_payments WHERE lrn='$lrn'");
+                $image_query = mysqli_num_rows($image);
+
+                if ($image_query > 0) {
+                    while ($i = mysqli_fetch_assoc($image)) {
+                        $imageURL = 'proof_of_payments/' . $i['attachment'];
+
+                ?>
+                        <!-- #########################    Proof of Payment Modal    ####################################################-->
+                        <div class="modal fade" role="dialog" tabindex="-1" id="modal-1">
+                            <div class="modal-dialog modal-lg" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Proof of Payment</h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body"><img src="<?php echo $imageURL;?>" alt="Proof of Payment"></div>
+                                    <div class="modal-footer"><button class="btn btn-primary" type="button" data-bs-dismiss="modal">Close</button></div>
+                                </div>
                             </div>
-                            <div class="modal-body"><img></div>
-                            <div class="modal-footer"><button class="btn btn-primary" type="button" data-bs-dismiss="modal">Close</button></div>
                         </div>
-                    </div>
-                </div>
+                        <!-- #########################    End of Modal    ####################################################-->
+                <?php
+
+                    }
+                }
+
+                ?>
             </div>
             <footer class="bg-white sticky-footer">
                 <div class="container my-auto">
