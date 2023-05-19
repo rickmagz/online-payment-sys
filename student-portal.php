@@ -1,6 +1,10 @@
 <?php
 session_start();
+include 'db_connect.php';
 
+$first_name = $_SESSION['first_name'];
+$last_name = $_SESSION['last_name'];
+$lrn = $_SESSION['lrn_id'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -57,32 +61,47 @@ session_start();
             <table class="table">
               <thead>
                 <tr>
-                  <th>Date</th>
-                  <th>Mode of Payment</th>
+                  <th>ID</th>
                   <th>Reference No.</th>
-                  <th>Proof of Payment</th>
                   <th>Amount Paid</th>
+                  <th>Mode of Payment</th>
+                  <th>Date of Payment</th>
                   <th>Remarks</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <!-- <td>Cell 1</td>
-                  <td>Cell 2</td>
-                  <td>Cell 3</td>
-                  <td>Cell 3</td>
-                  <td>Cell 3</td>
-                  <td>Cell 3</td> -->
 
-                </tr>
+                <?php 
+                  $payment = mysqli_query($cxn, "SELECT * FROM payments WHERE lrn='$lrn' ORDER BY uploaded_on asc");
+                  $payment_query = mysqli_num_rows($payment);
+
+                  if($payment_query>0){
+                    $i = 0;
+                    while($p = mysqli_fetch_assoc($payment)){
+                      $id = $p['id'];
+                      $ref_no = $p['ref_no'];
+                      $amount = $p['amount_paid'];
+                      $payment_method = $p['payment_method'];
+                      $date = strtotime($p['uploaded_on']);
+                      $pay_date = date("F d, Y; h:i A", $date);
+                      $remarks = $p['remarks'];
+
+                    
+                ?>
                 <tr>
-                  <!-- <td>Cell 3</td>
-                  <td>Cell 3</td>
-                  <td>Cell 3</td>
-                  <td>Cell 3</td>
-                  <td>Cell 3</td>
-                  <td>Cell 8</td> -->
+                  <td><?php echo $id;?></td>
+                  <td><?php echo $ref_no;?></td>
+                  <td><?php echo $amount;?></td>
+                  <td><?php echo $payment_method;?></td>
+                  <td><?php echo $pay_date;?></td>
+                  <td><?php echo $remarks;?></td>
                 </tr>
+
+                <?php
+                      $i++;
+                    }
+                  }
+                ?>
               </tbody>
             </table>
           </div>
