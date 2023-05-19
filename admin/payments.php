@@ -13,6 +13,7 @@ include 'db_connect.php';
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/Nunito.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <script src="https://code.jquery.com/jquery-3.5.1.js" type="text/javascript"></script>
     <script src='https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js' type='text/javascript'></script>
 </head>
@@ -74,7 +75,6 @@ include 'db_connect.php';
                                 <table class="table my-0" id="dataTable">
                                     <thead>
                                         <tr>
-                                            <th>LRN</th>
                                             <th>Name</th>
                                             <th>Grade Level</th>
                                             <th>Reference Number</th>
@@ -102,15 +102,15 @@ include 'db_connect.php';
                                             $pay_date = date("F d, Y; h:i A", $date);
                                         ?>
                                             <tr>
-                                                <td><?php echo $lrn; ?></td>
                                                 <td><?php echo $first_name; ?> <?php echo $last_name; ?></td>
                                                 <td><?php echo $grade_level; ?></td>
                                                 <td><?php echo $ref_no; ?></td>
                                                 <td><?php echo $payment_method; ?></td>
                                                 <td><?php echo $amount_paid; ?></td>
                                                 <td><?php echo $pay_date; ?></td>
-                                                <td><button data-id='<?php echo $p['id']; ?>' class="userinfo btn btn-primary">See Attachment</button></td>
-                                                <td><button class="btn btn-primary btn-sm" type="submit">Approve</button>&emsp13;<button class="btn btn-danger btn-sm" type="submit">Deny</button></td>
+                                                <td><button data-id='<?php echo $p['id']; ?>' class="userinfo btn btn-primary btn-sm"><i class="bi bi-image-fill"></i><br/>Attachment</button></td>
+                                                <td><button class="btn btn-primary btn-sm" type="submit"><i class="bi bi-check-circle-fill"></i>Accept</button></td>
+                                                <td><button class="btn btn-danger btn-sm" type="submit"><i class="bi bi-x-circle-fill"></i>Deny</button></td>
                                             </tr>
                                         <?php
                                         }
