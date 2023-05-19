@@ -45,14 +45,14 @@
                                     if(isset($_POST['login'])){
                                         $username = $_POST['username'];
                                         $password = $_POST['password'];
-                                        $query = mysqli_query($cxn, "SELECT * FROM users WHERE username='$username' AND password='$password'");
+                                        $query = mysqli_query($cxn, "SELECT * FROM users WHERE username='$username' AND teacher_id='$password'");
 
                                         if(mysqli_num_rows($query)>0){
                                             $row = mysqli_fetch_assoc($query);
                                             $_SESSION['first_name'] = $row['first_name'];
                                             $_SESSION['last_name']= $row['last_name'];
-                                            $_SESSION['lrn_id'] = $row['lrn_id'];
-                                            $_SESSION['email'] = $row['email'];
+                                            $_SESSION['lrn_id'] = $row['teacher_id'];
+                                            $_SESSION['username'] = $row['username'];
                                             header("location: admin.php");
                                         }
                                         else{
