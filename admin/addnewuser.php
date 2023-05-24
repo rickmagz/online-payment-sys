@@ -72,27 +72,27 @@ include 'db_connect.php';
                                 <form class="user" action="addnewuser.php" method="post" id="adduser">
                                     <div class="row mb-3">
                                         <div class="col-sm-6 col-xl-6 col-xxl-4 mb-3 mb-sm-0">
-                                        <label>Username</label>
+                                            <label>Username</label>
                                             <input class="form-control form-control-user" type="text" id="exampleFirstName" placeholder="Enter Username" name="username" required="" autofocus="" style="height: 50px; border-radius: 10px; padding: 10px;">
                                         </div>
                                         <div class="col-sm-6 col-xxl-4">
-                                        <label>Employee No.</label>
+                                            <label>Employee No.</label>
                                             <input class="form-control form-control-user" type="text" id="exampleLastName" placeholder="Enter Employee Number" name="empno" required="" style="height: 50px; border-radius: 10px; padding: 10px;">
                                         </div>
                                     </div>
                                     <div class="row mb-3">
                                         <div class="col-sm-6 col-xxl-4 mb-3 mb-sm-0">
-                                        <label>First Name</label>
+                                            <label>First Name</label>
                                             <input class="form-control form-control-user" type="text" id="exampleFirstName-1" placeholder="Enter First Name" name="first_name" required="" style="height: 50px; border-radius: 10px; padding: 10px;">
                                         </div>
                                         <div class="col-sm-6 col-xl-6 col-xxl-4">
-                                        <label>Last Name</label>
+                                            <label>Last Name</label>
                                             <input class="form-control form-control-user" type="text" placeholder="Enter Last Name" name="last_name" required="" style="height: 50px; border-radius: 10px; padding: 10px;">
                                         </div>
                                     </div>
                                     <div class="row mb-3">
                                         <div class="col-sm-6 col-xl-6 col-xxl-4">
-                                        <label>Access Level</label>
+                                            <label>Access Level</label>
                                             <select class="form-select form-select-sm" style="height: 50px; border-radius: 10px; padding: 10px; margin-bottom:16px;" name="access_level" required>
                                                 <optgroup label="Select Access Level">
                                                     <option value="Admin" selected>Admin</option>
@@ -123,9 +123,18 @@ include 'db_connect.php';
                 $access_level = $_POST['access_level'];
                 $added_by = $_SESSION['first_name'];
 
-                $query = mysqli_query($cxn, "INSERT INTO users(username,teacher_id,first_name,last_name,added_by,access_level) VALUES('$username','$empno','$first_name','$last_name','$added_by','$access_level')") or die("Error in query: $query." . mysqli_error($cxn));
+                $check_teacherid = mysqli_query($cxn, "SELECT * FROM users WHERE teacher_id='$empno'") or die("Error in query: $check_teacherid." . mysqli_error($cxn));
 
-                echo "<script type='text/javascript'> alert('Successfully Added New User!'); location.href = 'addnewuser.php'; </script>";
+                $check_username = mysqli_query($cxn, "SELECT * FROM users WHERE username='$username'") or die("Error in query: $check_username." . mysqli_error($cxn));
+
+                if ($check_teacherid->num_rows == 1) {
+                    echo "<script type='text/javascript'> alert('Teacher Employee No. already exist!'); location.href='addnewuser.php'; </script>";
+                } elseif ($check_username->num_rows == 1) {
+                    echo "<script type='text/javascript'> alert('Username already exist!'); location.href='addnewuser.php'; </script>";
+                } else {
+                    $query = mysqli_query($cxn, "INSERT INTO users(username,teacher_id,first_name,last_name,added_by,access_level) VALUES('$username','$empno','$first_name','$last_name','$added_by','$access_level')") or die("Error in query: $query." . mysqli_error($cxn));
+                    echo "<script type='text/javascript'> alert('Successfully Added New User!'); location.href = 'addnewuser.php'; </script>";
+                }
             }
 
             ?>

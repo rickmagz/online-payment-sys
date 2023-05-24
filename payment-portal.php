@@ -2,6 +2,17 @@
 session_start();
 include 'db_connect.php';
 
+$first_name = $_SESSION['first_name'];
+$last_name = $_SESSION['last_name'];
+$lrn = $_SESSION['lrn_id'];
+
+$get_gradelevel = mysqli_query($cxn, "SELECT * FROM student WHERE lrn_id='$lrn'") or die("Error in query: $get_gradelevel." . mysqli_error($cxn));
+
+if (mysqli_num_rows($get_gradelevel) > 0) {
+  $g = mysqli_fetch_assoc($get_gradelevel);
+  $glevel = $g['grade_level'];
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -32,13 +43,13 @@ include 'db_connect.php';
           <li class="nav-item"></li>
         </ul>
         <form action="index.php" method="POST">
-            <input class="btn btn-danger" type="submit" name="logout" value="Log Out">
-                    <?php
-                      if(isset($_POST['logout'])){
-                        session_destroy();
-                      }
-                      ?>
-          </form>
+          <input class="btn btn-danger" type="submit" name="logout" value="Log Out">
+          <?php
+          if (isset($_POST['logout'])) {
+            session_destroy();
+          }
+          ?>
+        </form>
       </div>
     </div>
   </nav>
@@ -59,22 +70,13 @@ include 'db_connect.php';
             <div class="card-body">
               <div class="row">
                 <div class="col-sm-12 col-md-5 col-lg-4 col-xl-4 offset-md-1 offset-lg-2 offset-xl-2">
-                  <div class="mb-3">
-                    <label class="form-label" for="service_price"><strong>Grade Level*</strong><br /></label><select class="form-select" required="" name="grade_level">
-                      <optgroup label="Select Grade Level">
-                        <option value="Grade 7" selected="">Grade 7</option>
-                        <option value="Grade 8">Grade 8</option>
-                        <option value="Grade 9">Grade 9</option>
-                        <option value="Grade 10">Grade 10</option>
-                        <option value="Grade 11">Grade 11</option>
-                        <option value="Grade 12">Grade 12</option>
-                      </optgroup>
-                    </select>
+                <div class="mb-3">
+                    <label class="form-label" for="service_price"><strong>Amount *</strong><br /></label><input class="form-control" type="text" id="service_price" placeholder="P000" required="" name="amount_paid" />
                   </div>
                 </div>
                 <div class="col-sm-12 col-md-5 col-lg-4">
-                  <div class="mb-3">
-                    <label class="form-label" for="service_price"><strong>Amount *</strong><br /></label><input class="form-control" type="text" id="service_price" placeholder="P000" required="" name="amount_paid"/>
+                <div class="mb-3">
+                    <label class="form-label" for="service_price"><strong>Reference No. / Receipt No.*</strong><br /></label><input class="form-control" type="text" id="service_price-1" placeholder="***********" required="" name="refno" />
                   </div>
                 </div>
               </div>
@@ -89,48 +91,42 @@ include 'db_connect.php';
                     </select>
                   </div>
                 </div>
-                <div class="col-sm-12 col-md-5 col-lg-4">
-                  <div class="mb-3">
-                    <label class="form-label" for="service_price"><strong>Reference No. / Receipt No.*</strong><br /></label><input class="form-control" type="text" id="service_price-1" placeholder="***********" required="" name="refno"/>
-                  </div>
-                </div>
+               
               </div>
-              <!-- <div class="row mb-2">
-                <div class="col-md-10 col-lg-8 col-xl-8 offset-md-1 offset-lg-2 offset-xl-2">
-                  <label class="form-label" for="service_price">
-                    <strong>Proof of Payment *</strong><br />
-                  </label>
-                  <input class="form-control" type="file" required="" name="file">
-                </div>
-                -->
-                <div class="col-md-10 col-lg-2 col-xl-2 offset-md-1 offset-lg-2 offset-xl-2" style="margin-top: 20px">
-                  <label class="form-label" for="service_price"><br /></label>
-                  <input class="btn btn-info" type="submit" name="submit" value="Next">
-                  <a href="student-portal.php" class="btn btn-danger" role="button">Cancel</a>
-                </div>
-              </div> 
+              
+              <div class="col-md-10 col-lg-2 col-xl-2 offset-md-1 offset-lg-2 offset-xl-2" style="margin-top: 20px">
+                <label class="form-label" for="service_price"><br /></label>
+                <input class="btn btn-info" type="submit" name="submit" value="Next">
+                <a href="student-portal.php" class="btn btn-danger" role="button">Cancel</a>
+              </div>
             </div>
           </div>
-        </form>
+      </div>
+      </form>
       </div>
     </section>
   </main>
 
 
   <?php
-        if(isset($_POST['submit'])){
-              $grade_level = $_POST['grade_level'];
-              $amount_paid = $_POST['amount_paid'];
-              $payment_method = $_POST['payment_method'];
-              $refno = $_POST['refno'];
-              $first_name = $_SESSION['first_name'];
-              $last_name = $_SESSION['last_name'];
-              $lrn = $_SESSION['lrn_id'];
+  if (isset($_POST['submit'])) {
+    $grade_level = $glevel;
+    $amount_paid = $_POST['amount_paid'];
+    $payment_method = $_POST['payment_method'];
+    $refno = $_POST['refno'];
+    $first_name = $_SESSION['first_name'];
+    $last_name = $_SESSION['last_name'];
+    $lrn = $_SESSION['lrn_id'];
 
-              $query = mysqli_query($cxn, "INSERT INTO payments (lrn,first_name,last_name,grade_level,amount_paid,payment_method,ref_no,remarks) VALUES('$lrn','$first_name','$last_name','$grade_level','$amount_paid','$payment_method','$refno','PENDING')") or die("Error in query: $query.".mysqli_error($cxn));
+    $check_refno = mysqli_query($cxn, "SELECT * FROM payments WHERE ref_no='$refno'") or die("Error in query: $check_refno." . mysqli_error($cxn));
 
-              echo "<script type='text/javascript'> alert('Click OK to upload Proof of Payment.'); location.href = 'proof_of_payment.php'; </script>";
-        }
+    if ($check_refno->num_rows == 1) {
+      echo "<script type='text/javascript'> alert('Reference Number exists!'); location.href='payment-portal.php'; </script>";
+    } else {
+      $query = mysqli_query($cxn, "INSERT INTO payments (lrn,first_name,last_name,grade_level,amount_paid,payment_method,ref_no,remarks) VALUES('$lrn','$first_name','$last_name','$grade_level','$amount_paid','$payment_method','$refno','PENDING')") or die("Error in query: $query." . mysqli_error($cxn));
+      echo "<script type='text/javascript'> alert('Click OK to upload Proof of Payment.'); location.href = 'proof_of_payment.php'; </script>";
+    }
+  }
   ?>
   <footer>
     <div class="container">

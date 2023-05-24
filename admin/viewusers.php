@@ -119,7 +119,11 @@ include 'db_connect.php';
                                         <?php
                                                 $i++;
                                             }
-                                        }
+                                        }else{
+                                            echo "<tr>
+                                                    <td>No record found.</td>
+                                                    </tr>";
+                                          };
                                         ?>
                                     </tbody>
                                     <tfoot>

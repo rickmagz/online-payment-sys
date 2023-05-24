@@ -5,6 +5,8 @@ include 'db_connect.php';
 $first_name = $_SESSION['first_name'];
 $last_name = $_SESSION['last_name'];
 $lrn = $_SESSION['lrn_id'];
+$id = $_SESSION['id'];
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -51,7 +53,7 @@ $lrn = $_SESSION['lrn_id'];
         <div class="bg-light border rounded border-0 border-light d-flex flex-column justify-content-between flex-lg-row p-4 p-md-5">
           <div class="pb-2 pb-lg-1">
             <h2 class="fw-bold mb-2">Hi, <?php echo $_SESSION['first_name']; ?> <?php echo $_SESSION['last_name']; ?>!</h2>
-            <p class="fs-4 mb-0">LRN: <?php echo $_SESSION['lrn_id']; ?></p>
+            <p class="fs-4 mb-0">LRN: <?php echo $_SESSION['lrn_id']; ?> [<?php echo $id; ?>]</p>
             <p class="fs-4 mb-0"><a href="payment-portal.php" class="btn btn-info" role="button">Process your payment here!</a></p>
           </div>
         </div>
@@ -71,36 +73,41 @@ $lrn = $_SESSION['lrn_id'];
               </thead>
               <tbody>
 
-                <?php 
-                  $payment = mysqli_query($cxn, "SELECT * FROM payments WHERE lrn='$lrn' ORDER BY uploaded_on asc");
-                  $payment_query = mysqli_num_rows($payment);
+                <?php
+                $payment = mysqli_query($cxn, "SELECT * FROM payments WHERE lrn='$lrn' ORDER BY uploaded_on asc");
+                $payment_query = mysqli_num_rows($payment);
 
-                  if($payment_query>0){
-                    $i = 0;
-                    while($p = mysqli_fetch_assoc($payment)){
-                      $id = $p['id'];
-                      $ref_no = $p['ref_no'];
-                      $amount = $p['amount_paid'];
-                      $payment_method = $p['payment_method'];
-                      $date = strtotime($p['uploaded_on']);
-                      $pay_date = date("F d, Y; h:i A", $date);
-                      $remarks = $p['remarks'];
+                if ($payment_query > 0) {
+                  $i = 0;
+                  while ($p = mysqli_fetch_assoc($payment)) {
+                    $id = $p['id'];
+                    $ref_no = $p['ref_no'];
+                    $amount = $p['amount_paid'];
+                    $payment_method = $p['payment_method'];
+                    $date = strtotime($p['uploaded_on']);
+                    $pay_date = date("F d, Y; h:i A", $date);
+                    $remarks = $p['remarks'];
 
-                    
+
                 ?>
-                <tr>
-                  <td><?php echo $id;?></td>
-                  <td><?php echo $ref_no;?></td>
-                  <td><?php echo $amount;?></td>
-                  <td><?php echo $payment_method;?></td>
-                  <td><?php echo $pay_date;?></td>
-                  <td><?php echo $remarks;?></td>
-                </tr>
+                    <tr>
+                      <td><?php echo $id; ?></td>
+                      <td><?php echo $ref_no; ?></td>
+                      <td><?php echo $amount; ?></td>
+                      <td><?php echo $payment_method; ?></td>
+                      <td><?php echo $pay_date; ?></td>
+                      <td><?php echo $remarks; ?></td>
+                    </tr>
 
                 <?php
-                      $i++;
-                    }
+                    $i++;
                   }
+                } else {
+                  echo "<tr>
+                            <td>No record found.</td>
+                            </tr>";
+                };
+
                 ?>
               </tbody>
             </table>

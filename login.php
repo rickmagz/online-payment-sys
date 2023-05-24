@@ -73,6 +73,7 @@ include 'db_connect.php';
                                             $_SESSION['last_name']= $row['last_name'];
                                             $_SESSION['lrn_id'] = $row['lrn_id'];
                                             $_SESSION['email'] = $row['email'];
+                                            $_SESSION['id'] = $row['id'];
                                             header("location: student-portal.php");
                                         }
                                         else{

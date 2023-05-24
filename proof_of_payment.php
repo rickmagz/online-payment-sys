@@ -5,7 +5,6 @@ include 'db_connect.php';
 $lrn = $_SESSION['lrn_id'];
 $firstname = $_SESSION['first_name'];
 $lastname = $_SESSION['last_name'];
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,7 +12,7 @@ $lastname = $_SESSION['last_name'];
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
-    <title>Payment | GNHS PTA Online Payment System</title>
+    <title>Proof of Payment | GNHS PTA Online Payment System</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" />
     <link rel="stylesheet" href="assets/css/Kaushan%20Script.css" />
     <link rel="stylesheet" href="assets/css/Montserrat.css" />
@@ -82,7 +81,7 @@ $lastname = $_SESSION['last_name'];
         </section>
     </main>
     <?php
-    $uploadFolder = "proof_of_payments/";
+    $uploadFolder = "proof/";
 
     if (isset($_POST['submit'])) {
         $filename = basename($_FILES["filetoupload"]["name"]);
@@ -92,7 +91,7 @@ $lastname = $_SESSION['last_name'];
         $allowTypes = array('jpg', 'png', 'jpeg', 'gif');
         if (in_array($fileType, $allowTypes)) {
             if (move_uploaded_file($_FILES["filetoupload"]["tmp_name"], $targetFileFolder)) {
-                $upload = $cxn->query("INSERT INTO proof_of_payments(lrn,attachment) VALUES('$lrn','" . $filename . "')");
+                $upload = $cxn->query("UPDATE payments SET proof_of_payment='$filename', uploaded_on=now() WHERE lrn='$lrn'");
             }
             if ($upload) {
                 echo '<script type="text/javascript"> alert("Proof of Payment Uploaded."); location.href="student-portal.php";</script>';

@@ -102,7 +102,7 @@ include 'db_connect.php';
 
                                         ?>
                                                 <tr>
-                                                    <td><?php echo $id;?> </td>
+                                                    <td><?php echo $id; ?> </td>
                                                     <td><?php echo $first_name; ?></td>
                                                     <td><?php echo $last_name; ?></td>
                                                     <td><?php echo $grade_level; ?></td>
@@ -115,7 +115,11 @@ include 'db_connect.php';
                                         <?php
                                                 $i++;
                                             }
-                                        }
+                                        } else {
+                                            echo "<tr>
+                                                    <td>No record found.</td>
+                                                    </tr>";
+                                        };
                                         ?>
                                     </tbody>
                                     <tfoot>

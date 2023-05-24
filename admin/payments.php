@@ -88,32 +88,42 @@ include 'db_connect.php';
                                     <tbody>
                                         <?php
                                         $payments = mysqli_query($cxn, "SELECT * FROM payments");
+                                        $payments_query = mysqli_num_rows($payments);
 
-                                        while ($p = mysqli_fetch_array($payments)) {
-                                            $id = $p['id'];
-                                            $lrn = $p['lrn'];
-                                            $first_name = $p['first_name'];
-                                            $last_name = $p['last_name'];
-                                            $grade_level = $p['grade_level'];
-                                            $ref_no = $p['ref_no'];
-                                            $amount_paid = $p['amount_paid'];
-                                            $payment_method = $p['payment_method'];
-                                            $date = strtotime($p['uploaded_on']);
-                                            $pay_date = date("F d, Y; h:i A", $date);
+                                        if ($payments_query > 0) {
+                                            $i = 0;
+                                            while ($p = mysqli_fetch_array($payments)) {
+                                                $id = $p['id'];
+                                                $lrn = $p['lrn'];
+                                                $first_name = $p['first_name'];
+                                                $last_name = $p['last_name'];
+                                                $grade_level = $p['grade_level'];
+                                                $ref_no = $p['ref_no'];
+                                                $amount_paid = $p['amount_paid'];
+                                                $payment_method = $p['payment_method'];
+                                                $date = strtotime($p['uploaded_on']);
+                                                $pay_date = date("F d, Y; h:i A", $date);
+
                                         ?>
-                                            <tr>
-                                                <td><?php echo $first_name; ?> <?php echo $last_name; ?></td>
-                                                <td><?php echo $grade_level; ?></td>
-                                                <td><?php echo $ref_no; ?></td>
-                                                <td><?php echo $payment_method; ?></td>
-                                                <td><?php echo $amount_paid; ?></td>
-                                                <td><?php echo $pay_date; ?></td>
-                                                <td><button data-id='<?php echo $p['id']; ?>' class="userinfo btn btn-primary btn-sm"><i class="bi bi-image-fill"></i><br/>Attachment</button></td>
-                                                <td><button class="btn btn-primary btn-sm" type="submit"><i class="bi bi-check-circle-fill"></i>Accept</button></td>
-                                                <td><button class="btn btn-danger btn-sm" type="submit"><i class="bi bi-x-circle-fill"></i>Deny</button></td>
-                                            </tr>
+                                                <tr>
+                                                    <td><?php echo $first_name; ?> <?php echo $last_name; ?></td>
+                                                    <td><?php echo $grade_level; ?></td>
+                                                    <td><?php echo $ref_no; ?></td>
+                                                    <td><?php echo $payment_method; ?></td>
+                                                    <td><?php echo $amount_paid; ?></td>
+                                                    <td><?php echo $pay_date; ?></td>
+                                                    <td><button data-id='<?php echo $p['id']; ?>' class="userinfo btn btn-primary btn-sm"><i class="bi bi-image-fill"></i><br />Attachment</button></td>
+                                                    <td><button class="btn btn-primary btn-sm" type="submit"><i class="bi bi-check-circle-fill"></i>Accept</button></td>
+                                                    <td><button class="btn btn-danger btn-sm" type="submit"><i class="bi bi-x-circle-fill"></i>Deny</button></td>
+                                                </tr>
                                         <?php
-                                        }
+                                                $i++;
+                                            }
+                                        }else{
+                                            echo "<tr>
+                                                    <td>No record found.</td>
+                                                    </tr>";
+                                          };
                                         ?>
 
                                     </tbody>
@@ -165,7 +175,7 @@ include 'db_connect.php';
                 <div class="modal-body">
                 </div>
                 <div class="modal-footer">
-                <a class="btn btn-secondary" href="payments.php" role="button">Close</a>
+                    <a class="btn btn-secondary" href="payments.php" role="button">Close</a>
                 </div>
             </div>
         </div>
