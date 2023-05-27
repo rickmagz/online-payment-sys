@@ -72,7 +72,7 @@ include 'db_connect.php';
                                 <table class="table my-0" id="dataTable">
                                     <thead>
                                         <tr>
-                                            <th>ID</th>
+                                            <th>No.</th>
                                             <th>First Name</th>
                                             <th>Last Name</th>
                                             <th>Username</th>
@@ -101,29 +101,32 @@ include 'db_connect.php';
                                                 $added_on = date("F d, Y; h:i A", $added);
                                                 $access_level = $u['access_level'];
 
+                                                
+                                                $i++;
+
                                         ?>
-                                                <tr>
+                                                <tr class="user<?php echo $id?>">
                                                     <td><?php echo $id; ?></td>
                                                     <td><?php echo $first_name; ?></td>
-                                                    <td> <?php echo $last_name; ?></td>
+                                                    <td><?php echo $last_name; ?></td>
                                                     <td><?php echo $username; ?></td>
                                                     <td><?php echo $t_id; ?></td>
                                                     <td><?php echo $access_level; ?></td>
                                                     <td><?php echo $added_by; ?></td>
                                                     <td><?php echo $added_on; ?></td>
-                                                    <td><button class="btn btn-primary btn-sm modifybtn" type="button" data-toggle="modal" data-target="#modifybtn">Modify</button>&emsp13;
-                                                        <button class="btn btn-outline-danger btn-sm" type="submit">Delete</button>
+                                                    <td>
+                                                        <button class="btn btn-primary btn-sm modifybtn" type="button" data-toggle="modal" data-target="#modifybtn">Modify</button>&emsp13;
+                                                        <a type="button" class="btn btn-danger btn-sm" href="deleteuser.php?id=<?php echo $id; ?>">Delete</a>
                                                     </td>
                                                 </tr>
 
                                         <?php
-                                                $i++;
                                             }
-                                        }else{
+                                        } else {
                                             echo "<tr>
                                                     <td>No record found.</td>
                                                     </tr>";
-                                          };
+                                        };
                                         ?>
                                     </tbody>
                                     <tfoot>
@@ -173,18 +176,18 @@ include 'db_connect.php';
                                 </div>
                             </form>
                         </div>
-
                         <div class="modal-footer">
-                            <a class="btn btn-secondary" href="viewusers.php" role="button">Close</a>
+                            <a class="btn btn-danger" href="viewusers.php" role="button">Close</a>
                             <button type="submit" name="modifyusers" form="modifyusers" class="btn btn-primary">Save changes</button>
                         </div>
                     </div>
                 </div>
             </div>
-                        <!-- End of Modal -->
+            <!-- End of Modal -->
 
-        
-        <?php
+
+
+            <?php
             if (isset($_POST['modifyusers'])) {
                 $id = $_POST['id'];
                 $t_id = $_POST['idno'];
@@ -198,8 +201,7 @@ include 'db_connect.php';
 
                 echo "<script type='text/javascript'> alert('Successfully Modified!'); location.href = 'viewusers.php'; </script>";
             }
-        ?>
-
+            ?>
             <footer class="bg-white sticky-footer">
                 <div class="container my-auto">
                     <div class="text-center my-auto copyright"><span>Copyright © GNHS PTA Payment System - Admin Dashboard 2023</span></div>
@@ -214,6 +216,7 @@ include 'db_connect.php';
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
+    <!--Modify Modal AJAX Code -->
     <script>
         $(document).ready(function() {
             $('.modifybtn').on('click', function() {

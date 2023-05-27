@@ -84,12 +84,12 @@ include 'db_connect.php';
                                     </thead>
                                     <tbody>
                                         <?php
-                                        $students = mysqli_query($cxn, "SELECT * FROM student ORDER BY last_name asc");
-                                        $student_query = mysqli_num_rows($students);
-
-                                        if ($student_query > 0) {
-                                            $i = 0;
-                                            while ($s = mysqli_fetch_assoc($students)) {
+                                        $i = 0;
+                                        $students = mysqli_query($cxn, "SELECT * FROM student") or die("Error in query: $students .".mysqli_error($cxn));
+                                        $students_query = mysqli_num_rows($students);
+                                        
+                                        if($students_query > 0){
+                                            while ($s = mysqli_fetch_array($students)) {
                                                 $id = $s['id'];
                                                 $lrn = $s['lrn_id'];
                                                 $first_name = $s['first_name'];
@@ -99,9 +99,9 @@ include 'db_connect.php';
                                                 $date_reg = date("F d, Y; h:i A", $reg_date);
                                                 $grade_level = $s['grade_level'];
 
-
+                                                $i++;
                                         ?>
-                                                <tr>
+                                                <tr class="student<?php echo $id?>">
                                                     <td><?php echo $id; ?> </td>
                                                     <td><?php echo $first_name; ?></td>
                                                     <td><?php echo $last_name; ?></td>
@@ -109,29 +109,29 @@ include 'db_connect.php';
                                                     <td><?php echo $lrn; ?></td>
                                                     <td><?php echo $email; ?></td>
                                                     <td><?php echo $date_reg; ?></td>
-                                                    <td><button class="btn btn-primary btn-sm modifybtn" type="button" data-toggle="modal" data-target="#modifybtn">Modify</button>&emsp13; <button class="btn btn-outline-danger btn-sm" type="submit">Delete</button></td>
+                                                    <td>
+                                                        <button class="btn btn-primary btn-sm modifybtn" type="button" data-toggle="modal" data-target="#modifybtn">Modify</button>&emsp13;
+                                                        <a type="button" class="btn btn-danger btn-sm" href="deletestudent.php?id=<?php echo $id; ?>">Delete</a>
+                                                    </td>
                                                 </tr>
 
                                         <?php
-                                                $i++;
                                             }
                                         } else {
                                             echo "<tr>
                                                     <td>No record found.</td>
                                                     </tr>";
-                                        };
+                                        }
                                         ?>
                                     </tbody>
-                                    <tfoot>
-                                        <tr></tr>
-                                    </tfoot>
+
                                 </table>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Modal -->
+                <!-- Modify Modal -->
                 <div class="modal fade" id="modifybtn" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -140,7 +140,10 @@ include 'db_connect.php';
                             </div>
                             <div class="modal-body">
                                 <form action="viewstudents.php" method="POST" id="modifystudent">
-                                    <input type="hidden" id="id" name="id" value="id">
+                                    <div class="form-floating mb-3 mt-3">
+                                        <input type="text" class="form-control" id="id" name="id" value="<?php echo $id; ?>" readonly>
+                                        <label>No.</label>
+                                    </div>
                                     <div class="form-floating mb-3 mt-3">
                                         <input type="text" class="form-control" id="first_name" placeholder="Enter first name" name="first_name">
                                         <label>First Name</label>
@@ -179,9 +182,9 @@ include 'db_connect.php';
                         </div>
                     </div>
                 </div>
+                <!--End of Modify Modal-->
 
-
-
+                
             </div>
 
             <?php
@@ -192,10 +195,17 @@ include 'db_connect.php';
                 $last_name = $_POST['last_name'];
                 $email = $_POST['email'];
                 $grade_level = $_POST['grade_level'];
-
                 $update_student = mysqli_query($cxn, "UPDATE student SET first_name='$first_name',last_name='$last_name',email='$email',grade_level='$grade_level',lrn_id='$lrn',date_created=now() WHERE id='$id'") or die("Error in query: $update_student." . mysqli_error($cxn));
-
                 echo "<script type='text/javascript'> alert('Successfully Modified!'); location.href = 'viewstudents.php'; </script>";
+            }
+
+            ?>
+
+            <?php
+            if (isset($_REQUEST['id'])) {
+                $id = $_REQUEST['id'];
+                mysqli_query($cxn, "DELETE FROM `student` WHERE `id`='$id'") or die(mysqli_error($cxn));
+                echo "<script type='text/javascript'> alert('Student Info deleted!'); location.href = 'viewstudents.php'; </script>";
             }
 
             ?>
@@ -213,6 +223,7 @@ include 'db_connect.php';
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
+    <!--Modify Modal AJAX Code -->
     <script>
         $(document).ready(function() {
             $('.modifybtn').on('click', function() {
@@ -235,6 +246,7 @@ include 'db_connect.php';
             });
         });
     </script>
+
 </body>
 
 </html>
