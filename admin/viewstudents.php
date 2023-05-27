@@ -193,7 +193,7 @@ include 'db_connect.php';
                 $email = $_POST['email'];
                 $grade_level = $_POST['grade_level'];
 
-                $update_student = mysqli_query($cxn, "UPDATE student SET first_name='$first_name',last_name='$last_name',email='$email',grade_level='$grade_level',date_created=now() WHERE id='$id'") or die("Error in query: $update_student." . mysqli_error($cxn));
+                $update_student = mysqli_query($cxn, "UPDATE student SET first_name='$first_name',last_name='$last_name',email='$email',grade_level='$grade_level',lrn_id='$lrn',date_created=now() WHERE id='$id'") or die("Error in query: $update_student." . mysqli_error($cxn));
 
                 echo "<script type='text/javascript'> alert('Successfully Modified!'); location.href = 'viewstudents.php'; </script>";
             }
