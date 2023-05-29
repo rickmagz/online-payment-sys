@@ -5,7 +5,7 @@ include 'db_connect.php';
 if (isset($_POST['request'])) {
     $request = $_POST['request'];
     if ($request == 'Grade Level') {
-        $query = mysqli_query($cxn, "SELECT * FROM student ORDER BY grade_level asc");
+        $query = mysqli_query($cxn, "SELECT * FROM student ORDER BY grade_level");
         $count = mysqli_num_rows($query);
 ?>
         <div class="card-body">

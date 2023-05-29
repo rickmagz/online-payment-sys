@@ -88,6 +88,7 @@ include 'db_connect.php';
                                 <table class="table my-0" id="dataTable">
                                     <thead>
                                         <tr>
+                                            <th>No.</th>
                                             <th>First Name</th>
                                             <th>Last Name</th>
                                             <th>Grade Level</th>
@@ -116,7 +117,8 @@ include 'db_connect.php';
 
                                                 $i++;
                                         ?>
-                                                <tr class="student<?php echo $id ?>">
+                                                <tr class="student<?php echo $id; ?>">
+                                                    <td><?php echo $id; ?></td>
                                                     <td><?php echo $first_name; ?></td>
                                                     <td><?php echo $last_name; ?></td>
                                                     <td><?php echo $grade_level; ?></td>
@@ -156,7 +158,7 @@ include 'db_connect.php';
                                 <form action="viewstudents.php" method="POST" id="modifystudent">
                                     <div class="form-floating mb-3 mt-3">
                                         <input type="text" class="form-control" id="id" name="id" value="<?php echo $id; ?>" readonly>
-                                        <label>No.</label>
+                                        <label>Entry No.</label>
                                     </div>
                                     <div class="form-floating mb-3 mt-3">
                                         <input type="text" class="form-control" id="first_name" placeholder="Enter first name" name="first_name">
@@ -215,14 +217,6 @@ include 'db_connect.php';
 
             ?>
 
-            <?php
-            if (isset($_REQUEST['id'])) {
-                $id = $_REQUEST['id'];
-                mysqli_query($cxn, "DELETE FROM `student` WHERE `id`='$id'") or die(mysqli_error($cxn));
-                echo "<script type='text/javascript'> alert('Student Info deleted!'); location.href = 'viewstudents.php'; </script>";
-            }
-
-            ?>
             <footer class="bg-white sticky-footer">
                 <div class="container my-auto">
                     <div class="text-center my-auto copyright"><span>Copyright © GNHS PTA Payment System - Admin Dashboard 2023</span></div>

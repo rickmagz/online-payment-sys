@@ -90,6 +90,7 @@ include 'db_connect.php';
                                 <table class="table my-0" id="dataTable">
                                     <thead>
                                         <tr>
+                                            <th>No.</th>
                                             <th>First Name</th>
                                             <th>Last Name</th>
                                             <th>Username</th>
@@ -123,6 +124,7 @@ include 'db_connect.php';
 
                                         ?>
                                                 <tr class="user<?php echo $id ?>">
+                                                    <td><?php echo $id; ?></td>
                                                     <td><?php echo $first_name; ?></td>
                                                     <td><?php echo $last_name; ?></td>
                                                     <td><?php echo $username; ?></td>
@@ -164,7 +166,10 @@ include 'db_connect.php';
                         </div>
                         <div class="modal-body">
                             <form action="viewusers.php" method="POST" id="modifyusers">
-                                <input type="hidden" id="id" name="id" value="id">
+                                <div class="form-floating mb-3 mt-3">
+                                    <input type="text" class="form-control" id="id" name="id" value="<?php echo $id; ?>" readonly>
+                                    <label>Entry No.</label>
+                                </div>
                                 <div class="form-floating mb-3 mt-3">
                                     <input type="text" class="form-control" id="first_name" placeholder="Enter first name" name="first_name">
                                     <label>First Name</label>
@@ -257,15 +262,15 @@ include 'db_connect.php';
         });
     </script>
     <script type="text/javascript">
-        $(document).ready(function(){
-            $("#fetchval").on('change', function(){
+        $(document).ready(function() {
+            $("#fetchval").on('change', function() {
                 var value = $(this).val();
 
                 $.ajax({
                     url: "fetchusers.php",
                     type: "POST",
                     data: 'request=' + value,
-                    beforeSend: function(){
+                    beforeSend: function() {
                         $(".table").html(`<span>
                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto; background: none; display: block; shape-rendering: auto;" width="206px" height="206px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
                         <circle cx="50" cy="50" r="32" stroke-width="8" stroke="#1d3f72" stroke-dasharray="50.26548245743669 50.26548245743669" fill="none" stroke-linecap="round">
@@ -274,7 +279,7 @@ include 'db_connect.php';
                         </svg>
                         </span>`);
                     },
-                    success: function(data){
+                    success: function(data) {
                         $(".table").html(data);
                     }
                 });
