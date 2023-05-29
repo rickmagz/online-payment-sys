@@ -261,7 +261,7 @@ include 'db_connect.php';
             });
         });
     </script>
-<!-- Filter AJAX Code -->
+    <!-- Filter AJAX Code -->
     <script type="text/javascript">
         $(document).ready(function() {
             $("#fetchval").on('change', function() {
@@ -272,7 +272,13 @@ include 'db_connect.php';
                     type: "POST",
                     data: 'request=' + value,
                     beforeSend: function() {
-                        $(".table").html("<span> On it.....</span>");
+                        $(".table").html(`<span>
+                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto; background: none; display: block; shape-rendering: auto;" width="206px" height="206px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+                        <circle cx="50" cy="50" r="32" stroke-width="8" stroke="#1d3f72" stroke-dasharray="50.26548245743669 50.26548245743669" fill="none" stroke-linecap="round">
+                        <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="1.8181818181818181s" keyTimes="0;1" values="0 50 50;360 50 50"></animateTransform>
+                        </circle>
+                        </svg>
+                        </span>`);
                     },
                     success: function(data) {
                         $(".table").html(data);
