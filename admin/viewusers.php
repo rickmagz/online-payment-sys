@@ -65,14 +65,31 @@ include 'db_connect.php';
                     </div>
                 </nav>
                 <div class="container-fluid">
-                    <h3 class="text-dark mb-4"><strong>System Users</strong></h3>
-                    <div class="card shadow">
+                    <div class="row">
+                        <div class="col-md-7 col-lg-8 col-xl-9 col-xxl-9">
+                            <h3 class="text-dark" style="padding-top: 8px;margin-bottom: 16px;">
+                                <strong>System Users</strong>
+                            </h3>
+                        </div>
+                        <div class="col-md-5 col-lg-4 col-xl-3 col-xxl-3 offset-xl-2 offset-xxl-1" style="margin: 0px;margin-top: 12px;padding-top: 0px;padding-right: 0px;padding-left: 20px; padding-bottom:10px;" id="filters">
+                            <span class="fs-6 fw-bold text-dark" style="padding: 0px;margin: 0px;padding-right: 5px;">
+                                Filter by
+                            </span>
+                            <select class="border rounded border-1 border-secondary" style="padding-right: 0px;width: 175px;" name="fetchval" id="fetchval">
+                                <option value="Select Filter" selected disabled>Select Filter</option>
+                                <option value="Admin">Admin</option>
+                                <option value="Teacher">Teacher</option>
+                                <option value="Registration Date">Registration Date</option>
+                                <option value="Last Name">Last Name</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="card">
                         <div class="card-body">
                             <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
                                 <table class="table my-0" id="dataTable">
                                     <thead>
                                         <tr>
-                                            <th>No.</th>
                                             <th>First Name</th>
                                             <th>Last Name</th>
                                             <th>Username</th>
@@ -101,12 +118,11 @@ include 'db_connect.php';
                                                 $added_on = date("F d, Y; h:i A", $added);
                                                 $access_level = $u['access_level'];
 
-                                                
+
                                                 $i++;
 
                                         ?>
-                                                <tr class="user<?php echo $id?>">
-                                                    <td><?php echo $id; ?></td>
+                                                <tr class="user<?php echo $id ?>">
                                                     <td><?php echo $first_name; ?></td>
                                                     <td><?php echo $last_name; ?></td>
                                                     <td><?php echo $username; ?></td>
@@ -215,6 +231,7 @@ include 'db_connect.php';
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
     <!--Modify Modal AJAX Code -->
     <script>
@@ -236,6 +253,25 @@ include 'db_connect.php';
                 $('#username').val(data[3]);
                 $('#idno').val(data[4]);
                 $('#access_level').val(data[5]);
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#fetchval").on('change', function(){
+                var value = $(this).val();
+
+                $.ajax({
+                    url: "fetchusers.php",
+                    type: "POST",
+                    data: 'request=' + value,
+                    beforeSend: function(){
+                        $(".table").html("<span> On it.....</span>");
+                    },
+                    success: function(data){
+                        $(".table").html(data);
+                    }
+                });
             });
         });
     </script>
