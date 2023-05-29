@@ -69,8 +69,8 @@ if (isset($_POST['request'])) {
                 </div>
             </div>
 <?php
-    }elseif($request == 'Teacher'){
-        $query = mysqli_query($cxn, "SELECT * FROM users WHERE access_level='Teacher'");
+    }elseif($request == 'Treasurer'){
+        $query = mysqli_query($cxn, "SELECT * FROM users WHERE access_level='Treasurer'");
         $count = mysqli_num_rows($query);
 ?>
 <div class="card-body">

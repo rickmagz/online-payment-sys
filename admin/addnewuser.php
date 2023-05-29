@@ -96,7 +96,7 @@ include 'db_connect.php';
                                             <select class="form-select form-select-sm" style="height: 50px; border-radius: 10px; padding: 10px; margin-bottom:16px;" name="access_level" required>
                                                 <optgroup label="Select Access Level">
                                                     <option value="Admin" selected>Admin</option>
-                                                    <option value="Teacher">Teacher</option>
+                                                    <option value="Treasurer">Treasurer</option>
                                                 </optgroup>
                                             </select>
                                         </div>
