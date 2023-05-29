@@ -71,7 +71,8 @@ if (mysqli_num_rows($get_gradelevel) > 0) {
               <div class="row">
                 <div class="col-sm-12 col-md-5 col-lg-4 col-xl-4 offset-md-1 offset-lg-2 offset-xl-2">
                 <div class="mb-3">
-                    <label class="form-label" for="service_price"><strong>Amount *</strong><br /></label><input class="form-control" type="text" id="service_price" placeholder="P000" required="" name="amount_paid" />
+                    <label class="form-label" for="service_price"><strong>Amount *</strong><br /></label>
+                    <input class="form-control" id="service_price" placeholder="P000" required="" name="amount_paid" value="150" readonly/>
                   </div>
                 </div>
                 <div class="col-sm-12 col-md-5 col-lg-4">

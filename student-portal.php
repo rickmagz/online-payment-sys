@@ -53,7 +53,7 @@ $id = $_SESSION['id'];
         <div class="bg-light border rounded border-0 border-light d-flex flex-column justify-content-between flex-lg-row p-4 p-md-5">
           <div class="pb-2 pb-lg-1">
             <h2 class="fw-bold mb-2">Hi, <?php echo $_SESSION['first_name']; ?> <?php echo $_SESSION['last_name']; ?>!</h2>
-            <p class="fs-4 mb-0">LRN: <?php echo $_SESSION['lrn_id']; ?> [<?php echo $id; ?>]</p>
+            <p class="fs-4 mb-0">LRN: <?php echo $_SESSION['lrn_id']; ?></p>
             <p class="fs-4 mb-0"><a href="payment-portal.php" class="btn btn-info" role="button">Process your payment here!</a></p>
           </div>
         </div>
@@ -63,7 +63,6 @@ $id = $_SESSION['id'];
             <table class="table">
               <thead>
                 <tr>
-                  <th>ID</th>
                   <th>Reference No.</th>
                   <th>Amount Paid</th>
                   <th>Mode of Payment</th>
@@ -91,7 +90,6 @@ $id = $_SESSION['id'];
 
                 ?>
                     <tr>
-                      <td><?php echo $id; ?></td>
                       <td><?php echo $ref_no; ?></td>
                       <td><?php echo $amount; ?></td>
                       <td><?php echo $payment_method; ?></td>
