@@ -78,7 +78,7 @@ include 'db_connect.php';
                             <select class="border rounded border-1 border-secondary" style="padding-right: 0px;width: 175px;" name="fetchval" id="fetchval">
                                 <option value="Select Filter" selected disabled>Select Filter</option>
                                 <option value="Admin">Admin</option>
-                                <option value="Teacher">Teacher</option>
+                                <option value="Treasurer">Treasurer</option>
                                 <option value="Registration Date">Registration Date</option>
                                 <option value="Last Name">Last Name</option>
                             </select>
@@ -185,7 +185,7 @@ include 'db_connect.php';
                                     <select class="form-select" name="access_level" id="access_level" required>
                                         <optgroup label="Select Access Level">
                                             <option value="Admin">Admin</option>
-                                            <option value="Teacher">Teacher</option>
+                                            <option value="Treasurer">Treasurer</option>
                                         </optgroup>
                                     </select>
                                     <label>Access Level</label>
