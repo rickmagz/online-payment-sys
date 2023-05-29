@@ -77,7 +77,7 @@ include 'db_connect.php';
                                         </div>
                                         <div class="col-sm-6 col-xxl-4">
                                             <label>ID No.</label>
-                                            <input class="form-control form-control-user" type="text" id="exampleLastName" placeholder="Enter Employee Number" name="empno" required="" style="height: 50px; border-radius: 10px; padding: 10px;">
+                                            <input class="form-control form-control-user" type="text" id="exampleLastName" placeholder="Enter ID Number" name="empno" required="" style="height: 50px; border-radius: 10px; padding: 10px;">
                                         </div>
                                     </div>
                                     <div class="row mb-3">
