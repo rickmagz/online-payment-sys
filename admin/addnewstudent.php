@@ -100,7 +100,7 @@ include 'db_connect.php';
                                 <form class="user" action="addnewstudent.php" method="post" id="addstudent">
                                     <div class="row mb-3">
                                         <div class="col-sm-6 col-xl-6 col-xxl-4 mb-3 mb-sm-0">
-                                            <label>Learners Reference Number</label>
+                                            <label>Learners Reference No.</label>
                                             <input class="form-control form-control-user" type="text" id="exampleFirstName" placeholder="Enter Learners Reference Number" name="lrn" required="" autofocus="" style="height: 50px; border-radius: 10px; padding: 10px;">
                                         </div>
                                         <div class="col-sm-6 col-xxl-4">
@@ -119,7 +119,16 @@ include 'db_connect.php';
                                         </div>
                                     </div>
                                     <div class="row mb-3">
-
+                                        <div class="col-sm-6 col-xxl-4 mb-3 mb-sm-0">
+                                            <label>Address</label>
+                                            <input class="form-control form-control-user" type="text" id="exampleFirstName-1" placeholder="Enter Address" name="address" required="" style="height: 50px; border-radius: 10px; padding: 10px;">
+                                        </div>
+                                        <div class="col-sm-6 col-xxl-4">
+                                            <label>Parent/Guardian Name</label>
+                                            <input class="form-control form-control-user" type="text" id="exampleLastName-5" placeholder="Enter Parent/Guardian Name" name="pg_name" required="" style="height: 50px; border-radius: 10px; padding: 10px;">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
                                         <div class="col-sm-6 col-xl-6 col-xxl-4">
                                             <label>Grade Level</label>
                                             <select class="form-select form-select-sm" style="height: 50px; border-radius: 10px; padding: 10px;" name="grade_level" required>
@@ -156,15 +165,17 @@ include 'db_connect.php';
                 $last_name = $_POST['last_name'];
                 $email = $_POST['email'];
                 $grade_level = $_POST['grade_level'];
+                $address = $_POST['address'];
+                $pg_name = $_POST['pg_name'];
 
                 $check_lrn = mysqli_query($cxn, "SELECT * FROM student WHERE lrn_id='$lrn'") or die("Error in query: $check_lrn." . mysqli_error($cxn));
 
                 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                     echo "<script type='text/javascript'> alert('Email not valid. Try again.'); location.href='addnewstudent.php'; </script>";
-                } elseif ($check_lrn->num_rows == 1) {
+                } elseif ($check_lrn->num_rows > 1) {
                     echo "<script type='text/javascript'> alert('LRN already registered.'); location.href='addnewstudent.php'; </script>";
                 } else {
-                    $query = mysqli_query($cxn, "INSERT INTO student(lrn_id,first_name,last_name,email,grade_level) VALUES('$lrn','$first_name','$last_name','$email','$grade_level')") or die("Error in query: $query." . mysqli_error($cxn));
+                    $query = mysqli_query($cxn, "INSERT INTO student(lrn_id,first_name,last_name,email,grade_level,address,pg_name) VALUES('$lrn','$first_name','$last_name','$email','$grade_level','$address','$pg_name')") or die("Error in query: $query." . mysqli_error($cxn));
                     echo "<script type='text/javascript'> alert('Successfully Added New Student!'); location.href = 'addnewstudent.php'; </script>";
                 }
             }
