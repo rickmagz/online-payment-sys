@@ -1,4 +1,5 @@
 <?php
+include 'db_connect.php';
 session_start();
 
 ?>
@@ -8,7 +9,7 @@ session_start();
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Dashboard - GNHS PTA Payment System - Admin</title>
+    <title>Overview - GNHS PTA Payment System - Admin</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/Nunito.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
@@ -23,7 +24,8 @@ session_start();
                 </a>
                 <hr class="sidebar-divider my-0">
                 <ul class="navbar-nav text-light" id="accordionSidebar">
-                    <li class="nav-item"><a class="nav-link active" href="admin.php"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
+                    <li class="nav-item"><a class="nav-link active" href="admin.php"><i class="fas fa-tachometer-alt"></i><span>Overview</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="search.php"><i class="fas fa-search"></i><span>Search</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="addnewstudent.php"><i class="fas fa-user"></i><span>Add New Student</span></a><a class="nav-link" href="addnewuser.php"><i class="fas fa-user"></i><span>Add New User</span></a><a class="nav-link" href="viewstudents.php"><i class="fas fa-users"></i><span>Registered Students</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="viewusers.php"><i class="fas fa-user-tie"></i><span>System Users</span></a><a class="nav-link" href="payments.php"><i class="fas fa-money-bill"></i><span>Payment History</span></a></li>
                     <li class="nav-item"></li>
@@ -73,8 +75,13 @@ session_start();
                                 <div class="card-body">
                                     <div class="row align-items-center no-gutters">
                                         <div class="col me-2">
-                                            <div class="text-uppercase text-primary fw-bold text-xs mb-1"><span>monthly payments</span></div>
-                                            <div class="text-dark fw-bold h5 mb-0"><span>$40,000</span></div>
+                                            <div class="text-uppercase text-primary fw-bold text-xs mb-1"><span>Total Received payments</span></div>
+                                            <?php
+                                            $total_pay = mysqli_query($cxn, "SELECT SUM(amount_paid) AS total_pay FROM payments");
+                                            $tp = $total_pay->fetch_assoc();
+
+                                            ?>
+                                            <div class="text-dark fw-bold h5 mb-0"><span>&#8369;<?php echo $tp["total_pay"]; ?></span></div>
                                         </div>
                                         <div class="col-auto"><i class="fas fa-calendar fa-2x text-gray-300"></i></div>
                                     </div>
@@ -86,8 +93,14 @@ session_start();
                                 <div class="card-body">
                                     <div class="row align-items-center no-gutters">
                                         <div class="col me-2">
-                                            <div class="text-uppercase text-success fw-bold text-xs mb-1"><span>annual payments</span></div>
-                                            <div class="text-dark fw-bold h5 mb-0"><span>$215,000</span></div>
+                                            <div class="text-uppercase text-success fw-bold text-xs mb-1"><span>No. of Students Paid</span></div>
+                                            <?php
+                                            $total_students = mysqli_query($cxn, "SELECT * FROM payments");
+                                            $ts = mysqli_num_rows($total_students);
+                                            ?>
+                                            <div class="text-dark fw-bold h5 mb-0"><span>
+                                                    <?php echo $ts; ?>
+                                                </span></div>
                                         </div>
                                         <div class="col-auto"><i class="far fa-money-bill-alt fa-2x text-gray-300"></i></div>
                                     </div>
@@ -100,14 +113,16 @@ session_start();
                                     <div class="row align-items-center no-gutters">
                                         <div class="col me-2">
                                             <div class="text-uppercase text-info fw-bold text-xs mb-1"><span>payments made<br></span></div>
+                                            <?php
+                                            $total_students = mysqli_query($cxn, "SELECT * FROM payments");
+                                            $ts = mysqli_num_rows($total_students);
+                                            $ps = ROUND(($ts / 1012) * 100, 2);
+                                            ?>
                                             <div class="row g-0 align-items-center">
                                                 <div class="col-auto">
-                                                    <div class="text-dark fw-bold h5 mb-0 me-3"><span>50%</span></div>
-                                                </div>
-                                                <div class="col">
-                                                    <div class="progress progress-sm">
-                                                        <div class="progress-bar bg-info" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%;"><span class="visually-hidden">50%</span></div>
-                                                    </div>
+                                                    <div class="text-dark fw-bold h5 mb-0 me-3"><span>
+                                                            <?php echo $ps; ?>%
+                                                        </span></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -122,7 +137,14 @@ session_start();
                                     <div class="row align-items-center no-gutters">
                                         <div class="col me-2">
                                             <div class="text-uppercase text-warning fw-bold text-xs mb-1"><span>Pending payments</span></div>
-                                            <div class="text-dark fw-bold h5 mb-0"><span>18</span></div>
+                                            <?php
+                                            $total_students = mysqli_query($cxn, "SELECT * FROM payments WHERE remarks='PENDING'");
+                                            $pending = mysqli_num_rows($total_students);
+
+                                            ?>
+                                            <div class="text-dark fw-bold h5 mb-0"><span>
+                                                <?php echo $pending;?>
+                                            </span></div>
                                         </div>
                                         <div class="col-auto"><i class="far fa-bell fa-2x text-gray-300"></i></div>
                                     </div>
@@ -131,43 +153,134 @@ session_start();
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-7 col-xl-7">
-                            <div class="card shadow mb-4">
+                        <div class="col-lg-7 col-xl-7 col-xxl-7">
+                            <div class="card shadow mb-3">
                                 <div class="card-header d-flex justify-content-between align-items-center">
-                                    <h6 class="text-primary fw-bold m-0">Earnings Overview</h6>
+                                    <h6 class="text-primary fw-bold m-0">Payment History</h6>
                                 </div>
                                 <div class="card-body">
-                                    <div class="chart-area"><canvas data-bss-chart="{&quot;type&quot;:&quot;line&quot;,&quot;data&quot;:{&quot;labels&quot;:[&quot;Jan&quot;,&quot;Feb&quot;,&quot;Mar&quot;,&quot;Apr&quot;,&quot;May&quot;,&quot;Jun&quot;,&quot;Jul&quot;,&quot;Aug&quot;],&quot;datasets&quot;:[{&quot;label&quot;:&quot;Earnings&quot;,&quot;fill&quot;:true,&quot;data&quot;:[&quot;0&quot;,&quot;10000&quot;,&quot;5000&quot;,&quot;15000&quot;,&quot;10000&quot;,&quot;20000&quot;,&quot;15000&quot;,&quot;25000&quot;],&quot;backgroundColor&quot;:&quot;rgba(78, 115, 223, 0.05)&quot;,&quot;borderColor&quot;:&quot;rgba(78, 115, 223, 1)&quot;}]},&quot;options&quot;:{&quot;maintainAspectRatio&quot;:false,&quot;legend&quot;:{&quot;display&quot;:false,&quot;labels&quot;:{&quot;fontStyle&quot;:&quot;normal&quot;}},&quot;title&quot;:{&quot;fontStyle&quot;:&quot;normal&quot;},&quot;scales&quot;:{&quot;xAxes&quot;:[{&quot;gridLines&quot;:{&quot;color&quot;:&quot;rgb(234, 236, 244)&quot;,&quot;zeroLineColor&quot;:&quot;rgb(234, 236, 244)&quot;,&quot;drawBorder&quot;:false,&quot;drawTicks&quot;:false,&quot;borderDash&quot;:[&quot;2&quot;],&quot;zeroLineBorderDash&quot;:[&quot;2&quot;],&quot;drawOnChartArea&quot;:false},&quot;ticks&quot;:{&quot;fontColor&quot;:&quot;#858796&quot;,&quot;fontStyle&quot;:&quot;normal&quot;,&quot;padding&quot;:20}}],&quot;yAxes&quot;:[{&quot;gridLines&quot;:{&quot;color&quot;:&quot;rgb(234, 236, 244)&quot;,&quot;zeroLineColor&quot;:&quot;rgb(234, 236, 244)&quot;,&quot;drawBorder&quot;:false,&quot;drawTicks&quot;:false,&quot;borderDash&quot;:[&quot;2&quot;],&quot;zeroLineBorderDash&quot;:[&quot;2&quot;]},&quot;ticks&quot;:{&quot;fontColor&quot;:&quot;#858796&quot;,&quot;fontStyle&quot;:&quot;normal&quot;,&quot;padding&quot;:20}}]}}}"></canvas></div>
+                                    <div class="table-responsive" id="dataTable" role="grid" aria-describedby="dataTable_info">
+                                        <table class="table table-hover" id="dataTable">
+                                            <thead>
+                                                <tr>
+                                                    <th>Date</th>
+                                                    <th>Student Name</th>
+                                                    <th>Reference No.</th>
+                                                    <th>Payment Method</th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php
+                                                $payments = mysqli_query($cxn, "SELECT * FROM payments ORDER BY uploaded_on asc LIMIT 10");
+                                                $payments_query = mysqli_num_rows($payments);
+
+                                                if ($payments_query > 0) {
+                                                    $i = 0;
+                                                    while ($p = mysqli_fetch_array($payments)) {
+                                                        $first_name = $p['first_name'];
+                                                        $last_name = $p['last_name'];
+                                                        $grade_level = $p['grade_level'];
+                                                        $ref_no = $p['ref_no'];
+                                                        $payment_method = $p['payment_method'];
+                                                        $date = strtotime($p['uploaded_on']);
+                                                        $pay_date = date("m/d/y", $date);
+
+                                                ?>
+                                                        <tr>
+                                                            <td><?php echo $pay_date; ?></td>
+                                                            <td><?php echo $first_name; ?> <?php echo $last_name; ?></td>
+                                                            <td><?php echo $ref_no; ?></td>
+                                                            <td><?php echo $payment_method; ?></td>
+
+                                                        </tr>
+
+                                                <?php
+                                                        $i++;
+                                                    }
+                                                } else {
+                                                    echo "<tr>
+                                                        <td>No record found.</td>
+                                                        </tr>";
+                                                };
+                                                ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-5 col-xl-5">
                             <div class="card shadow mb-4">
                                 <div class="card-header d-flex justify-content-between align-items-center">
-                                    <h6 class="text-primary fw-bold m-0">Revenue Sources</h6>
+                                    <h6 class="text-primary fw-bold m-0">Authorized Users</h6>
                                 </div>
                                 <div class="card-body">
-                                    <div class="chart-area"><canvas data-bss-chart="{&quot;type&quot;:&quot;doughnut&quot;,&quot;data&quot;:{&quot;labels&quot;:[&quot;Grade 7&quot;,&quot;Grade 8&quot;,&quot;Grade 9&quot;,&quot;Grade 10&quot;,&quot;Garde 11&quot;,&quot;Grade 12&quot;],&quot;datasets&quot;:[{&quot;label&quot;:&quot;RevenueSources&quot;,&quot;backgroundColor&quot;:[&quot;#1ac955&quot;,&quot;#ebe545&quot;,&quot;#36b9cc&quot;,&quot;rgb(255,0,0)&quot;,&quot;rgb(246,51,238)&quot;,&quot;rgb(234,153,30)&quot;],&quot;borderColor&quot;:[&quot;#ffffff&quot;,&quot;#ffffff&quot;,&quot;#ffffff&quot;,&quot;#ffffff&quot;,&quot;#ffffff&quot;,&quot;#ffffff&quot;],&quot;data&quot;:[&quot;50&quot;,&quot;30&quot;,&quot;15&quot;,&quot;45&quot;,&quot;60&quot;,&quot;30&quot;]}]},&quot;options&quot;:{&quot;maintainAspectRatio&quot;:false,&quot;legend&quot;:{&quot;display&quot;:true,&quot;labels&quot;:{&quot;fontStyle&quot;:&quot;normal&quot;},&quot;reverse&quot;:false,&quot;position&quot;:&quot;bottom&quot;},&quot;title&quot;:{&quot;fontStyle&quot;:&quot;normal&quot;,&quot;display&quot;:false,&quot;position&quot;:&quot;top&quot;}}}"></canvas></div>
+                                    <div class="table-responsive" id="dataTable" role="grid" aria-describedby="dataTable_info">
+                                        <table class="table table-hover my-0" id="dataTable">
+                                            <thead>
+                                                <tr>
+                                                    <th>Name</th>
+                                                    <th>Username</th>
+                                                    <th>Added by</th>
+                                                    <th>Access Level</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php
+                                                $users = mysqli_query($cxn, "SELECT * FROM users LIMIT 10");
+                                                $users_query = mysqli_num_rows($users);
+
+                                                if ($users_query > 0) {
+                                                    $i = 0;
+                                                    while ($u = mysqli_fetch_assoc($users)) {
+                                                        $first_name = $u['first_name'];
+                                                        $last_name = $u['last_name'];
+                                                        $username = $u['username'];
+                                                        $added_by = $u['added_by'];
+                                                        $access_level = $u['access_level'];
+
+
+                                                        $i++;
+
+                                                ?>
+                                                        <tr>
+                                                            <td><?php echo $first_name; ?> <?php echo $last_name; ?></td>
+                                                            <td><?php echo $username; ?></td>
+                                                            <td><?php echo $added_by; ?></td>
+                                                            <td><?php echo $access_level; ?></td>
+
+                                                        </tr>
+                                                <?php
+                                                    }
+                                                } else {
+                                                    echo "<tr>
+                                                    <td>No record found.</td>
+                                                    </tr>";
+                                                };
+                                                ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <footer class="bg-white sticky-footer">
+                    <div class="container my-auto">
+                        <div class="text-center my-auto copyright"><span>Copyright © GNHS PTA Payment System - Admin Dashboard 2023</span></div>
+                    </div>
+                </footer>
             </div>
-            <footer class="bg-white sticky-footer">
-                <div class="container my-auto">
-                    <div class="text-center my-auto copyright"><span>Copyright © GNHS PTA Payment System - Admin Dashboard 2023</span></div>
-                </div>
-            </footer>
         </div>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
-    <script src="assets/js/bs-init.js"></script>
-    <script src="assets/js/theme.js"></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
+        <script src="assets/js/bs-init.js"></script>
+        <script src="assets/js/theme.js"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 
 </html>

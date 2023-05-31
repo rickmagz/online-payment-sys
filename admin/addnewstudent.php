@@ -31,6 +31,8 @@ include 'db_connect.php';
                             <span>Dashboard</span>
                         </a>
                     </li>
+                    <li class="nav-item"><a class="nav-link" href="search.php"><i class="fas fa-search"></i><span>Search</span></a></li>
+
                     <li class="nav-item">
                         <a class="nav-link active" href="addnewstudent.php">
                             <i class="fas fa-user"></i>
