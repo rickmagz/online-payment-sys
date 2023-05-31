@@ -94,7 +94,8 @@ include 'db_connect.php';
                                             <th>Grade Level</th>
                                             <th>LRN</th>
                                             <th>E-mail Address</th>
-                                            <th>Registration Date</th>
+                                            <th>Address</th>
+                                            <th>Parent Name</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
@@ -111,9 +112,9 @@ include 'db_connect.php';
                                                 $first_name = $s['first_name'];
                                                 $last_name = $s['last_name'];
                                                 $email = $s['email'];
-                                                $reg_date = strtotime($s['date_created']);
-                                                $date_reg = date("F d, Y; h:i A", $reg_date);
                                                 $grade_level = $s['grade_level'];
+                                                $address = $s['address'];
+                                                $pg_name = $s['pg_name'];
 
                                                 $i++;
                                         ?>
@@ -124,7 +125,8 @@ include 'db_connect.php';
                                                     <td><?php echo $grade_level; ?></td>
                                                     <td><?php echo $lrn; ?></td>
                                                     <td><?php echo $email; ?></td>
-                                                    <td><?php echo $date_reg; ?></td>
+                                                    <td><?php echo $address; ?></td>
+                                                    <td><?php echo $pg_name; ?></td>
                                                     <td>
                                                         <button class="btn btn-primary btn-sm modifybtn" type="button" data-toggle="modal" data-target="#modifybtn">Modify</button>&emsp13;
                                                         <a type="button" class="btn btn-danger btn-sm" href="deletestudent.php?id=<?php echo $id; ?>">Delete</a>
