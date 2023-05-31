@@ -91,8 +91,8 @@ include 'db_connect.php';
                                             <th>No.</th>
                                             <th>First Name</th>
                                             <th>Last Name</th>
-                                            <th>Grade Level</th>
                                             <th>LRN</th>
+                                            <th>Grade Level</th>
                                             <th>E-mail Address</th>
                                             <th>Address</th>
                                             <th>Parent Name</th>
@@ -122,8 +122,8 @@ include 'db_connect.php';
                                                     <td><?php echo $id; ?></td>
                                                     <td><?php echo $first_name; ?></td>
                                                     <td><?php echo $last_name; ?></td>
-                                                    <td><?php echo $grade_level; ?></td>
                                                     <td><?php echo $lrn; ?></td>
+                                                    <td><?php echo $grade_level; ?></td>
                                                     <td><?php echo $email; ?></td>
                                                     <td><?php echo $address; ?></td>
                                                     <td><?php echo $pg_name; ?></td>
@@ -163,15 +163,19 @@ include 'db_connect.php';
                                         <label>Entry No.</label>
                                     </div>
                                     <div class="form-floating mb-3 mt-3">
-                                        <input type="text" class="form-control" id="first_name" placeholder="Enter first name" name="first_name">
+                                        <input type="text" class="form-control" id="first_name" placeholder="Enter first name" name="first_name" readonly>
                                         <label>First Name</label>
                                     </div>
                                     <div class="form-floating mb-3 mt-3">
-                                        <input type="text" class="form-control" id="last_name" placeholder="Enter last name" name="last_name">
+                                        <input type="text" class="form-control" id="last_name" placeholder="Enter last name" name="last_name" readonly>
                                         <label>Last Name</label>
                                     </div>
                                     <div class="form-floating mb-3 mt-3">
-                                        <select class="form-select" name="grade_level" id="grade_level" required>
+                                        <input type="text" class="form-control" id="lrn" placeholder="Enter LRN" name="lrn" readonly>
+                                        <label>Learners Reference No.</label>
+                                    </div>
+                                    <div class="form-floating mb-3 mt-3">
+                                        <select class="form-select" name="grade_level" id="grade_level" autofocus required>
                                             <optgroup label="Select Grade Level">
                                                 <option value="Grade 7" selected>Grade 7</option>
                                                 <option value="Grade 8">Grade 8</option>
@@ -182,10 +186,6 @@ include 'db_connect.php';
                                             </optgroup>
                                         </select>
                                         <label>Grade Level</label>
-                                    </div>
-                                    <div class="form-floating mb-3 mt-3">
-                                        <input type="text" class="form-control" id="lrn" placeholder="Enter LRN" name="lrn">
-                                        <label>Learners Reference No.</label>
                                     </div>
                                     <div class="form-floating mb-3 mt-3">
                                         <input type="text" class="form-control" id="email" placeholder="Enter Email" name="email">
@@ -251,8 +251,8 @@ include 'db_connect.php';
                 $('#id').val(data[0]);
                 $('#first_name').val(data[1]);
                 $('#last_name').val(data[2]);
-                $('#grade_level').val(data[3]);
-                $('#lrn').val(data[4]);
+                $('#lrn').val(data[3]);
+                $('#grade_level').val(data[4]);
                 $('#email').val(data[5]);
             });
         });

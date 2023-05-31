@@ -108,8 +108,8 @@ if (isset($_POST['request'])) {
                                 <th>First Name</th>
                                 <th>Last Name</th>
                                 <th>Grade Level</th>
-                                <th>LRN</th>
                                 <th>E-mail Address</th>
+                                <th>LRN</th>
                                 <th>Registration Date</th>
                                 <th>Actions</th>
                             </tr>
@@ -137,8 +137,8 @@ if (isset($_POST['request'])) {
                             <td><?php echo $id; ?></td>
                             <td><?php echo $first_name; ?></td>
                             <td><?php echo $last_name; ?></td>
-                            <td><?php echo $grade_level; ?></td>
                             <td><?php echo $lrn; ?></td>
+                            <td><?php echo $grade_level; ?></td>
                             <td><?php echo $email; ?></td>
                             <td><?php echo $date_reg; ?></td>
                             <td>
