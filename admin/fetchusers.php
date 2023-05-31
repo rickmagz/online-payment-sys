@@ -10,7 +10,7 @@ if (isset($_POST['request'])) {
 ?>
         <div class="card-body">
             <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
-                <table class="table" id="dataTable">
+                <table class="table table-hover" id="dataTable">
                     <?php
                     if ($count) {
 
@@ -102,7 +102,7 @@ if (isset($_POST['request'])) {
     ?>
         <div class="card-body">
             <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
-                <table class="table" id="dataTable">
+                <table class="table table-hover" id="dataTable">
                     <?php
                     if ($count) {
 
@@ -192,7 +192,7 @@ if (isset($_POST['request'])) {
     ?>
         <div class="card-body">
             <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
-                <table class="table" id="dataTable">
+                <table class="table table-hover" id="dataTable">
                     <?php
                     if ($count) {
 
@@ -281,7 +281,7 @@ if (isset($_POST['request'])) {
     ?>
         <div class="card-body">
             <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
-                <table class="table" id="dataTable">
+                <table class="table table-hover" id="dataTable">
                     <?php
                     if ($count) {
 
