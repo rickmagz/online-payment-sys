@@ -55,7 +55,7 @@ if (isset($_POST['request'])) {
                             <td><?php echo $grade_level; ?></td>
                             <td><?php echo $ref_no; ?></td>
                             <td><?php echo $payment_method; ?></td>
-                            <td><?php echo $amount_paid; ?></td>
+                            <td>&#8369;<?php echo $amount_paid; ?></td>
                             <td><?php echo $pay_date; ?></td>
                             <td><button data-id='<?php echo $p['id']; ?>' class="userinfo btn btn-primary btn-sm"><i class="bi bi-image-fill"></i>&nbsp;See Attachment</button></td>
                             <td><button class="btn btn-primary btn-sm" type="submit"><i class="bi bi-check-circle-fill"></i>&nbsp;Accept</button></td>
@@ -155,7 +155,7 @@ if (isset($_POST['request'])) {
                             <td><?php echo $grade_level; ?></td>
                             <td><?php echo $ref_no; ?></td>
                             <td><?php echo $payment_method; ?></td>
-                            <td><?php echo $amount_paid; ?></td>
+                            <td>&#8369;<?php echo $amount_paid; ?></td>
                             <td><?php echo $pay_date; ?></td>
                             <td><button data-id='<?php echo $p['id']; ?>' class="userinfo btn btn-primary btn-sm"><i class="bi bi-image-fill"></i>&nbsp;See Attachment</button></td>
                             <td><button class="btn btn-primary btn-sm" type="submit"><i class="bi bi-check-circle-fill"></i>&nbsp;Accept</button></td>
@@ -254,7 +254,7 @@ if (isset($_POST['request'])) {
                             <td><?php echo $grade_level; ?></td>
                             <td><?php echo $ref_no; ?></td>
                             <td><?php echo $payment_method; ?></td>
-                            <td><?php echo $amount_paid; ?></td>
+                            <td>&#8369;<?php echo $amount_paid; ?></td>
                             <td><?php echo $pay_date; ?></td>
                             <td><button data-id='<?php echo $p['id']; ?>' class="userinfo btn btn-primary btn-sm"><i class="bi bi-image-fill"></i>&nbsp;See Attachment</button></td>
                             <td><button class="btn btn-primary btn-sm" type="submit"><i class="bi bi-check-circle-fill"></i>&nbsp;Accept</button></td>
@@ -358,7 +358,7 @@ if (isset($_POST['request'])) {
                             <td><?php echo $grade_level; ?></td>
                             <td><?php echo $ref_no; ?></td>
                             <td><?php echo $payment_method; ?></td>
-                            <td><?php echo $amount_paid; ?></td>
+                            <td>&#8369;<?php echo $amount_paid; ?></td>
                             <td><?php echo $pay_date; ?></td>
                             <td><button data-id='<?php echo $p['id']; ?>' class="userinfo btn btn-primary btn-sm"><i class="bi bi-image-fill"></i>&nbsp;See Attachment</button></td>
                             <td><button class="btn btn-primary btn-sm" type="submit"><i class="bi bi-check-circle-fill"></i>&nbsp;Accept</button></td>
@@ -460,7 +460,7 @@ if (isset($_POST['request'])) {
                             <td><?php echo $grade_level; ?></td>
                             <td><?php echo $ref_no; ?></td>
                             <td><?php echo $payment_method; ?></td>
-                            <td><?php echo $amount_paid; ?></td>
+                            <td>&#8369;<?php echo $amount_paid; ?></td>
                             <td><?php echo $pay_date; ?></td>
                             <td><button data-id='<?php echo $p['id']; ?>' class="userinfo btn btn-primary btn-sm"><i class="bi bi-image-fill"></i>&nbsp;See Attachment</button></td>
                             <td><button class="btn btn-primary btn-sm" type="submit"><i class="bi bi-check-circle-fill"></i>&nbsp;Accept</button></td>
