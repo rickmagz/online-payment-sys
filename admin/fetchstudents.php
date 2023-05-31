@@ -17,6 +17,7 @@ if (isset($_POST['request'])) {
                     ?>
                         <thead>
                             <tr>
+                                <th>No.</th>
                                 <th>First Name</th>
                                 <th>Last Name</th>
                                 <th>Grade Level</th>
@@ -103,6 +104,7 @@ if (isset($_POST['request'])) {
                     ?>
                         <thead>
                             <tr>
+                                <th>No.</th>
                                 <th>First Name</th>
                                 <th>Last Name</th>
                                 <th>Grade Level</th>
@@ -132,6 +134,7 @@ if (isset($_POST['request'])) {
                             ?>
                         </tbody>
                         <tr class="student<?php echo $id ?>">
+                            <td><?php echo $id; ?></td>
                             <td><?php echo $first_name; ?></td>
                             <td><?php echo $last_name; ?></td>
                             <td><?php echo $grade_level; ?></td>
