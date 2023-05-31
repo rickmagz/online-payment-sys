@@ -68,16 +68,63 @@ include 'db_connect.php';
                     </div>
                 </nav>
                 <div class="container-fluid">
-                    <h3 class="text-dark mb-4"><strong>Payment History</strong></h3>
+                    <div class="row">
+                        <div class="col-md-7 col-lg-8 col-xl-9 col-xxl-9">
+                            <h3 class="text-dark" style="padding-top: 8px;margin-bottom: 16px;">
+                                <strong>Payment History</strong>
+                            </h3>
+                        </div>
+                        <div class="col-md-5 col-lg-4 col-xl-3 col-xxl-3 offset-xl-2 offset-xxl-1" style="margin: 0px;margin-top: 12px;padding-top: 0px;padding-right: 0px;padding-left: 20px; padding-bottom:10px;" id="filters">
+                            <span class="fs-6 fw-bold text-dark" style="padding: 0px;margin: 0px;padding-right: 5px;">
+                                Filter by
+                            </span>
+                            <select class="border rounded border-1 border-secondary" style="padding-right: 0px;width: 175px;" name="fetchpay" id="fetchpay">
+                                <option value="Select Filter" selected disabled>Select Filter</option>
+                                <option value="Grade Level">Grade Level</option>
+                                <option value="Payment Method">Payment Method</option>
+                                <option value="Last Name (A-Z)">Last Name (A-Z)</option>
+                                <option value="Date (Asc)">Date (Asc)</option>
+                                <option value="Date (Desc)">Date (Desc)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <script type="text/javascript">
+                        $(document).ready(function() {
+                            $("#fetchpay").on('change', function() {
+                                var value = $(this).val();
+
+                                $.ajax({
+                                    url: "fetchpayments.php",
+                                    type: "POST",
+                                    data: 'request=' + value,
+                                    beforeSend: function() {
+                                        $(".table").html(`<span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto; background: none; display: block; shape-rendering: auto;" width="206px" height="206px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+                                        <circle cx="50" cy="50" r="32" stroke-width="8" stroke="#1d3f72" stroke-dasharray="50.26548245743669 50.26548245743669" fill="none" stroke-linecap="round">
+                                        <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="1.8181818181818181s" keyTimes="0;1" values="0 50 50;360 50 50"></animateTransform>
+                                        </circle>
+                                        </svg>
+                                        </span>`);
+                                    },
+                                    success: function(data) {
+                                        $(".table").html(data);
+                                    }
+                                });
+                            });
+                        });
+                    </script>
+
                     <div class="card shadow">
                         <div class="card-body">
                             <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
                                 <table class="table my-0" id="dataTable">
                                     <thead>
                                         <tr>
-                                            <th>Name</th>
+                                            <th>No.</th>
+                                            <th>Student Name</th>
                                             <th>Grade Level</th>
-                                            <th>Reference Number</th>
+                                            <th>Reference No.</th>
                                             <th>Payment Method</th>
                                             <th>Amount Paid</th>
                                             <th>Payment Date</th>
@@ -106,24 +153,25 @@ include 'db_connect.php';
 
                                         ?>
                                                 <tr>
+                                                    <td><?php echo $id; ?></td>
                                                     <td><?php echo $first_name; ?> <?php echo $last_name; ?></td>
                                                     <td><?php echo $grade_level; ?></td>
                                                     <td><?php echo $ref_no; ?></td>
                                                     <td><?php echo $payment_method; ?></td>
                                                     <td><?php echo $amount_paid; ?></td>
                                                     <td><?php echo $pay_date; ?></td>
-                                                    <td><button data-id='<?php echo $p['id']; ?>' class="userinfo btn btn-primary btn-sm"><i class="bi bi-image-fill"></i><br />Attachment</button></td>
-                                                    <td><button class="btn btn-primary btn-sm" type="submit"><i class="bi bi-check-circle-fill"></i>Accept</button></td>
-                                                    <td><button class="btn btn-danger btn-sm" type="submit"><i class="bi bi-x-circle-fill"></i>Deny</button></td>
+                                                    <td><button data-id='<?php echo $p['id']; ?>' class="userinfo btn btn-primary btn-sm"><i class="bi bi-image-fill"></i>&nbsp;See Attachment</button></td>
+                                                    <td><button class="btn btn-primary btn-sm" type="submit"><i class="bi bi-check-circle-fill"></i>&nbsp;Accept</button></td>
+                                                    <td><button class="btn btn-danger btn-sm" type="submit"><i class="bi bi-x-circle-fill"></i>&nbsp;Deny</button></td>
                                                 </tr>
                                         <?php
                                                 $i++;
                                             }
-                                        }else{
+                                        } else {
                                             echo "<tr>
                                                     <td>No record found.</td>
                                                     </tr>";
-                                          };
+                                        };
                                         ?>
 
                                     </tbody>
@@ -146,6 +194,8 @@ include 'db_connect.php';
     <script src="assets/js/theme.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
     <script type='text/javascript'>
         $(document).ready(function() {
             $('.userinfo').click(function() {
