@@ -47,6 +47,7 @@ if (isset($_POST['request'])) {
                             ?>
                         </tbody>
                         <tr class="student<?php echo $id ?>">
+                            <td><?php echo $id; ?></td>
                             <td><?php echo $first_name; ?></td>
                             <td><?php echo $last_name; ?></td>
                             <td><?php echo $grade_level; ?></td>
@@ -65,6 +66,29 @@ if (isset($_POST['request'])) {
                 </table>
             </div>
         </div>
+
+        <script>
+            $(document).ready(function() {
+                $('.modifybtn').on('click', function() {
+                    $('#modifybtn').modal('show');
+
+                    $tr = $(this).closest('tr');
+
+                    var data = $tr.children("td").map(function() {
+                        return $(this).text();
+                    }).get();
+
+                    console.log(data);
+
+                    $('#id').val(data[0]);
+                    $('#first_name').val(data[1]);
+                    $('#last_name').val(data[2]);
+                    $('#grade_level').val(data[3]);
+                    $('#lrn').val(data[4]);
+                    $('#email').val(data[5]);
+                });
+            });
+        </script>
     <?php
     } elseif ($request == 'Last Name') {
         $query = mysqli_query($cxn, "SELECT * FROM student ORDER BY last_name asc");
