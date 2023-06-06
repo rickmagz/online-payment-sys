@@ -95,7 +95,7 @@ include 'db_connect.php';
                     <h4 class="card-title text-center">Looking for something?</h4><br />
                     <form action="search.php" method="POST">
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Search..." name="search">
+                            <input type="text" class="form-control" placeholder="Search..." name="search" required>
                             <span class="input-group-btn">
                                 <button class="btn btn-primary" type="submit" name="submit">Search</button>
                             </span>
