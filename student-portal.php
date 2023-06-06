@@ -102,8 +102,8 @@ $id = $_SESSION['id'];
                   }
                 } else {
                   echo "<tr>
-                            <td>No record found.</td>
-                            </tr>";
+                            <td colspan='5'>No record found.</td>
+                        </tr>";
                 };
 
                 ?>

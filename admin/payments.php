@@ -31,9 +31,7 @@ include 'db_connect.php';
                     <li class="nav-item"><a class="nav-link" href="search.php"><i class="fas fa-search"></i><span>Search</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="addnewstudent.php"><i class="fas fa-user"></i><span>Add New Student</span></a><a class="nav-link" href="addnewuser.php"><i class="fas fa-user"></i><span>Add New User</span></a><a class="nav-link" href="viewstudents.php"><i class="fas fa-users"></i><span>Registered Students</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="viewusers.php"><i class="fas fa-user-tie"></i><span>System Users</span></a><a class="nav-link active" href="payments.php"><i class="fas fa-money-bill"></i><span>Payment History</span></a></li>
-                    <li class="nav-item"></li>
-                    <li class="nav-item"></li>
-                    <li class="nav-item"></li>
+                    
                 </ul>
                 <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
             </div>
@@ -127,10 +125,11 @@ include 'db_connect.php';
                                             <th>Grade Level</th>
                                             <th>Reference No.</th>
                                             <th>Payment Method</th>
-                                            <th>Amount Paid</th>
-                                            <th>Payment Date</th>
+                                            <th>Amount</th>
+                                            <th>Date (M/D/Y)</th>
                                             <th>Proof of Payment</th>
                                             <th>Remarks</th>
+                                            <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -150,7 +149,7 @@ include 'db_connect.php';
                                                 $amount_paid = $p['amount_paid'];
                                                 $payment_method = $p['payment_method'];
                                                 $date = strtotime($p['uploaded_on']);
-                                                $pay_date = date("F d, Y; h:i A", $date);
+                                                $pay_date = date("m/d/Y; h:i A", $date);
                                                 $remarks = $p['remarks'];
 
 
@@ -164,8 +163,9 @@ include 'db_connect.php';
                                                     <td>&#8369;<?php echo $amount_paid; ?></td>
                                                     <td><?php echo $pay_date; ?></td>
                                                     <td><button data-id='<?php echo $p['id']; ?>' class="userinfo btn btn-primary btn-sm"><i class="bi bi-image-fill"></i>&nbsp;See Attachment</button></td>
-                                                    <td><?php echo $remarks;?></td>
-                                                    <!-- <td><a class="btn btn-primary btn-sm" href="acceptpayment.php?id=<?php echo $id; ?>"><i class="bi bi-check-circle-fill"></i> </a> <a class="btn btn-danger btn-sm" href="denypayment.php?id=<?php echo $id; ?>"><i class="bi bi-x-circle-fill"></i> </a></td> -->
+                                                    <td><?php echo $remarks; ?></td>
+                                                    <td><button class="btn btn-primary btn-sm" type="submit"><i class="bi bi-check-circle-fill"></i>&nbsp;Accept</button></td>
+                                                    <td><button class="btn btn-danger btn-sm" type="submit"><i class="bi bi-x-circle-fill"></i>&nbsp;Deny</button></td>
                                                 </tr>
                                         <?php
                                                 $i++;
@@ -179,6 +179,7 @@ include 'db_connect.php';
 
                                     </tbody>
                                 </table>
+
 
                             </div>
                         </div>
