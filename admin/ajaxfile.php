@@ -9,7 +9,7 @@ while ($row = mysqli_fetch_array($result)) {
 ?>
     <table border='0' width='100%'>
         <tr>
-            <td><img src="../proof/<?php echo $row['proof_of_payment']; ?>" height="250px" width="250px;">
+            <td><img src="../proof/<?php echo $row['proof_of_payment']; ?>" height="500px;" width="450px;">
         </tr>
     </table>
 
