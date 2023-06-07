@@ -175,7 +175,7 @@ include 'db_connect.php';
                                         <label>Learners Reference No.</label>
                                     </div>
                                     <div class="form-floating mb-3 mt-3">
-                                        <select class="form-select" name="grade_level" id="grade_level" autofocus required>
+                                        <select class="form-select" name="grade_level" id="grade_level" required>
                                             <optgroup label="Select Grade Level">
                                                 <option value="Grade 7" selected>Grade 7</option>
                                                 <option value="Grade 8">Grade 8</option>
@@ -188,8 +188,16 @@ include 'db_connect.php';
                                         <label>Grade Level</label>
                                     </div>
                                     <div class="form-floating mb-3 mt-3">
-                                        <input type="text" class="form-control" id="email" placeholder="Enter Email" name="email">
+                                        <input type="text" class="form-control" id="email" placeholder="Enter Email" name="email" autofocus required>
                                         <label>Email Address</label>
+                                    </div>
+                                    <div class="form-floating mb-3 mt-3">
+                                        <input type="text" class="form-control" id="address" placeholder="Enter address" name="address" required>
+                                        <label>Address</label>
+                                    </div>
+                                    <div class="form-floating mb-3 mt-3">
+                                        <input type="text" class="form-control" id="pg_name" placeholder="Enter Parent/Guardian Name" name="pg_name" required>
+                                        <label>Parent/Guardian Name</label>
                                     </div>
                                 </form>
                             </div>
@@ -213,7 +221,9 @@ include 'db_connect.php';
                 $last_name = $_POST['last_name'];
                 $email = $_POST['email'];
                 $grade_level = $_POST['grade_level'];
-                $update_student = mysqli_query($cxn, "UPDATE student SET first_name='$first_name',last_name='$last_name',email='$email',grade_level='$grade_level',lrn_id='$lrn',date_created=now() WHERE id='$id'") or die("Error in query: $update_student." . mysqli_error($cxn));
+                $address = $_POST['address'];
+                $pg_name = $_POST['pg_name'];
+                $update_student = mysqli_query($cxn, "UPDATE student SET first_name='$first_name',last_name='$last_name',email='$email',grade_level='$grade_level',lrn_id='$lrn',pg_name='$pg_name',address='$address', date_created=now() WHERE id='$id'") or die("Error in query: $update_student." . mysqli_error($cxn));
                 echo "<script type='text/javascript'> alert('Successfully Modified!'); location.href = 'viewstudents.php'; </script>";
             }
 
@@ -254,6 +264,8 @@ include 'db_connect.php';
                 $('#lrn').val(data[3]);
                 $('#grade_level').val(data[4]);
                 $('#email').val(data[5]);
+                $('#address').val(data[6]);
+                $('#pg_name').val(data[7]);
             });
         });
     </script>
