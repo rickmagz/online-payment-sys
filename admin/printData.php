@@ -146,16 +146,6 @@ include 'db_connect.php';
                             </div>
                         </a>
                     </div>
-                    <div class="col">
-                        <a href="studentpayment_rep.php" target="_blank" class="text-decoration-none">
-                            <div class="card shadow text-center">
-                                <div class="card-body">
-                                    <i class="far fa-thumbs-up fa-lg"></i><br>
-                                    Student Payment Report
-                                </div>
-                            </div>
-                        </a>
-                    </div>
                 </div>
 
             </div>
