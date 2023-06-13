@@ -24,10 +24,20 @@ session_start();
                 </a>
                 <hr class="sidebar-divider my-0">
                 <ul class="navbar-nav text-light" id="accordionSidebar">
-                    <li class="nav-item"><a class="nav-link active" href="admin.php"><i class="fas fa-tachometer-alt"></i><span>Overview</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="search.php"><i class="fas fa-search"></i><span>Search</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="addnewstudent.php"><i class="fas fa-user"></i><span>Add New Student</span></a><a class="nav-link" href="addnewuser.php"><i class="fas fa-user"></i><span>Add New User</span></a><a class="nav-link" href="viewstudents.php"><i class="fas fa-users"></i><span>Registered Students</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="viewusers.php"><i class="fas fa-user-tie"></i><span>System Users</span></a><a class="nav-link" href="payments.php"><i class="fas fa-money-bill"></i><span>Payment History</span></a></li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="admin.php"><i class="fas fa-tachometer-alt"></i><span>Overview</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="search.php"><i class="fas fa-search"></i><span>Search</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="addnewstudent.php"><i class="fas fa-user"></i><span>Add New Student</span></a><a class="nav-link" href="addnewuser.php"><i class="fas fa-user"></i><span>Add New User</span></a><a class="nav-link" href="viewstudents.php"><i class="fas fa-users"></i><span>Registered Students</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="viewusers.php"><i class="fas fa-user-tie"></i><span>System Users</span></a>
+                        <a class="nav-link" href="payments.php"><i class="fas fa-money-bill"></i><span>Payment History</span></a>
+                        <a class="nav-link" href="printData.php"><i class="fas fa-print"></i><span>Generate Report</span></a>
+                    </li>
                     <li class="nav-item"></li>
                     <li class="nav-item"></li>
                     <li class="nav-item"></li>
@@ -67,7 +77,7 @@ session_start();
                 </nav>
                 <div class="container-fluid">
                     <div class="d-sm-flex justify-content-between align-items-center mb-4">
-                        <h3 class="text-dark mb-0"><strong>Dashboard</strong></h3><a class="btn btn-primary btn-sm d-none d-sm-inline-block" role="button" href="#"><i class="fas fa-download fa-sm text-white-50"></i>&nbsp;Generate Report</a>
+                        <h3 class="text-dark mb-0"><strong>Overview</strong></h3>
                     </div>
                     <div class="row">
                         <div class="col-md-6 col-xl-3 mb-4">

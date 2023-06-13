@@ -27,11 +27,23 @@ include 'db_connect.php';
                 </a>
                 <hr class="sidebar-divider my-0">
                 <ul class="navbar-nav text-light" id="accordionSidebar">
-                    <li class="nav-item"><a class="nav-link" href="admin.php"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="search.php"><i class="fas fa-search"></i><span>Search</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="addnewstudent.php"><i class="fas fa-user"></i><span>Add New Student</span></a><a class="nav-link" href="addnewuser.php"><i class="fas fa-user"></i><span>Add New User</span></a><a class="nav-link" href="viewstudents.php"><i class="fas fa-users"></i><span>Registered Students</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="viewusers.php"><i class="fas fa-user-tie"></i><span>System Users</span></a><a class="nav-link active" href="payments.php"><i class="fas fa-money-bill"></i><span>Payment History</span></a></li>
-
+                    <li class="nav-item">
+                        <a class="nav-link " href="admin.php"><i class="fas fa-tachometer-alt"></i><span>Overview</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="search.php"><i class="fas fa-search"></i><span>Search</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="addnewstudent.php"><i class="fas fa-user"></i><span>Add New Student</span></a><a class="nav-link " href="addnewuser.php"><i class="fas fa-user"></i><span>Add New User</span></a><a class="nav-link " href="viewstudents.php"><i class="fas fa-users"></i><span>Registered Students</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="viewusers.php"><i class="fas fa-user-tie"></i><span>System Users</span></a>
+                        <a class="nav-link active" href="payments.php"><i class="fas fa-money-bill"></i><span>Payment History</span></a>
+                        <a class="nav-link" href="printData.php"><i class="fas fa-print"></i><span>Generate Report</span></a>
+                    </li>
+                    <li class="nav-item"></li>
+                    <li class="nav-item"></li>
+                    <li class="nav-item"></li>
                 </ul>
                 <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
             </div>
@@ -174,9 +186,9 @@ include 'db_connect.php';
                                                         <button class="btn btn-primary btn-sm" type="submit" name="accept" form="accept"><i class="bi bi-check-circle-fill"></i>&nbsp;Accept</button>
 
                                                         <?php
-                                                        if(isset($_POST['id'])){
+                                                        if (isset($_POST['id'])) {
                                                             $id = $_POST['id'];
-                                                            $accept_payment = mysqli_query($cxn,"UPDATE payments SET remarks='ACCEPTED' WHERE id='$id'");
+                                                            $accept_payment = mysqli_query($cxn, "UPDATE payments SET remarks='ACCEPTED' WHERE id='$id'");
 
                                                             echo "<script type='text/javascript'> alert('Payment Accepted!'); location.href = 'payments.php'; </script>";
                                                         }
