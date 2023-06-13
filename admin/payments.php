@@ -31,7 +31,7 @@ include 'db_connect.php';
                     <li class="nav-item"><a class="nav-link" href="search.php"><i class="fas fa-search"></i><span>Search</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="addnewstudent.php"><i class="fas fa-user"></i><span>Add New Student</span></a><a class="nav-link" href="addnewuser.php"><i class="fas fa-user"></i><span>Add New User</span></a><a class="nav-link" href="viewstudents.php"><i class="fas fa-users"></i><span>Registered Students</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="viewusers.php"><i class="fas fa-user-tie"></i><span>System Users</span></a><a class="nav-link active" href="payments.php"><i class="fas fa-money-bill"></i><span>Payment History</span></a></li>
-                    
+
                 </ul>
                 <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
             </div>
@@ -164,8 +164,34 @@ include 'db_connect.php';
                                                     <td><?php echo $pay_date; ?></td>
                                                     <td><button data-id='<?php echo $p['id']; ?>' class="userinfo btn btn-primary btn-sm"><i class="bi bi-image-fill"></i>&nbsp;See Attachment</button></td>
                                                     <td><?php echo $remarks; ?></td>
-                                                    <td><button class="btn btn-primary btn-sm" type="submit"><i class="bi bi-check-circle-fill"></i>&nbsp;Accept</button></td>
-                                                    <td><button class="btn btn-danger btn-sm" type="submit"><i class="bi bi-x-circle-fill"></i>&nbsp;Deny</button></td>
+
+
+                                                    <td>
+                                                        <form action="payments.php" method="POST" id="accept">
+                                                            <input type="hidden" name="id" value="<?php echo $id; ?>">
+                                                        </form>
+
+                                                        <button class="btn btn-primary btn-sm" type="submit" name="accept" form="accept"><i class="bi bi-check-circle-fill"></i>&nbsp;Accept</button>
+
+                                                        <?php
+                                                        if(isset($_POST['id'])){
+                                                            $id = $_POST['id'];
+                                                            $accept_payment = mysqli_query($cxn,"UPDATE payments SET remarks='ACCEPTED' WHERE id='$id'");
+
+                                                            echo "<script type='text/javascript'> alert('Payment Accepted!'); location.href = 'payments.php'; </script>";
+                                                        }
+                                                        ?>
+                                                    </td>
+
+
+                                                    <td>
+                                                        <form action="payment_denied.php" method="POST" id="deny">
+                                                            <input type="hidden" name="id" value="<?php echo $id; ?>">
+                                                        </form>
+
+                                                        <button class="btn btn-danger btn-sm" type="submit" name="deny" form="deny"><i class="bi bi-x-circle-fill"></i>&nbsp;Deny</button>
+
+                                                    </td>
                                                 </tr>
                                         <?php
                                                 $i++;
