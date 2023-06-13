@@ -17,6 +17,13 @@ include 'db_connect.php';
     <script src="https://code.jquery.com/jquery-3.5.1.js" type="text/javascript"></script>
     <script src='https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js' type='text/javascript'></script>
 </head>
+<style>
+    @media print {
+        #printbtn {
+            display: none;
+        }
+    }
+</style>
 <body id="page-top">
     <div id="wrapper">
         
@@ -104,7 +111,7 @@ include 'db_connect.php';
                                                     <td><?php echo $ref_no; ?></td>
                                                     <td><?php echo $payment_method; ?></td>
                                                     <td><?php echo $pay_date; ?></td>
-                                                    <td><button data-id='<?php echo $p['id']; ?>' class="userinfo btn btn-primary btn-sm"><i class="bi bi-image-fill"></i>&nbsp;See Attachment</button></td>
+                                                    <td><button data-id='<?php echo $p['id']; ?>' class="userinfo btn btn-primary btn-sm" id="printbtn"><i class="bi bi-image-fill"></i>&nbsp;See Attachment</button></td>
                                                     <td><?php echo $remarks; ?></td>
                                                 </tr>
 
@@ -123,8 +130,8 @@ include 'db_connect.php';
                             </div>
 
                             <br>
-                            <a href="javascript:window.print()" class="btn btn-primary btn-sm"><i class="fa fa-print" aria-hidden="true"></i> Print</button>
-                            <a href="javascript:window.close()" class="btn btn-secondary btn-sm"><i class="fa fa-reply" aria-hidden="true"></i> Back to Search</a>
+                            <a href="javascript:window.print()" class="btn btn-primary btn-sm" id="printbtn"><i class="fa fa-print" aria-hidden="true"></i> Print</a>
+                            <a href="javascript:window.close()" class="btn btn-secondary btn-sm" id="printbtn"><i class="fa fa-reply" aria-hidden="true"></i> Back to Search</a>
                             </div>
                         </div>
                     </div>
