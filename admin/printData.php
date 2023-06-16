@@ -127,29 +127,186 @@ include 'db_connect.php';
                             </a>
                         </div>
                         <div class="col">
-                            <a href="monthly_rep.php" target="_blank" class="text-decoration-none">
+                            <a href="monthly_rep.php" class="text-decoration-none" data-toggle="modal" data-target="#monthlyreport">
                                 <div class="card shadow text-center">
                                     <div class="card-body">
                                         <i class="fas fa-file-invoice fa-lg"></i><br>
                                         Monthly Payment Report
                                     </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col">
+                            <a href="yearly_rep.php" target="_blank" class="text-decoration-none">
+                                <div class="card shadow text-center">
+                                    <div class="card-body">
+                                        <i class="fas fa-file-invoice fa-lg"></i><br>
+                                        Yearly Payment Report
+                                    </div>
+                                </div>
                             </a>
                         </div>
                     </div>
-                    <div class="col">
-                        <a href="yearly_rep.php" target="_blank" class="text-decoration-none">
-                            <div class="card shadow text-center">
-                                <div class="card-body">
-                                    <i class="fas fa-file-invoice fa-lg"></i><br>
-                                    Yearly Payment Report
+
+                </div>
+            </div>
+            <?php
+                $jan = 1;
+                $feb = 2;
+                $mar = 3;
+                $apr = 4;
+                $may = 5;
+                $jun = 6;
+                $jul = 7;
+                $aug = 8;
+                $sep = 9;
+                $oct = 10;
+                $nov = 11;
+                $dec = 12;
+            ?>
+
+            <!--Monthly Report Modal -->
+            <div class="modal fade" id="monthlyreport" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="myModalLabel">Select Month</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container-fluid mt-3">
+                                <div class="row">
+                                    <div class="col">
+                                        <a href="monthly_rep.php?id=<?php echo $jan;?>" target="_blank" class="text-decoration-none">
+                                            <div class="card shadow text-center">
+                                                <div class="card-body">
+                                                    January
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col">
+                                        <a href="monthly_rep.php?id=<?php echo $feb;?>" class="text-decoration-none" target="_blank">
+                                            <div class="card shadow text-center">
+                                                <div class="card-body">
+                                                    February
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col">
+                                        <a href="monthly_rep.php?id=<?php echo $mar;?>" target="_blank" class="text-decoration-none">
+                                            <div class="card shadow text-center">
+                                                <div class="card-body">
+                                                    March
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col">
+                                        <a href="monthly_rep.php?id=<?php echo $apr;?>" target="_blank" class="text-decoration-none">
+                                            <div class="card shadow text-center">
+                                                <div class="card-body">
+                                                    April
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
-                        </a>
+
+
+                            <div class="container-fluid mt-3">
+                                <div class="row">
+                                    <div class="col">
+                                        <a href="monthly_rep.php?id=<?php echo $may;?>" target="_blank" class="text-decoration-none">
+                                            <div class="card shadow text-center">
+                                                <div class="card-body">
+                                                    May
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col">
+                                        <a href="monthly_rep.php?id=<?php echo $jun;?>" class="text-decoration-none" target="_blank">
+                                            <div class="card shadow text-center">
+                                                <div class="card-body">
+                                                    June
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col">
+                                        <a href="monthly_rep.php?id=<?php echo $jul;?>" target="_blank" class="text-decoration-none">
+                                            <div class="card shadow text-center">
+                                                <div class="card-body">
+                                                    July
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col">
+                                        <a href="monthly_rep.php?id=<?php echo $aug;?>" target="_blank" class="text-decoration-none">
+                                            <div class="card shadow text-center">
+                                                <div class="card-body">
+                                                    August
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="container-fluid mt-3">
+                                <div class="row">
+                                    <div class="col">
+                                        <a href="monthly_rep.php?id=<?php echo $sep;?>" target="_blank" class="text-decoration-none">
+                                            <div class="card shadow text-center">
+                                                <div class="card-body">
+                                                    September
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col">
+                                        <a href="monthly_rep.php?id=<?php echo $oct;?>" class="text-decoration-none" target="_blank">
+                                            <div class="card shadow text-center">
+                                                <div class="card-body">
+                                                    October
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col">
+                                        <a href="monthly_rep.php?id=<?php echo $nov;?>" target="_blank" class="text-decoration-none">
+                                            <div class="card shadow text-center">
+                                                <div class="card-body">
+                                                    November
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col">
+                                        <a href="monthly_rep.php?id=<?php echo $dec;?>" target="_blank" class="text-decoration-none">
+                                            <div class="card shadow text-center">
+                                                <div class="card-body">
+                                                    December
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
                     </div>
                 </div>
-
             </div>
         </div>
+
         <footer class="bg-white sticky-footer">
             <div class="container my-auto">
                 <div class="text-center my-auto copyright"><span>Copyright © GNHS PTA Payment System - Admin Dashboard 2023</span></div>
