@@ -68,7 +68,6 @@ $id = $_SESSION['id'];
                   <th>Mode of Payment</th>
                   <th>Date of Payment</th>
                   <th>Remarks</th>
-                  <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -95,7 +94,6 @@ $id = $_SESSION['id'];
                       <td><?php echo $amount; ?></td>
                       <td><?php echo $payment_method; ?></td>
                       <td><?php echo $pay_date; ?></td>
-                      <td><?php echo $remarks; ?></td>
                       <td>
                         <a class="btn btn-info btn-sm text-decoration-none text-reset" href="viewreceipt.php?id=<?php echo $ref_no;?>" target="_blank">View Receipt</a>
                       </td>
