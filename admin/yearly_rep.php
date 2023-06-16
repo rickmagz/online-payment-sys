@@ -24,77 +24,70 @@ include 'db_connect.php';
     }
 </style>
 
+<?php
+$data = $_GET['id'];
+
+switch ($data) {
+    case '2023':
+        $year = "2023";
+        break;
+    case '2024':
+        $year = "2024";
+        break;
+    case '2025':
+        $year = "2025";
+        break;
+    case '2026':
+        $year = "2026";
+        break;
+    default:
+        $year = "<<fetch_year error!>>";
+}
+
+$getPaymentRecord = mysqli_query($cxn, "SELECT * FROM payments WHERE year(uploaded_on) = $data");
+$paymentsrecord_query = mysqli_num_rows($getPaymentRecord);
+
+$getYearlyAmount = "SELECT SUM(amount_paid) FROM payments WHERE year(uploaded_on) = $data";
+$result = $cxn->query($getYearlyAmount);
+$sum = $result->fetch_assoc()['SUM(amount_paid)'];
+?>
+
 <body>
     <div id="wrapper">
         <div class="container-fluid mt-3" style="max-width: 85%;">
             <h2>GNHS PTA Payment System</h2>
-            <h3>Yearly Payment Record</h3>
+            <h3><?php echo $year; ?> PTA Payment Report</h3>
+
             <div id="print">
-
-                <table class="table table-bordered my-0" id="dataTable">
-                    <thead>
-                        <tr>
-                            <th>No.</th>
-                            <th>Student Name</th>
-                            <th>Grade Level</th>
-                            <th>Reference No.</th>
-                            <th>Payment Method</th>
-                            <th>Amount</th>
-                            <th>Date (M/D/Y)</th>
-                            <th>Remarks</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        $payments = mysqli_query($cxn, "SELECT * FROM payments WHERE year(uploaded_on) = YEAR(NOW())");
-                        $payments_query = mysqli_num_rows($payments);
-
-                        if ($payments_query > 0) {
-                            $i = 0;
-                            while ($p = mysqli_fetch_assoc($payments)) {
-                                $id = $p['id'];
-                                $lrn = $p['lrn'];
-                                $first_name = $p['first_name'];
-                                $last_name = $p['last_name'];
-                                $grade_level = $p['grade_level'];
-                                $ref_no = $p['ref_no'];
-                                $amount_paid = $p['amount_paid'];
-                                $payment_method = $p['payment_method'];
-                                $date = strtotime($p['uploaded_on']);
-                                $pay_date = date("m/d/Y; h:i A", $date);
-                                $remarks = $p['remarks'];
-
-
-                        ?>
-                                <tr>
-                                    <td><?php echo $id; ?></td>
-                                    <td><?php echo $first_name; ?> <?php echo $last_name; ?></td>
-                                    <td><?php echo $grade_level; ?></td>
-                                    <td><?php echo $ref_no; ?></td>
-                                    <td><?php echo $payment_method; ?></td>
-                                    <td>&#8369;<?php echo $amount_paid; ?></td>
-                                    <td><?php echo $pay_date; ?></td>
-                                    <td><?php echo $remarks; ?></td>
-                                </tr>
-
-                        <?php
-                            }
-                        } else {
-                            echo "<tr>
-                                    <td>No record found.</td>
-                                </tr>";
-                        }
-                        ?>
-                    </tbody>
-
-                </table>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Total Number of Students Paid</h5>
+                                <h3 class="card-text">
+                                    <?php echo $paymentsrecord_query; ?>
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Total Funds</h5>
+                                <h3 class="card-text">&#8369;<?php echo $sum; ?>.00</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
     </div>
     <div class="container-fluid mt-3" style="max-width: 85%;">
         <button class="btn btn-outline-primary" onclick="printDiv()" id="printbtn">Print</button>
+        <a href="javascript:window.close()" class="btn btn-outline-secondary" id="printbtn"><i class="fa fa-reply" aria-hidden="true"></i>Close</a>
     </div>
 
 

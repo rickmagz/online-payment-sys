@@ -137,7 +137,7 @@ include 'db_connect.php';
                             </a>
                         </div>
                         <div class="col">
-                            <a href="yearly_rep.php" target="_blank" class="text-decoration-none">
+                            <a href="yearly_rep.php" class="text-decoration-none" data-toggle="modal" data-target="#yearlyreport">
                                 <div class="card shadow text-center">
                                     <div class="card-body">
                                         <i class="fas fa-file-invoice fa-lg"></i><br>
@@ -151,18 +151,18 @@ include 'db_connect.php';
                 </div>
             </div>
             <?php
-                $jan = 1;
-                $feb = 2;
-                $mar = 3;
-                $apr = 4;
-                $may = 5;
-                $jun = 6;
-                $jul = 7;
-                $aug = 8;
-                $sep = 9;
-                $oct = 10;
-                $nov = 11;
-                $dec = 12;
+            $jan = 1;
+            $feb = 2;
+            $mar = 3;
+            $apr = 4;
+            $may = 5;
+            $jun = 6;
+            $jul = 7;
+            $aug = 8;
+            $sep = 9;
+            $oct = 10;
+            $nov = 11;
+            $dec = 12;
             ?>
 
             <!--Monthly Report Modal -->
@@ -177,7 +177,7 @@ include 'db_connect.php';
                             <div class="container-fluid mt-3">
                                 <div class="row">
                                     <div class="col">
-                                        <a href="monthly_rep.php?id=<?php echo $jan;?>" target="_blank" class="text-decoration-none">
+                                        <a href="monthly_rep.php?id=<?php echo $jan; ?>" target="_blank" class="text-decoration-none">
                                             <div class="card shadow text-center">
                                                 <div class="card-body">
                                                     January
@@ -186,7 +186,7 @@ include 'db_connect.php';
                                         </a>
                                     </div>
                                     <div class="col">
-                                        <a href="monthly_rep.php?id=<?php echo $feb;?>" class="text-decoration-none" target="_blank">
+                                        <a href="monthly_rep.php?id=<?php echo $feb; ?>" class="text-decoration-none" target="_blank">
                                             <div class="card shadow text-center">
                                                 <div class="card-body">
                                                     February
@@ -195,7 +195,7 @@ include 'db_connect.php';
                                         </a>
                                     </div>
                                     <div class="col">
-                                        <a href="monthly_rep.php?id=<?php echo $mar;?>" target="_blank" class="text-decoration-none">
+                                        <a href="monthly_rep.php?id=<?php echo $mar; ?>" target="_blank" class="text-decoration-none">
                                             <div class="card shadow text-center">
                                                 <div class="card-body">
                                                     March
@@ -204,7 +204,7 @@ include 'db_connect.php';
                                         </a>
                                     </div>
                                     <div class="col">
-                                        <a href="monthly_rep.php?id=<?php echo $apr;?>" target="_blank" class="text-decoration-none">
+                                        <a href="monthly_rep.php?id=<?php echo $apr; ?>" target="_blank" class="text-decoration-none">
                                             <div class="card shadow text-center">
                                                 <div class="card-body">
                                                     April
@@ -219,7 +219,7 @@ include 'db_connect.php';
                             <div class="container-fluid mt-3">
                                 <div class="row">
                                     <div class="col">
-                                        <a href="monthly_rep.php?id=<?php echo $may;?>" target="_blank" class="text-decoration-none">
+                                        <a href="monthly_rep.php?id=<?php echo $may; ?>" target="_blank" class="text-decoration-none">
                                             <div class="card shadow text-center">
                                                 <div class="card-body">
                                                     May
@@ -228,7 +228,7 @@ include 'db_connect.php';
                                         </a>
                                     </div>
                                     <div class="col">
-                                        <a href="monthly_rep.php?id=<?php echo $jun;?>" class="text-decoration-none" target="_blank">
+                                        <a href="monthly_rep.php?id=<?php echo $jun; ?>" class="text-decoration-none" target="_blank">
                                             <div class="card shadow text-center">
                                                 <div class="card-body">
                                                     June
@@ -237,7 +237,7 @@ include 'db_connect.php';
                                         </a>
                                     </div>
                                     <div class="col">
-                                        <a href="monthly_rep.php?id=<?php echo $jul;?>" target="_blank" class="text-decoration-none">
+                                        <a href="monthly_rep.php?id=<?php echo $jul; ?>" target="_blank" class="text-decoration-none">
                                             <div class="card shadow text-center">
                                                 <div class="card-body">
                                                     July
@@ -246,7 +246,7 @@ include 'db_connect.php';
                                         </a>
                                     </div>
                                     <div class="col">
-                                        <a href="monthly_rep.php?id=<?php echo $aug;?>" target="_blank" class="text-decoration-none">
+                                        <a href="monthly_rep.php?id=<?php echo $aug; ?>" target="_blank" class="text-decoration-none">
                                             <div class="card shadow text-center">
                                                 <div class="card-body">
                                                     August
@@ -261,7 +261,7 @@ include 'db_connect.php';
                             <div class="container-fluid mt-3">
                                 <div class="row">
                                     <div class="col">
-                                        <a href="monthly_rep.php?id=<?php echo $sep;?>" target="_blank" class="text-decoration-none">
+                                        <a href="monthly_rep.php?id=<?php echo $sep; ?>" target="_blank" class="text-decoration-none">
                                             <div class="card shadow text-center">
                                                 <div class="card-body">
                                                     September
@@ -270,7 +270,7 @@ include 'db_connect.php';
                                         </a>
                                     </div>
                                     <div class="col">
-                                        <a href="monthly_rep.php?id=<?php echo $oct;?>" class="text-decoration-none" target="_blank">
+                                        <a href="monthly_rep.php?id=<?php echo $oct; ?>" class="text-decoration-none" target="_blank">
                                             <div class="card shadow text-center">
                                                 <div class="card-body">
                                                     October
@@ -279,7 +279,7 @@ include 'db_connect.php';
                                         </a>
                                     </div>
                                     <div class="col">
-                                        <a href="monthly_rep.php?id=<?php echo $nov;?>" target="_blank" class="text-decoration-none">
+                                        <a href="monthly_rep.php?id=<?php echo $nov; ?>" target="_blank" class="text-decoration-none">
                                             <div class="card shadow text-center">
                                                 <div class="card-body">
                                                     November
@@ -288,7 +288,7 @@ include 'db_connect.php';
                                         </a>
                                     </div>
                                     <div class="col">
-                                        <a href="monthly_rep.php?id=<?php echo $dec;?>" target="_blank" class="text-decoration-none">
+                                        <a href="monthly_rep.php?id=<?php echo $dec; ?>" target="_blank" class="text-decoration-none">
                                             <div class="card shadow text-center">
                                                 <div class="card-body">
                                                     December
@@ -300,19 +300,84 @@ include 'db_connect.php';
                             </div>
                         </div>
 
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <?php
+                $year23 = 2023;
+                $year24 = 2024;
+                $year25 = 2025;
+                $year26 = 2026;
+                
+            ?>
+
+            <!--Yearly Report Modal -->
+            <div class="modal fade" id="yearlyreport" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="myModalLabel">Select Year</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        </div>
+                        <div class="modal-body">
+                        <div class="container-fluid mt-3">
+                                <div class="row">
+                                    <div class="col">
+                                        <a href="yearly_rep.php?id=<?php echo $year23; ?>" target="_blank" class="text-decoration-none">
+                                            <div class="card shadow text-center">
+                                                <div class="card-body">
+                                                    2023
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col">
+                                        <a href="yearly_rep.php?id=<?php echo $year24; ?>" class="text-decoration-none" target="_blank">
+                                            <div class="card shadow text-center">
+                                                <div class="card-body">
+                                                    2024
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col">
+                                        <a href="yearly_rep.php?id=<?php echo $year25; ?>" target="_blank" class="text-decoration-none">
+                                            <div class="card shadow text-center">
+                                                <div class="card-body">
+                                                    2025
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col">
+                                        <a href="yearly_rep.php?id=<?php echo $year26; ?>" target="_blank" class="text-decoration-none">
+                                            <div class="card shadow text-center">
+                                                <div class="card-body">
+                                                    2026
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <footer class="bg-white sticky-footer">
-            <div class="container my-auto">
-                <div class="text-center my-auto copyright"><span>Copyright © GNHS PTA Payment System - Admin Dashboard 2023</span></div>
-            </div>
-        </footer>
-    </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
+            <footer class="bg-white sticky-footer">
+                <div class="container my-auto">
+                    <div class="text-center my-auto copyright"><span>Copyright © GNHS PTA Payment System - Admin Dashboard 2023</span></div>
+                </div>
+            </footer>
+        </div><a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
