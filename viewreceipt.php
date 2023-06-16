@@ -14,6 +14,7 @@ if ($getStudentData) {
     $method = $sd['payment_method'];
     $ref_no = $sd['ref_no'];
     $amount = $sd['amount_paid'];
+    $remarks = $sd['remarks'];
     $date = strtotime($sd['uploaded_on']);
     $regdate = date("m/d/Y; h:i A", $date);
     $time = date_default_timezone_set('Asia/Manila');
@@ -46,7 +47,7 @@ if ($getStudentData) {
 
 <body>
     <div id="wrapper">
-        <div class="container mt-3" style="max-width: 45%;">
+        <div class="container mt-2" style="max-width: 45%;">
             <div id="print">
                 <div class="text-center">
                     <h4>Guimbal National High School PTA Payment</h4>
@@ -55,16 +56,16 @@ if ($getStudentData) {
                 <div class="row">
                     <div class="col-md-6">
                         <h5>Customer Information</h5>
-                        <ul>
+                        <ul class="list-unstyled">
                             <li>Name: <strong><?php echo $first_name;?> <?php echo $last_name;?></strong></li>
                             <li>LRN: <?php echo $lrn;?></li>
                         </ul>
                     </div>
                     <div class="col-md-6">
                         <h5>Invoice Information</h5>
-                        <ul>
+                        <ul class="list-unstyled">
                             <li>Reference Number: <?php echo $ref_no;?></li>
-                            <li>Date: <?php echo $datestamp;?></li>
+                            <li>Print Date: <?php echo $datestamp;?></li>
                         </ul>
                     </div>
                 </div>
@@ -87,9 +88,10 @@ if ($getStudentData) {
                         
                     </tfoot>
                 </table>
-                <p>Payment Received: <?php echo $regdate;?></p>
-                <p>Payment Method: <?php echo $method;?></p>
-                <p>Signature:</p>
+                <p class="m-0">Payment Received: <?php echo $regdate;?></p>
+                <p class="m-0">Payment Status: <?php echo $remarks;?></p>
+                <p class="m-0">Payment Method: <?php echo $method;?></p>
+                <p class="m-0">Signature: _________________________</p>
             </div>
         </div>
     </div>
