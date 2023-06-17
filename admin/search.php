@@ -128,7 +128,7 @@ include 'db_connect.php';
                             if (isset($_POST['search'])) {
                                 $search = $_POST['search'];
 
-                                $search_query = mysqli_query($cxn, "SELECT * FROM student WHERE id LIKE '%$search%' or lrn_id LIKE '%$search%' or first_name LIKE '%$search%' or last_name LIKE '%$search%' or email LIKE '%$search%' ORDER BY id asc") or die("Error in query: $search_query." . mysqli_error($cxn));
+                                $search_query = mysqli_query($cxn, "SELECT * FROM student WHERE id LIKE '%$search%' or lrn_id LIKE '%$search%' or first_name LIKE '%$search%' or last_name LIKE '%$search%' or email LIKE '%$search%' or grade_level LIKE '%$search' ORDER BY id asc") or die("Error in query: $search_query." . mysqli_error($cxn));
 
                                 if ($search_query) {
                                     if (mysqli_num_rows($search_query) > 0) {
