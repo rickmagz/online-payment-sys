@@ -1,6 +1,6 @@
 <?php
-    session_start();
-    include 'db_connect.php';
+session_start();
+include 'db_connect.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -42,25 +42,24 @@
                             </div>
 
                             <?php
-                                    if(isset($_POST['login'])){
-                                        $username = $_POST['username'];
-                                        $password = $_POST['password'];
-                                        $query = mysqli_query($cxn, "SELECT * FROM users WHERE username='$username' AND teacher_id='$password'");
+                            if (isset($_POST['login'])) {
+                                $username = $_POST['username'];
+                                $password = $_POST['password'];
+                                $query = mysqli_query($cxn, "SELECT * FROM users WHERE username='$username' AND teacher_id='$password' AND access_level='Admin'");
 
-                                        if(mysqli_num_rows($query)>0){
-                                            $row = mysqli_fetch_assoc($query);
-                                            $_SESSION['first_name'] = $row['first_name'];
-                                            $_SESSION['last_name']= $row['last_name'];
-                                            $_SESSION['lrn_id'] = $row['teacher_id'];
-                                            $_SESSION['username'] = $row['username'];
-                                            header("location: admin.php");
-                                        }
-                                        else{
-                                            echo '<script type="text/javascript"> alert("Invalid Credentials!")</script>';
-                                        }
-                                    }
+                                if (mysqli_num_rows($query) > 0) {
+                                    $row = mysqli_fetch_assoc($query);
+                                    $_SESSION['first_name'] = $row['first_name'];
+                                    $_SESSION['last_name'] = $row['last_name'];
+                                    $_SESSION['lrn_id'] = $row['teacher_id'];
+                                    $_SESSION['username'] = $row['username'];
+                                    header("location: admin.php");
+                                } else {
+                                    echo '<script type="text/javascript"> alert("Invalid Credentials!")</script>';
+                                }
+                            }
 
-                                ?>
+                            ?>
                         </div>
                     </div>
                 </div>
