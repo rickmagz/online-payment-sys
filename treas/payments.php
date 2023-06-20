@@ -183,25 +183,12 @@ include 'db_connect.php';
                                                             <input type="hidden" name="id" value="<?php echo $id; ?>">
                                                         </form>
 
-                                                        <button class="btn btn-primary btn-sm" type="submit" name="accept" form="accept"><i class="bi bi-check-circle-fill"></i>&nbsp;Accept</button>
-
-                                                        <?php
-                                                        if (isset($_POST['id'])) {
-                                                            $id = $_POST['id'];
-                                                            $accept_payment = mysqli_query($cxn, "UPDATE payments SET remarks='ACCEPTED' WHERE id='$id'");
-
-                                                            echo "<script type='text/javascript'> alert('Payment Accepted!'); location.href = 'payments.php'; </script>";
-                                                        }
-                                                        ?>
+                                                        <a type="button" class="btn btn-primary btn-sm" href="payment_accept.php?id=<?php echo $id; ?>"><i class="bi bi-check-circle-fill"></i>&nbsp;Accept</a>
                                                     </td>
 
 
                                                     <td>
-                                                        <form action="payment_denied.php" method="POST" id="deny">
-                                                            <input type="hidden" name="id" value="<?php echo $id; ?>">
-                                                        </form>
-
-                                                        <button class="btn btn-danger btn-sm" type="submit" name="deny" form="deny"><i class="bi bi-x-circle-fill"></i>&nbsp;Deny</button>
+                                                    <a type="button" class="btn btn-danger btn-sm" href="payment_denied.php?id=<?php echo $id; ?>"><i class="bi bi-x-circle-fill"></i>&nbsp;Deny</a>
 
                                                     </td>
                                                 </tr>
