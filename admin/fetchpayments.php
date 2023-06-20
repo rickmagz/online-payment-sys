@@ -58,8 +58,8 @@ if (isset($_POST['request'])) {
                             <td>&#8369;<?php echo $amount_paid; ?></td>
                             <td><?php echo $pay_date; ?></td>
                             <td><button data-id='<?php echo $p['id']; ?>' class="userinfo btn btn-primary btn-sm"><i class="bi bi-image-fill"></i>&nbsp;See Attachment</button></td>
-                            <td><button class="btn btn-primary btn-sm" type="submit"><i class="bi bi-check-circle-fill"></i>&nbsp;Accept</button></td>
-                            <td><button class="btn btn-danger btn-sm" type="submit"><i class="bi bi-x-circle-fill"></i>&nbsp;Deny</button></td>
+                            <td><a type="button" class="btn btn-primary btn-sm" href="payment_accept.php?id=<?php echo $id; ?>"><i class="bi bi-check-circle-fill"></i>&nbsp;Accept</a></td>
+                            <td><a type="button" class="btn btn-danger btn-sm" href="payment_denied.php?id=<?php echo $id; ?>"><i class="bi bi-x-circle-fill"></i>&nbsp;Deny</a></td>
                         </tr>
                     <?php
                             }
@@ -158,8 +158,8 @@ if (isset($_POST['request'])) {
                             <td>&#8369;<?php echo $amount_paid; ?></td>
                             <td><?php echo $pay_date; ?></td>
                             <td><button data-id='<?php echo $p['id']; ?>' class="userinfo btn btn-primary btn-sm"><i class="bi bi-image-fill"></i>&nbsp;See Attachment</button></td>
-                            <td><button class="btn btn-primary btn-sm" type="submit"><i class="bi bi-check-circle-fill"></i>&nbsp;Accept</button></td>
-                            <td><button class="btn btn-danger btn-sm" type="submit"><i class="bi bi-x-circle-fill"></i>&nbsp;Deny</button></td>
+                            <td><a type="button" class="btn btn-primary btn-sm" href="payment_accept.php?id=<?php echo $id; ?>"><i class="bi bi-check-circle-fill"></i>&nbsp;Accept</a></td>
+                            <td><a type="button" class="btn btn-danger btn-sm" href="payment_denied.php?id=<?php echo $id; ?>"><i class="bi bi-x-circle-fill"></i>&nbsp;Deny</a></td>
                         </tr>
 
                     <?php
@@ -257,8 +257,8 @@ if (isset($_POST['request'])) {
                             <td>&#8369;<?php echo $amount_paid; ?></td>
                             <td><?php echo $pay_date; ?></td>
                             <td><button data-id='<?php echo $p['id']; ?>' class="userinfo btn btn-primary btn-sm"><i class="bi bi-image-fill"></i>&nbsp;See Attachment</button></td>
-                            <td><button class="btn btn-primary btn-sm" type="submit"><i class="bi bi-check-circle-fill"></i>&nbsp;Accept</button></td>
-                            <td><button class="btn btn-danger btn-sm" type="submit"><i class="bi bi-x-circle-fill"></i>&nbsp;Deny</button></td>
+                            <td><a type="button" class="btn btn-primary btn-sm" href="payment_accept.php?id=<?php echo $id; ?>"><i class="bi bi-check-circle-fill"></i>&nbsp;Accept</a></td>
+                            <td <a type="button" class="btn btn-danger btn-sm" href="payment_denied.php?id=<?php echo $id; ?>"><i class="bi bi-x-circle-fill"></i>&nbsp;Deny</a></td>
                         </tr>
                     <?php
                             }
@@ -361,8 +361,8 @@ if (isset($_POST['request'])) {
                             <td>&#8369;<?php echo $amount_paid; ?></td>
                             <td><?php echo $pay_date; ?></td>
                             <td><button data-id='<?php echo $p['id']; ?>' class="userinfo btn btn-primary btn-sm"><i class="bi bi-image-fill"></i>&nbsp;See Attachment</button></td>
-                            <td><button class="btn btn-primary btn-sm" type="submit"><i class="bi bi-check-circle-fill"></i>&nbsp;Accept</button></td>
-                            <td><button class="btn btn-danger btn-sm" type="submit"><i class="bi bi-x-circle-fill"></i>&nbsp;Deny</button></td>
+                            <td><a type="button" class="btn btn-primary btn-sm" href="payment_accept.php?id=<?php echo $id; ?>"><i class="bi bi-check-circle-fill"></i>&nbsp;Accept</a></td>
+                            <td> <a type="button" class="btn btn-danger btn-sm" href="payment_denied.php?id=<?php echo $id; ?>"><i class="bi bi-x-circle-fill"></i>&nbsp;Deny</a></td>
                         </tr>
                     <?php
                             }
@@ -408,8 +408,8 @@ if (isset($_POST['request'])) {
 
 
 
-<?php
-    }elseif ($request == 'Date (Desc)') {
+    <?php
+    } elseif ($request == 'Date (Desc)') {
         $query = mysqli_query($cxn, "SELECT * FROM payments ORDER BY uploaded_on desc");
         $count = mysqli_num_rows($query);
     ?>
@@ -463,8 +463,8 @@ if (isset($_POST['request'])) {
                             <td>&#8369;<?php echo $amount_paid; ?></td>
                             <td><?php echo $pay_date; ?></td>
                             <td><button data-id='<?php echo $p['id']; ?>' class="userinfo btn btn-primary btn-sm"><i class="bi bi-image-fill"></i>&nbsp;See Attachment</button></td>
-                            <td><button class="btn btn-primary btn-sm" type="submit"><i class="bi bi-check-circle-fill"></i>&nbsp;Accept</button></td>
-                            <td><button class="btn btn-danger btn-sm" type="submit"><i class="bi bi-x-circle-fill"></i>&nbsp;Deny</button></td>
+                            <td><a type="button" class="btn btn-primary btn-sm" href="payment_accept.php?id=<?php echo $id; ?>"><i class="bi bi-check-circle-fill"></i>&nbsp;Accept</a></td>
+                            <td<a type="button" class="btn btn-danger btn-sm" href="payment_denied.php?id=<?php echo $id; ?>"><i class="bi bi-x-circle-fill"></i>&nbsp;Deny</a></td>
                         </tr>
                     <?php
                             }
