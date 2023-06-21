@@ -48,12 +48,12 @@ switch ($data) {
     default:
         $grade_level = "<<fetch_gradelevel error!>>";
 }
-$today = date("m-d-Y");
+$today = date("Y-m-d");
 
-$getGradeLevel = mysqli_query($cxn, "SELECT * FROM payments WHERE uploaded_on = '$today' AND remarks='APPROVED'");
+$getGradeLevel = mysqli_query($cxn, "SELECT * FROM payments WHERE uploaded_on BETWEEN '$today 00:00:00' AND '$today 23:59:59'");
 $paymentrecord_today = mysqli_num_rows($getGradeLevel);
 
-$getDailyTotalAmount = "SELECT SUM(amount_paid) FROM payments WHERE uploaded_on = '$today'";
+$getDailyTotalAmount = "SELECT SUM(amount_paid) FROM payments WHERE uploaded_on BETWEEN '$today 00:00:00' AND '$today 23:59:59' AND remarks='ACCEPTED'";
 $res = $cxn->query($getDailyTotalAmount);
 $total = $res->fetch_assoc()['SUM(amount_paid)'];
 ?>
@@ -64,7 +64,7 @@ $total = $res->fetch_assoc()['SUM(amount_paid)'];
             <h2><strong>GNHS PTA Payment System</h2>
             <h3>Daily Payment Report</strong></h3>
             <h4>Grade <?php echo $data; ?></h4>
-            <h5>Total Payment: &#8369; <?php echo $total; ?>.00<br>(as of <?php echo $today; ?>)</h5>
+            <h5>Total Accepted Amount: &#8369; <?php echo $total; ?>.00<br>(as of <?php echo $today; ?>)</h5>
             <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
                 <table class="table table-hover table-bordered my-0" id="dataTable">
                     <thead>
@@ -89,14 +89,14 @@ $total = $res->fetch_assoc()['SUM(amount_paid)'];
                                 $lname = $gr['last_name'];
                                 $refno = $gr['ref_no'];
                                 $payment_method = $gr['payment_method'];
-                                $date = strtotime($p['uploaded_on']);
+                                $date = strtotime($gr['uploaded_on']);
                                 $pay_date = date("m/d/Y", $date);
-                                $remarks = $p['remarks'];
+                                $remarks = $gr['remarks'];
                         ?>
                                 <tr>
                                     <td><?php echo $id; ?></td>
-                                    <td><?php echo $first_name; ?> <?php echo $last_name; ?></td>
-                                    <td><?php echo $ref_no; ?></td>
+                                    <td><?php echo $fname; ?> <?php echo $lname; ?></td>
+                                    <td><?php echo $refno; ?></td>
                                     <td><?php echo $payment_method; ?></td>
                                     <td><?php echo $pay_date; ?></td>
                                     <td><?php echo $remarks; ?></td>
