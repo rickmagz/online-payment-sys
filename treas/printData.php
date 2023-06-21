@@ -23,18 +23,18 @@ include 'db_connect.php';
         <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
             <div class="container d-flex flex-column p-0"><a class="navbar-brand text-break d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
                     <div class="sidebar-brand-icon rotate-n-15"></div>
-                    <div class="sidebar-brand-text mx-3"><span class="text-start"><br><br>GNHS PTA&nbsp;<br>Payment System<br>Treasurer<br>dashboard</span></div>
+                    <div class="sidebar-brand-text mx-3"><span class="text-start">GNHS PTA&nbsp;<br>Payment System<br>Admin dashboard</span></div>
                 </a>
-                <hr class="sidebar-divider my-4">
+                <hr class="sidebar-divider my-0">
                 <ul class="navbar-nav text-light" id="accordionSidebar">
                     <li class="nav-item">
-                        <a class="nav-link " href="treas.php"><i class="fas fa-tachometer-alt"></i><span>Overview</span></a>
+                        <a class="nav-link " href="admin.php"><i class="fas fa-tachometer-alt"></i><span>Overview</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="search.php"><i class="fas fa-search"></i><span>Search</span></a>
+                        <a class="nav-link " href="search.php"><i class="fas fa-search"></i><span>Search</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="viewstudents.php"><i class="fas fa-users"></i><span>Registered Students</span></a>
+                        <a class="nav-link" href="addnewstudent.php"><i class="fas fa-user"></i><span>Add New Student</span></a><a class="nav-link" href="addnewuser.php"><i class="fas fa-user"></i><span>Add New User</span></a><a class="nav-link" href="viewstudents.php"><i class="fas fa-users"></i><span>Registered Students</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="viewusers.php"><i class="fas fa-user-tie"></i><span>System Users</span></a>
@@ -127,6 +127,16 @@ include 'db_connect.php';
                             </a>
                         </div>
                         <div class="col">
+                            <a href="daily_rep.php" class="text-decoration-none" data-toggle="modal" data-target="#dailyreport">
+                                <div class="card shadow text-center">
+                                    <div class="card-body">
+                                        <i class="fas fa-file-invoice fa-lg"></i><br>
+                                        Daily Payment Report
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col">
                             <a href="monthly_rep.php" class="text-decoration-none" data-toggle="modal" data-target="#monthlyreport">
                                 <div class="card shadow text-center">
                                     <div class="card-body">
@@ -150,6 +160,96 @@ include 'db_connect.php';
 
                 </div>
             </div>
+            <?php
+            $g7 = 7;
+            $g8 = 8;
+            $g9 = 9;
+            $g10 = 10;
+            $g11 = 11;
+            $g12 = 12;
+            ?>
+
+            <!-- Daily Report Modal-->
+            <div class="modal fade" id="dailyreport" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="myModalLabel">Select Grade Level</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container-fluid mt-3">
+                                <div class="row">
+                                    <div class="col">
+                                        <a href="daily_rep.php?gradelevel=<?php echo $g7; ?>" target="_blank" class="text-decoration-none">
+                                            <div class="card shadow text-center">
+                                                <div class="card-body">
+                                                    Grade 7
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col">
+                                        <a href="daily_rep.php?gradelevel=<?php echo $g8; ?>" class="text-decoration-none" target="_blank">
+                                            <div class="card shadow text-center">
+                                                <div class="card-body">
+                                                    Grade 8
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col">
+                                        <a href="daily_rep.php?gradelevel=<?php echo $g9; ?>" target="_blank" class="text-decoration-none">
+                                            <div class="card shadow text-center">
+                                                <div class="card-body">
+                                                    Grade 9
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container-fluid mt-3">
+                                <div class="row">
+                                    <div class="col">
+                                        <a href="daily_rep.php?gradelevel=<?php echo $g10; ?>" target="_blank" class="text-decoration-none">
+                                            <div class="card shadow text-center">
+                                                <div class="card-body">
+                                                    Grade 10
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col">
+                                        <a href="daily_rep.php?gradelevel=<?php echo $g11; ?>" class="text-decoration-none" target="_blank">
+                                            <div class="card shadow text-center">
+                                                <div class="card-body">
+                                                    Grade 11
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col">
+                                        <a href="daily_rep.php?gradelevel=<?php echo $g12; ?>>" target="_blank" class="text-decoration-none">
+                                            <div class="card shadow text-center">
+                                                <div class="card-body">
+                                                    Grade 12
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
             <?php
             $jan = 1;
             $feb = 2;
