@@ -62,7 +62,7 @@ $total = $res->fetch_assoc()['SUM(amount_paid)'];
     <div id="wrapper">
         <div class="container-fluid mt-3" style="max-width: 85%; text-align: center;">
             <h2><strong>GNHS PTA Payment System</h2>
-            <h3>Payment Report</strong></h3>
+            <h3>Daily Payment Report</strong></h3>
             <h4>Grade <?php echo $data; ?></h4>
             <h5>Total Payment: &#8369; <?php echo $total; ?>.00<br>(as of <?php echo $today; ?>)</h5>
             <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
