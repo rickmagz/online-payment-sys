@@ -27,22 +27,22 @@ include 'db_connect.php';
 $data = $_GET['gradelevel'];
 
 switch ($data) {
-    case 'g7':
+    case '7':
         $grade_level = "Grade 7";
         break;
-    case 'g8':
+    case '8':
         $grade_level = "Grade 8";
         break;
-    case 'g9':
+    case '9':
         $grade_level = "Grade 9";
         break;
-    case 'g10':
+    case '10':
         $grade_level = "Grade 10";
         break;
-    case 'g11':
+    case '11':
         $grade_level = "Grade 11";
         break;
-    case 'g12':
+    case '12':
         $grade_level = "Grade 12";
         break;
     default:
@@ -50,7 +50,7 @@ switch ($data) {
 }
 $today = date("Y-m-d");
 
-$getGradeLevel = mysqli_query($cxn, "SELECT * FROM payments WHERE uploaded_on BETWEEN '$today 00:00:00' AND '$today 23:59:59'");
+$getGradeLevel = mysqli_query($cxn, "SELECT * FROM payments WHERE grade_level = '$grade_level' AND uploaded_on BETWEEN '$today 00:00:00' AND '$today 23:59:59'");
 $paymentrecord_today = mysqli_num_rows($getGradeLevel);
 
 $getDailyTotalAmount = "SELECT SUM(amount_paid) FROM payments WHERE uploaded_on payments WHERE uploaded_on BETWEEN '$today 00:00:00' AND '$today 23:59:59' AND remarks='ACCEPTED'";
