@@ -93,6 +93,9 @@ include 'db_connect.php';
                                 <option value="Select Filter" selected disabled>Select Filter</option>
                                 <option value="Grade Level">Grade Level</option>
                                 <option value="Payment Method">Payment Method</option>
+                                <option value="Pending">Pending (Remarks)</option>
+                                <option value="Accepted">Accepted (Remarks)</option>
+                                <option value="Denied">Denied (Remarks)</option>
                                 <option value="Last Name (A-Z)">Last Name (A-Z)</option>
                                 <option value="Date (Asc)">Date (Asc)</option>
                                 <option value="Date (Desc)">Date (Desc)</option>
