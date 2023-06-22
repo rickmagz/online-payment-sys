@@ -258,7 +258,7 @@ if (isset($_POST['request'])) {
                             <td><?php echo $pay_date; ?></td>
                             <td><button data-id='<?php echo $p['id']; ?>' class="userinfo btn btn-primary btn-sm"><i class="bi bi-image-fill"></i>&nbsp;See Attachment</button></td>
                             <td><a type="button" class="btn btn-primary btn-sm" href="payment_accept.php?id=<?php echo $id; ?>"><i class="bi bi-check-circle-fill"></i>&nbsp;Accept</a></td>
-                            <td <a type="button" class="btn btn-danger btn-sm" href="payment_denied.php?id=<?php echo $id; ?>"><i class="bi bi-x-circle-fill"></i>&nbsp;Deny</a></td>
+                            <td> <a type="button" class="btn btn-danger btn-sm" href="payment_denied.php?id=<?php echo $id; ?>"><i class="bi bi-x-circle-fill"></i>&nbsp;Deny</a></td>
                         </tr>
                     <?php
                             }
