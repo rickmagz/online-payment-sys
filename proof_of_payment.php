@@ -35,13 +35,13 @@ $lastname = $_SESSION['last_name'];
                     <li class="nav-item"></li>
                 </ul>
                 <form action="index.php" method="POST">
-            <input class="btn btn-danger" type="submit" name="logout" value="Log Out">
+                    <input class="btn btn-danger" type="submit" name="logout" value="Log Out">
                     <?php
-                      if(isset($_POST['logout'])){
+                    if (isset($_POST['logout'])) {
                         session_destroy();
-                      }
-                      ?>
-          </form>
+                    }
+                    ?>
+                </form>
             </div>
         </div>
     </nav>
@@ -91,7 +91,7 @@ $lastname = $_SESSION['last_name'];
         $allowTypes = array('jpg', 'png', 'jpeg', 'gif');
         if (in_array($fileType, $allowTypes)) {
             if (move_uploaded_file($_FILES["filetoupload"]["tmp_name"], $targetFileFolder)) {
-                $upload = $cxn->query("UPDATE payments SET proof_of_payment='$filename', uploaded_on=now() WHERE lrn='$lrn'");
+                $upload = $cxn->query("UPDATE payments SET proof_of_payment='$filename' WHERE lrn='$lrn'");
             }
             if ($upload) {
                 echo '<script type="text/javascript"> alert("Proof of Payment Uploaded."); location.href="student-portal.php";</script>';
