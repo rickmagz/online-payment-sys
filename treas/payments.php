@@ -23,21 +23,21 @@ include 'db_connect.php';
         <nav class="navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0">
             <div class="container d-flex flex-column p-0"><a class="navbar-brand text-break d-flex justify-content-center align-items-center sidebar-brand m-0" href="#">
                     <div class="sidebar-brand-icon rotate-n-15"></div>
-                    <div class="sidebar-brand-text mx-3"><span class="text-start"><br><br>GNHS PTA&nbsp;<br>Payment System<br>Treasurer<br>dashboard</span></div>
+                    <div class="sidebar-brand-text mx-3"><span class="text-start">GNHS PTA&nbsp;<br>Payment System<br>Admin dashboard</span></div>
                 </a>
-                <hr class="sidebar-divider my-4">
+                <hr class="sidebar-divider my-0">
                 <ul class="navbar-nav text-light" id="accordionSidebar">
                     <li class="nav-item">
-                        <a class="nav-link " href="treas.php"><i class="fas fa-tachometer-alt"></i><span>Overview</span></a>
+                        <a class="nav-link " href="admin.php"><i class="fas fa-tachometer-alt"></i><span>Overview</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="search.php"><i class="fas fa-search"></i><span>Search</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="viewstudents.php"><i class="fas fa-users"></i><span>Registered Students</span></a>
+                        <a class="nav-link" href="addnewstudent.php"><i class="fas fa-user"></i><span>Add New Student</span></a><a class="nav-link " href="addnewuser.php"><i class="fas fa-user"></i><span>Add New User</span></a><a class="nav-link " href="viewstudents.php"><i class="fas fa-users"></i><span>Registered Students</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="viewusers.php"><i class="fas fa-user-tie"></i><span>System Users</span></a>
+                        <a class="nav-link " href="viewusers.php"><i class="fas fa-user-tie"></i><span>System Users</span></a>
                         <a class="nav-link active" href="payments.php"><i class="fas fa-money-bill"></i><span>Payment History</span></a>
                         <a class="nav-link" href="printData.php"><i class="fas fa-print"></i><span>Generate Report</span></a>
                     </li>
@@ -93,6 +93,9 @@ include 'db_connect.php';
                                 <option value="Select Filter" selected disabled>Select Filter</option>
                                 <option value="Grade Level">Grade Level</option>
                                 <option value="Payment Method">Payment Method</option>
+                                <option value="Pending">Pending (Remarks)</option>
+                                <option value="Accepted">Accepted (Remarks)</option>
+                                <option value="Denied">Denied (Remarks)</option>
                                 <option value="Last Name (A-Z)">Last Name (A-Z)</option>
                                 <option value="Date (Asc)">Date (Asc)</option>
                                 <option value="Date (Desc)">Date (Desc)</option>
@@ -146,12 +149,12 @@ include 'db_connect.php';
                                     </thead>
                                     <tbody>
                                         <?php
-                                        $payments = mysqli_query($cxn, "SELECT * FROM payments");
+                                        $payments = mysqli_query($cxn, "SELECT * FROM payments ORDER BY id ASC");
                                         $payments_query = mysqli_num_rows($payments);
 
                                         if ($payments_query > 0) {
                                             $i = 0;
-                                            while ($p = mysqli_fetch_array($payments)) {
+                                            while ($p = mysqli_fetch_assoc($payments)) {
                                                 $id = $p['id'];
                                                 $lrn = $p['lrn'];
                                                 $first_name = $p['first_name'];
@@ -179,16 +182,17 @@ include 'db_connect.php';
 
 
                                                     <td>
-                                                        <form action="payments.php" method="POST" id="accept">
-                                                            <input type="hidden" name="id" value="<?php echo $id; ?>">
-                                                        </form>
-
                                                         <a type="button" class="btn btn-primary btn-sm" href="payment_accept.php?id=<?php echo $id; ?>"><i class="bi bi-check-circle-fill"></i>&nbsp;Accept</a>
+
+
+
                                                     </td>
 
 
                                                     <td>
-                                                    <a type="button" class="btn btn-danger btn-sm" href="payment_denied.php?id=<?php echo $id; ?>"><i class="bi bi-x-circle-fill"></i>&nbsp;Deny</a>
+                                                        <a type="button" class="btn btn-danger btn-sm" href="payment_denied.php?id=<?php echo $id; ?>"><i class="bi bi-x-circle-fill"></i>&nbsp;Deny</a>
+
+
 
                                                     </td>
                                                 </tr>
@@ -200,6 +204,8 @@ include 'db_connect.php';
                                                     <td colspan='9'>No record found.</td>
                                                     </tr>";
                                         };
+
+                                        $cxn->close();
                                         ?>
 
                                     </tbody>
