@@ -230,7 +230,7 @@ include 'db_connect.php';
                                         </a>
                                     </div>
                                     <div class="col">
-                                        <a href="daily_rep.php?gradelevel=<?php echo $g12; ?>>" target="_blank" class="text-decoration-none">
+                                        <a href="daily_rep.php?gradelevel=<?php echo $g12; ?>" target="_blank" class="text-decoration-none">
                                             <div class="card shadow text-center">
                                                 <div class="card-body">
                                                     Grade 12
