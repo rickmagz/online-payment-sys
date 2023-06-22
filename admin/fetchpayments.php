@@ -532,6 +532,7 @@ if (isset($_POST['request'])) {
                                 <th>Payment Method</th>
                                 <th>Amount Paid</th>
                                 <th>Payment Date</th>
+                                <th>Remarks</th>
                                 <th>Proof of Payment</th>
                                 <th>Actions</th>
                             </tr>
@@ -554,6 +555,7 @@ if (isset($_POST['request'])) {
                                 $payment_method = $p['payment_method'];
                                 $date = strtotime($p['uploaded_on']);
                                 $pay_date = date("F d, Y; h:i A", $date);
+                                $remarks = $p['remarks']
                             ?>
                         </tbody>
                         <tr>
@@ -564,6 +566,7 @@ if (isset($_POST['request'])) {
                             <td><?php echo $payment_method; ?></td>
                             <td>&#8369;<?php echo $amount_paid; ?></td>
                             <td><?php echo $pay_date; ?></td>
+                            <td><?php echo $remarks; ?></td>
                             <td><button data-id='<?php echo $p['id']; ?>' class="userinfo btn btn-primary btn-sm"><i class="bi bi-image-fill"></i>&nbsp;See Attachment</button></td>
                             <td><a type="button" class="btn btn-primary btn-sm" href="payment_accept.php?id=<?php echo $id; ?>"><i class="bi bi-check-circle-fill"></i>&nbsp;Accept</a></td>
                             <td><a type="button" class="btn btn-danger btn-sm" href="payment_denied.php?id=<?php echo $id; ?>"><i class="bi bi-x-circle-fill"></i>&nbsp;Deny</a></td>
@@ -634,6 +637,7 @@ if (isset($_POST['request'])) {
                                 <th>Payment Method</th>
                                 <th>Amount Paid</th>
                                 <th>Payment Date</th>
+                                <th>Remarks</th>
                                 <th>Proof of Payment</th>
                                 <th>Actions</th>
                             </tr>
@@ -656,6 +660,7 @@ if (isset($_POST['request'])) {
                                 $payment_method = $p['payment_method'];
                                 $date = strtotime($p['uploaded_on']);
                                 $pay_date = date("F d, Y; h:i A", $date);
+                                $remarks = $p['remarks'];
                             ?>
                         </tbody>
                         <tr>
@@ -666,6 +671,7 @@ if (isset($_POST['request'])) {
                             <td><?php echo $payment_method; ?></td>
                             <td>&#8369;<?php echo $amount_paid; ?></td>
                             <td><?php echo $pay_date; ?></td>
+                            <td><?php echo $remarks; ?></td>
                             <td><button data-id='<?php echo $p['id']; ?>' class="userinfo btn btn-primary btn-sm"><i class="bi bi-image-fill"></i>&nbsp;See Attachment</button></td>
                             <td><a type="button" class="btn btn-primary btn-sm" href="payment_accept.php?id=<?php echo $id; ?>"><i class="bi bi-check-circle-fill"></i>&nbsp;Accept</a></td>
                             <td><a type="button" class="btn btn-danger btn-sm" href="payment_denied.php?id=<?php echo $id; ?>"><i class="bi bi-x-circle-fill"></i>&nbsp;Deny</a></td>
@@ -735,6 +741,7 @@ if (isset($_POST['request'])) {
                                 <th>Payment Method</th>
                                 <th>Amount Paid</th>
                                 <th>Payment Date</th>
+                                <th>Remarks</th>
                                 <th>Proof of Payment</th>
                                 <th>Actions</th>
                             </tr>
@@ -757,6 +764,7 @@ if (isset($_POST['request'])) {
                                 $payment_method = $p['payment_method'];
                                 $date = strtotime($p['uploaded_on']);
                                 $pay_date = date("F d, Y; h:i A", $date);
+                                $remarks = $p['remarks'];
                             ?>
                         </tbody>
                         <tr>
@@ -767,6 +775,7 @@ if (isset($_POST['request'])) {
                             <td><?php echo $payment_method; ?></td>
                             <td>&#8369;<?php echo $amount_paid; ?></td>
                             <td><?php echo $pay_date; ?></td>
+                            <td><?php echo $remarks; ?></td>
                             <td><button data-id='<?php echo $p['id']; ?>' class="userinfo btn btn-primary btn-sm"><i class="bi bi-image-fill"></i>&nbsp;See Attachment</button></td>
                             <td><a type="button" class="btn btn-primary btn-sm" href="payment_accept.php?id=<?php echo $id; ?>"><i class="bi bi-check-circle-fill"></i>&nbsp;Accept</a></td>
                             <td><a type="button" class="btn btn-danger btn-sm" href="payment_denied.php?id=<?php echo $id; ?>"><i class="bi bi-x-circle-fill"></i>&nbsp;Deny</a></td>
