@@ -55,7 +55,7 @@ $datestamp = date('m/d/Y h:i:s a', time());
 $getGradeLevel = mysqli_query($cxn, "SELECT * FROM payments WHERE grade_level = '$grade_level' ORDER BY uploaded_on desc");
 $paymentrecord_today = mysqli_num_rows($getGradeLevel);
 
-$getDailyTotalAmount = "SELECT SUM(amount_paid) FROM payments";
+$getDailyTotalAmount = "SELECT SUM(amount_paid) FROM payments WHERE grade_level = '$grade_level' AND remarks='ACCEPTED'";
 $res = $cxn->query($getDailyTotalAmount);
 $total = $res->fetch_assoc()['SUM(amount_paid)'];
 ?>
