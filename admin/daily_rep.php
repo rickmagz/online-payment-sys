@@ -49,6 +49,8 @@ switch ($data) {
         $grade_level = "<<fetch_gradelevel error!>>";
 }
 $today = date("Y-m-d");
+$time = date_default_timezone_set('Asia/Manila');
+$datestamp = date('m/d/Y h:i:s a', time());
 
 $getGradeLevel = mysqli_query($cxn, "SELECT * FROM payments WHERE grade_level = '$grade_level' AND uploaded_on BETWEEN '$today 00:00:00' AND '$today 23:59:59'");
 $paymentrecord_today = mysqli_num_rows($getGradeLevel);
@@ -59,6 +61,7 @@ $total = $res->fetch_assoc()['SUM(amount_paid)'];
 ?>
 
 <body>
+    <span>Date Printed: <?php echo $datestamp; ?></span>
     <div id="wrapper">
         <div class="container-fluid mt-3" style="max-width: 85%; text-align: center;">
             <h2><strong>GNHS PTA Payment System</h2>
