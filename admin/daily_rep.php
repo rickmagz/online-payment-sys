@@ -52,10 +52,10 @@ $today = date("Y-m-d");
 $time = date_default_timezone_set('Asia/Manila');
 $datestamp = date('m/d/Y h:i:s a', time());
 
-$getGradeLevel = mysqli_query($cxn, "SELECT * FROM payments WHERE grade_level = '$grade_level' AND uploaded_on BETWEEN '$today 00:00:00' AND '$today 23:59:59'");
+$getGradeLevel = mysqli_query($cxn, "SELECT * FROM payments WHERE grade_level = '$grade_level' ORDER BY uploaded_on desc");
 $paymentrecord_today = mysqli_num_rows($getGradeLevel);
 
-$getDailyTotalAmount = "SELECT SUM(amount_paid) FROM payments WHERE grade_level = '$grade_level' AND uploaded_on BETWEEN '$today 00:00:00' AND '$today 23:59:59' AND remarks='ACCEPTED'";
+$getDailyTotalAmount = "SELECT SUM(amount_paid) FROM payments";
 $res = $cxn->query($getDailyTotalAmount);
 $total = $res->fetch_assoc()['SUM(amount_paid)'];
 ?>
@@ -88,9 +88,9 @@ $total = $res->fetch_assoc()['SUM(amount_paid)'];
                             while ($gr = mysqli_fetch_assoc($getGradeLevel)) {
                                 $id = $gr['id'];
                                 $lrn = $gr['lrn'];
-                                $fname = $gr['first_name'];
-                                $lname = $gr['last_name'];
-                                $refno = $gr['ref_no'];
+                                $first_name = $gr['first_name'];
+                                $last_name = $gr['last_name'];
+                                $ref_no = $gr['ref_no'];
                                 $payment_method = $gr['payment_method'];
                                 $date = strtotime($gr['uploaded_on']);
                                 $pay_date = date("m/d/Y", $date);
@@ -98,8 +98,8 @@ $total = $res->fetch_assoc()['SUM(amount_paid)'];
                         ?>
                                 <tr>
                                     <td><?php echo $id; ?></td>
-                                    <td><?php echo $fname; ?> <?php echo $lname; ?></td>
-                                    <td><?php echo $refno; ?></td>
+                                    <td><?php echo $first_name; ?> <?php echo $last_name; ?></td>
+                                    <td><?php echo $ref_no; ?></td>
                                     <td><?php echo $payment_method; ?></td>
                                     <td><?php echo $pay_date; ?></td>
                                     <td><?php echo $remarks; ?></td>

@@ -52,10 +52,10 @@ $today = date("Y-m-d");
 $time = date_default_timezone_set('Asia/Manila');
 $datestamp = date('m/d/Y h:i:s a', time());
 
-$getGradeLevel = mysqli_query($cxn, "SELECT * FROM payments WHERE grade_level = '$grade_level' AND uploaded_on BETWEEN '$today 00:00:00' AND '$today 23:59:59'");
+$getGradeLevel = mysqli_query($cxn, "SELECT * FROM payments WHERE grade_level = '$grade_level' ORDER BY uploaded_on desc");
 $paymentrecord_today = mysqli_num_rows($getGradeLevel);
 
-$getDailyTotalAmount = "SELECT SUM(amount_paid) FROM payments WHERE uploaded_on payments WHERE uploaded_on BETWEEN '$today 00:00:00' AND '$today 23:59:59' AND remarks='ACCEPTED'";
+$getDailyTotalAmount = "SELECT SUM(amount_paid) FROM payments";
 $res = $cxn->query($getDailyTotalAmount);
 $total = $res->fetch_assoc()['SUM(amount_paid)'];
 ?>
@@ -88,13 +88,13 @@ $total = $res->fetch_assoc()['SUM(amount_paid)'];
                             while ($gr = mysqli_fetch_assoc($getGradeLevel)) {
                                 $id = $gr['id'];
                                 $lrn = $gr['lrn'];
-                                $fname = $gr['first_name'];
-                                $lname = $gr['last_name'];
-                                $refno = $gr['ref_no'];
+                                $first_name = $gr['first_name'];
+                                $last_name = $gr['last_name'];
+                                $ref_no = $gr['ref_no'];
                                 $payment_method = $gr['payment_method'];
-                                $date = strtotime($p['uploaded_on']);
+                                $date = strtotime($gr['uploaded_on']);
                                 $pay_date = date("m/d/Y", $date);
-                                $remarks = $p['remarks'];
+                                $remarks = $gr['remarks'];
                         ?>
                                 <tr>
                                     <td><?php echo $id; ?></td>
