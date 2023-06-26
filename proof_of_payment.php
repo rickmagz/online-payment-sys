@@ -5,6 +5,8 @@ include 'db_connect.php';
 $lrn = $_SESSION['lrn_id'];
 $firstname = $_SESSION['first_name'];
 $lastname = $_SESSION['last_name'];
+$refno = $_SESSION['refno'];
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -50,7 +52,7 @@ $lastname = $_SESSION['last_name'];
             <div class="container-fluid">
                 <a class="btn btn-link link-primary mb-3" role="button" href="services.html"></a>
                 <div class="d-sm-flex justify-content-between align-items-center mb-4">
-                    <h3 class="text-dark mb-0">PTA Payment for <?php echo $_SESSION['first_name']; ?> <?php echo $_SESSION['last_name']; ?> (LRN: <?php echo $_SESSION['lrn_id']; ?>)</h3>
+                    <h3 class="text-dark mb-0">PTA Payment for <?php echo $_SESSION['first_name']; ?> <?php echo $_SESSION['last_name']; ?> (LRN: <?php echo $_SESSION['refno']; ?>)</h3>
                 </div>
                 <form action="proof_of_payment.php" method="post" enctype="multipart/form-data">
                     <div class="card shadow mb-3">
@@ -91,7 +93,7 @@ $lastname = $_SESSION['last_name'];
         $allowTypes = array('jpg', 'png', 'jpeg', 'gif');
         if (in_array($fileType, $allowTypes)) {
             if (move_uploaded_file($_FILES["filetoupload"]["tmp_name"], $targetFileFolder)) {
-                $upload = $cxn->query("UPDATE payments SET proof_of_payment='$filename' WHERE lrn='$lrn'");
+                $upload = $cxn->query("UPDATE payments SET proof_of_payment='$filename' WHERE ref_no='$refno'");
             }
             if ($upload) {
                 echo '<script type="text/javascript"> alert("Proof of Payment Uploaded."); location.href="student-portal.php";</script>';

@@ -115,6 +115,7 @@ if (mysqli_num_rows($get_gradelevel) > 0) {
     $amount_paid = $_POST['amount_paid'];
     $payment_method = $_POST['payment_method'];
     $refno = $_POST['refno'];
+    $_SESSION['refno'] = $_POST['refno'];
     $first_name = $_SESSION['first_name'];
     $last_name = $_SESSION['last_name'];
     $lrn = $_SESSION['lrn_id'];
